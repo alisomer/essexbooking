@@ -1,0 +1,24 @@
+Requirements Document
+------------------------
+
+
+
+
+
+
+------------------------
+Hardware Interfaces
+------------------------
+The system has no hardware interface requirements other than the server machine or cloud virtual machine that is capable of running IIS 7.* and a client machine that is capable of running a modern web browser.
+
+
+------------------------
+Software Interfaces
+------------------------
+1.ASP.NET 4.0 Framework. The system will use ASP.NET framework for the underlying mechanisms for a dynamic web site.
+2.ASP.NET MVC 3. The system will use the ASP.NET extension MVC which stands for Model View Controller. The extension will also define the software architecture of the project as MVC 
+3.Microsoft SQL Server 2008 Express. The system will use Microsoft SQL Server 2008 Express as its database component.
+4.ADO.NET. The system will utilize the auto generated classes from ADO.NET for communicating with the database.
+5.ECB SDMX. The European Central Bank exchange rate web service that uses "Statistical Data and Metadata eXchange" standard will be used for receiving the exchange rates at the times of purchases.
+6.JQuery 1.6.*. This javascript library will be used for multiple purposes such as DOM manipulation, event handling, animations, Ajax calls.
+7.JQuery UI 1.8.*. The User interfaces plugin of Jquery will be used to easily make user interface elements such as dialog boxes and datepickers.
