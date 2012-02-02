@@ -3,6 +3,18 @@ Requirements Document
 
 
 
+Product Perspective
+===================
+
+System Interfaces
+-----------------
+
+
+Interfaces
+----------
+
+The system will have two main interfaces, a website for customers and a telesales interface for staff. The website will allow customers to browse the available options in terms of travelling and accomodation, create orders and make payments. Using the website, customers will be able to login or register for an account, which can be used to browse through past bookings and edit the details of current orders. The telesales interface, will allow staff to create new orders while on the phone with customers, examine and moderate existing orders and alter website settings. It will also allow staff to view or alter details on customers and notify customers of any outstanding payments. Finally, after a customer's request the operators will be able to cancel any current order.
+
 
 
 
