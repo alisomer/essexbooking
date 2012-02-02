@@ -11,6 +11,7 @@ CE903 (MSc Group Project): Outline Agenda for Group Meeting
 4. Actions from previous meeting
 - The requirements document so far.
 - Results of the skills audit.
+- Using Git
 
 5. New matters for consideration
 - Discuss final understanding of the Project Outline
