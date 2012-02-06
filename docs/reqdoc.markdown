@@ -34,3 +34,26 @@ Software Interfaces
 5.ECB SDMX. The European Central Bank exchange rate web service that uses "Statistical Data and Metadata eXchange" standard will be used for receiving the exchange rates at the times of purchases.
 6.JQuery 1.6.*. This javascript library will be used for multiple purposes such as DOM manipulation, event handling, animations, Ajax calls.
 7.JQuery UI 1.8.*. The User interfaces plugin of Jquery will be used to easily make user interface elements such as dialog boxes and datepickers.
+
+
+
+
+------------------------
+Entities
+------------------------
+Resorts: These are the destinations for travel which have different types of hotels.
+Hotels: Hotels can either be of type budget, standard or luxury.
+Travel: A part of the holiday package which can be either 'train' or 'flight'.
+Holiday package: Consists of the hotel and the travel arrangements.
+Booking: This is formed when a customer purchases holiday package.
+Extras: These are the additional activities that the customers may want to book such as ski hire. A resort may have any number of extras.
+Customer: Customers are the people who are using the system to purchase holiday packages. Customers can also have login details consisting of an email address and a password which they can use the see their booking records and details.
+Staff: Is super-type for admins and telesales personnel.
+Admin: Admins are capable of editing or creating the content such as the travel package details.
+Telesales staff: These users record modify or cancel bookings for customers over the phone. 
+
+
+
+
+
+
