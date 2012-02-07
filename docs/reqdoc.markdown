@@ -54,6 +54,35 @@ Telesales staff: These users record modify or cancel bookings for customers over
 
 
 
+# System Description
+
+## Operations
+
+<!-- See SRS template
+
+Specify the normal and special operations required by the user such as:
+(1) The various modes of operations in the user organization
+(2) Periods of interactive operations and periods of unattended operations
+(3) Data processing support functions
+(4) Backup and recovery operations 
+
+(Note:  This is sometimes specified as part of the User Interfaces section.)  If you separate this from the UI stuff earlier, then cover business process type stuff that would impact the design.  For instance, if the company brings all their systems down at midnight for data backup that might impact the design.  These are all the work tasks that impact the design of an application, but which might not be located in software. -->
 
 
 
+## User Characteristics
+
+Users are seperated into to distict groups, customers and staff members.
+Customers are expected to be able to operate an internet browser if they want to use the online service. As the process of booking involves using a credit card, the customer must be an adult and own a credit card. Customers will also need to have some form of identification (i.e. passport) which will be required by the company to book the train/airplane tickets and the hotel. A passport will also be required for every participant. 
+Staff members will also need to be able to operate an internet browser as the telesales interface will be in the form of a website. Since they will be mostly on the phone with customers while using the website, it is important they have a good understanding of how the system works and be able to navigate through it quickly so as not to have the customer wait on the phone for too long. Also, they must have some basic troubleshooting experience in order for them to be able to react accordingly on errors while they interact with a customer.
+
+
+## Constraints
+
+The system has certain constraints that limit the developer's options. The after a user registers, the password cannot be revealed to anyone, not even the owner of the account as they are stored in the database in an encrypted form. The only allowed actions on the password are reset and update. In order to ensure fast loading time and the necessary uptime the hardware needs to be of good quality, properly configured and provided with an uninterrupted power supply. Any compensations in this part will have it's effect on the overall performance of the system.
+
+
+
+## Assumptions and Dependencies
+
+The server must run the latest version of the Windows Server operating system running the Internet Information Services (IIS) version 7.0 in order to support the frameworks used by the system. Also, the software will also require to constantly update the exchange rate between British Pounds and Euros. For this it will facilitate the exchange rate information taken from the European Central Bank's (ECB) website, which means that any changes to the way ECB provides the exchange rates will have to be reflected within the software. Finally, for the checkout process the website will facilitate a Credit Card Checker API that will have to be available at the time of each purchase. The software will assume that the certificates and validations provided by the API are credible and any failed or fradulent purchases will rely on errors from the API.
