@@ -1,0 +1,7 @@
+C:\Users\asomer\Documents\Visual Studio 2010\Projects\EssexBooking\EssexBooking\bin\EssexBooking.dll
+C:\Users\asomer\Documents\Visual Studio 2010\Projects\EssexBooking\EssexBooking\bin\EssexBooking.pdb
+C:\Users\asomer\Documents\Visual Studio 2010\Projects\EssexBooking\EssexBooking\bin\EntityFramework.dll
+C:\Users\asomer\Documents\Visual Studio 2010\Projects\EssexBooking\EssexBooking\bin\EntityFramework.xml
+C:\Users\asomer\Documents\Visual Studio 2010\Projects\EssexBooking\EssexBooking\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\asomer\Documents\Visual Studio 2010\Projects\EssexBooking\EssexBooking\obj\Debug\EssexBooking.dll
+C:\Users\asomer\Documents\Visual Studio 2010\Projects\EssexBooking\EssexBooking\obj\Debug\EssexBooking.pdb

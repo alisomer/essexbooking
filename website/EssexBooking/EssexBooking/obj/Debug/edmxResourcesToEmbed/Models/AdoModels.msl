@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ASPNETDBModelStoreContainer" CdmEntityContainer="ASPNETDBEntities">
+    <EntitySetMapping Name="Bookings">
+      <EntityTypeMapping TypeName="ASPNETDBModel.Booking">
+        <MappingFragment StoreEntitySet="Bookings">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+          <ScalarProperty Name="travel_id" ColumnName="travel_id" />
+          <ScalarProperty Name="hotel_id" ColumnName="hotel_id" />
+          <ScalarProperty Name="start_date" ColumnName="start_date" />
+          <ScalarProperty Name="duration" ColumnName="duration" />
+          <ScalarProperty Name="guests" ColumnName="guests" />
+          <ScalarProperty Name="booker_id" ColumnName="booker_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ExtraBookings">
+      <EntityTypeMapping TypeName="ASPNETDBModel.ExtraBooking">
+        <MappingFragment StoreEntitySet="ExtraBookings">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="extra_id" ColumnName="extra_id" />
+          <ScalarProperty Name="booking_id" ColumnName="booking_id" />
+          <ScalarProperty Name="participants" ColumnName="participants" />
+          <ScalarProperty Name="booked_date" ColumnName="booked_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Extras">
+      <EntityTypeMapping TypeName="ASPNETDBModel.Extra">
+        <MappingFragment StoreEntitySet="Extras">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="resort_id" ColumnName="resort_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="price" ColumnName="price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Hotels">
+      <EntityTypeMapping TypeName="ASPNETDBModel.Hotel">
+        <MappingFragment StoreEntitySet="Hotels">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="resort_id" ColumnName="resort_id" />
+          <ScalarProperty Name="hotel_type_id" ColumnName="hotel_type_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HotelTypes">
+      <EntityTypeMapping TypeName="ASPNETDBModel.HotelType">
+        <MappingFragment StoreEntitySet="HotelTypes">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="price" ColumnName="price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="passangers">
+      <EntityTypeMapping TypeName="ASPNETDBModel.passanger">
+        <MappingFragment StoreEntitySet="passanger">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="travel_id" ColumnName="travel_id" />
+          <ScalarProperty Name="first_name" ColumnName="first_name" />
+          <ScalarProperty Name="last_name" ColumnName="last_name" />
+          <ScalarProperty Name="passaport_no" ColumnName="passaport_no" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Resorts">
+      <EntityTypeMapping TypeName="ASPNETDBModel.Resort">
+        <MappingFragment StoreEntitySet="Resorts">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="description" ColumnName="description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Travels">
+      <EntityTypeMapping TypeName="ASPNETDBModel.Travel">
+        <MappingFragment StoreEntitySet="Travel">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="travel_type_id" ColumnName="travel_type_id" />
+          <ScalarProperty Name="departure" ColumnName="departure" />
+          <ScalarProperty Name="arrival" ColumnName="arrival" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TravelTypes">
+      <EntityTypeMapping TypeName="ASPNETDBModel.TravelType">
+        <MappingFragment StoreEntitySet="TravelTypes">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="available_days" ColumnName="available_days" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

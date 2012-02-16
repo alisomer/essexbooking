@@ -1,0 +1,8 @@
+C:\Users\asomer\Documents\Visual Studio 2010\Projects\EssexBooking\EssexBooking.Tests\bin\Debug\EssexBooking.Tests.dll.config
+C:\Users\asomer\Documents\Visual Studio 2010\Projects\EssexBooking\EssexBooking.Tests\bin\Debug\EssexBooking.Tests.dll
+C:\Users\asomer\Documents\Visual Studio 2010\Projects\EssexBooking\EssexBooking.Tests\bin\Debug\EssexBooking.Tests.pdb
+C:\Users\asomer\Documents\Visual Studio 2010\Projects\EssexBooking\EssexBooking.Tests\bin\Debug\EssexBooking.dll
+C:\Users\asomer\Documents\Visual Studio 2010\Projects\EssexBooking\EssexBooking.Tests\bin\Debug\EssexBooking.pdb
+C:\Users\asomer\Documents\Visual Studio 2010\Projects\EssexBooking\EssexBooking.Tests\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\asomer\Documents\Visual Studio 2010\Projects\EssexBooking\EssexBooking.Tests\obj\Debug\EssexBooking.Tests.dll
+C:\Users\asomer\Documents\Visual Studio 2010\Projects\EssexBooking\EssexBooking.Tests\obj\Debug\EssexBooking.Tests.pdb

@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ASPNETDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="ASPNETDBModelStoreContainer">
+    <EntitySet Name="Bookings" EntityType="ASPNETDBModel.Store.Bookings" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ExtraBookings" EntityType="ASPNETDBModel.Store.ExtraBookings" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Extras" EntityType="ASPNETDBModel.Store.Extras" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Hotels" EntityType="ASPNETDBModel.Store.Hotels" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="HotelTypes" EntityType="ASPNETDBModel.Store.HotelTypes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="passanger" EntityType="ASPNETDBModel.Store.passanger" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Resorts" EntityType="ASPNETDBModel.Store.Resorts" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Travel" EntityType="ASPNETDBModel.Store.Travel" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TravelTypes" EntityType="ASPNETDBModel.Store.TravelTypes" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_Bookings_Hotels" Association="ASPNETDBModel.Store.FK_Bookings_Hotels">
+      <End Role="Hotels" EntitySet="Hotels" />
+      <End Role="Bookings" EntitySet="Bookings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bookings_Travel" Association="ASPNETDBModel.Store.FK_Bookings_Travel">
+      <End Role="Travel" EntitySet="Travel" />
+      <End Role="Bookings" EntitySet="Bookings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ExtraBookings_ExtraBookings" Association="ASPNETDBModel.Store.FK_ExtraBookings_ExtraBookings">
+      <End Role="Extras" EntitySet="Extras" />
+      <End Role="ExtraBookings" EntitySet="ExtraBookings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Extras_Resorts" Association="ASPNETDBModel.Store.FK_Extras_Resorts">
+      <End Role="Resorts" EntitySet="Resorts" />
+      <End Role="Extras" EntitySet="Extras" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Hotels_HotelTypes" Association="ASPNETDBModel.Store.FK_Hotels_HotelTypes">
+      <End Role="HotelTypes" EntitySet="HotelTypes" />
+      <End Role="Hotels" EntitySet="Hotels" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Hotels_Resorts" Association="ASPNETDBModel.Store.FK_Hotels_Resorts">
+      <End Role="Resorts" EntitySet="Resorts" />
+      <End Role="Hotels" EntitySet="Hotels" />
+    </AssociationSet>
+    <AssociationSet Name="FK_passanger_Travel" Association="ASPNETDBModel.Store.FK_passanger_Travel">
+      <End Role="Travel" EntitySet="Travel" />
+      <End Role="passanger" EntitySet="passanger" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Travel_Travel" Association="ASPNETDBModel.Store.FK_Travel_Travel">
+      <End Role="TravelTypes" EntitySet="TravelTypes" />
+      <End Role="Travel" EntitySet="Travel" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Bookings">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="customer_id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="travel_id" Type="int" Nullable="false" />
+    <Property Name="hotel_id" Type="int" Nullable="false" />
+    <Property Name="start_date" Type="datetime" Nullable="false" />
+    <Property Name="duration" Type="int" Nullable="false" />
+    <Property Name="guests" Type="int" Nullable="false" />
+    <Property Name="booker_id" Type="uniqueidentifier" />
+  </EntityType>
+  <EntityType Name="ExtraBookings">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="extra_id" Type="int" Nullable="false" />
+    <Property Name="booking_id" Type="int" Nullable="false" />
+    <Property Name="participants" Type="int" Nullable="false" />
+    <Property Name="booked_date" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Extras">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="resort_id" Type="int" Nullable="false" />
+    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="description" Type="nvarchar" MaxLength="500" />
+    <Property Name="price" Type="decimal" Nullable="false" Precision="6" Scale="2" />
+  </EntityType>
+  <EntityType Name="Hotels">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="resort_id" Type="int" Nullable="false" />
+    <Property Name="hotel_type_id" Type="int" Nullable="false" />
+    <Property Name="name" Type="nchar" Nullable="false" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="HotelTypes">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="price" Type="decimal" Nullable="false" Precision="6" Scale="2" />
+  </EntityType>
+  <EntityType Name="passanger">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="travel_id" Type="int" Nullable="false" />
+    <Property Name="first_name" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="last_name" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="passaport_no" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Resorts">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="description" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="Travel">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="travel_type_id" Type="int" Nullable="false" />
+    <Property Name="departure" Type="datetime" Nullable="false" />
+    <Property Name="arrival" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TravelTypes">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="price" Type="decimal" Nullable="false" Precision="6" Scale="2" />
+    <Property Name="available_days" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_Bookings_Hotels">
+    <End Role="Hotels" Type="ASPNETDBModel.Store.Hotels" Multiplicity="1" />
+    <End Role="Bookings" Type="ASPNETDBModel.Store.Bookings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hotels">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Bookings">
+        <PropertyRef Name="hotel_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bookings_Travel">
+    <End Role="Travel" Type="ASPNETDBModel.Store.Travel" Multiplicity="1" />
+    <End Role="Bookings" Type="ASPNETDBModel.Store.Bookings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Travel">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Bookings">
+        <PropertyRef Name="travel_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ExtraBookings_ExtraBookings">
+    <End Role="Extras" Type="ASPNETDBModel.Store.Extras" Multiplicity="1" />
+    <End Role="ExtraBookings" Type="ASPNETDBModel.Store.ExtraBookings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Extras">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ExtraBookings">
+        <PropertyRef Name="extra_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Extras_Resorts">
+    <End Role="Resorts" Type="ASPNETDBModel.Store.Resorts" Multiplicity="1" />
+    <End Role="Extras" Type="ASPNETDBModel.Store.Extras" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resorts">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Extras">
+        <PropertyRef Name="resort_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Hotels_HotelTypes">
+    <End Role="HotelTypes" Type="ASPNETDBModel.Store.HotelTypes" Multiplicity="1" />
+    <End Role="Hotels" Type="ASPNETDBModel.Store.Hotels" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HotelTypes">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Hotels">
+        <PropertyRef Name="hotel_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Hotels_Resorts">
+    <End Role="Resorts" Type="ASPNETDBModel.Store.Resorts" Multiplicity="1" />
+    <End Role="Hotels" Type="ASPNETDBModel.Store.Hotels" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resorts">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Hotels">
+        <PropertyRef Name="resort_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_passanger_Travel">
+    <End Role="Travel" Type="ASPNETDBModel.Store.Travel" Multiplicity="1" />
+    <End Role="passanger" Type="ASPNETDBModel.Store.passanger" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Travel">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="passanger">
+        <PropertyRef Name="travel_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Travel_Travel">
+    <End Role="TravelTypes" Type="ASPNETDBModel.Store.TravelTypes" Multiplicity="1" />
+    <End Role="Travel" Type="ASPNETDBModel.Store.Travel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TravelTypes">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Travel">
+        <PropertyRef Name="travel_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
