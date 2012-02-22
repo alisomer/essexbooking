@@ -142,14 +142,12 @@ namespace EssexBooking.Controllers
             return View(model);
         }
 
-        //
-        // GET: /Account/ChangePasswordSuccess
-
         public ActionResult ChangePasswordSuccess()
         {
             return View();
         }
-
+        //
+        // GET: /Account/ChangePasswordSuccess
         #region Status Codes
         private static string ErrorCodeToString(MembershipCreateStatus createStatus)
         {
@@ -189,5 +187,11 @@ namespace EssexBooking.Controllers
             }
         }
         #endregion
+
+        public ActionResult ShowHistory()
+        {
+            return View();
+        }
     }
+
 }
