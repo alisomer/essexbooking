@@ -18,6 +18,7 @@ using System.Runtime.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
+[assembly: EdmRelationshipAttribute("ASPNETDBModel", "FK_Bookings_Extras", "Extras", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(EssexBooking.Models.Extra), "Bookings", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(EssexBooking.Models.Booking), true)]
 [assembly: EdmRelationshipAttribute("ASPNETDBModel", "FK_Bookings_Hotels", "Hotels", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(EssexBooking.Models.Hotel), "Bookings", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(EssexBooking.Models.Booking), true)]
 [assembly: EdmRelationshipAttribute("ASPNETDBModel", "FK_Bookings_Travel", "Travel", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(EssexBooking.Models.Travel), "Bookings", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(EssexBooking.Models.Booking), true)]
 [assembly: EdmRelationshipAttribute("ASPNETDBModel", "FK_ExtraBookings_ExtraBookings", "Extras", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(EssexBooking.Models.Extra), "ExtraBookings", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(EssexBooking.Models.ExtraBooking), true)]
@@ -36,32 +37,32 @@ namespace EssexBooking.Models
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    public partial class ASPNETDBEntities : ObjectContext
+    public partial class ASPNETDBEntities1 : ObjectContext
     {
         #region Constructors
     
         /// <summary>
-        /// Initializes a new ASPNETDBEntities object using the connection string found in the 'ASPNETDBEntities' section of the application configuration file.
+        /// Initializes a new ASPNETDBEntities1 object using the connection string found in the 'ASPNETDBEntities1' section of the application configuration file.
         /// </summary>
-        public ASPNETDBEntities() : base("name=ASPNETDBEntities", "ASPNETDBEntities")
+        public ASPNETDBEntities1() : base("name=ASPNETDBEntities1", "ASPNETDBEntities1")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
         }
     
         /// <summary>
-        /// Initialize a new ASPNETDBEntities object.
+        /// Initialize a new ASPNETDBEntities1 object.
         /// </summary>
-        public ASPNETDBEntities(string connectionString) : base(connectionString, "ASPNETDBEntities")
+        public ASPNETDBEntities1(string connectionString) : base(connectionString, "ASPNETDBEntities1")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
         }
     
         /// <summary>
-        /// Initialize a new ASPNETDBEntities object.
+        /// Initialize a new ASPNETDBEntities1 object.
         /// </summary>
-        public ASPNETDBEntities(EntityConnection connection) : base(connection, "ASPNETDBEntities")
+        public ASPNETDBEntities1(EntityConnection connection) : base(connection, "ASPNETDBEntities1")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
@@ -324,7 +325,9 @@ namespace EssexBooking.Models
         /// <param name="start_date">Initial value of the start_date property.</param>
         /// <param name="duration">Initial value of the duration property.</param>
         /// <param name="guests">Initial value of the guests property.</param>
-        public static Booking CreateBooking(global::System.Int32 id, global::System.Guid customer_id, global::System.Int32 travel_id, global::System.Int32 hotel_id, global::System.DateTime start_date, global::System.Int32 duration, global::System.Int32 guests)
+        /// <param name="booker_id">Initial value of the booker_id property.</param>
+        /// <param name="extra_id">Initial value of the extra_id property.</param>
+        public static Booking CreateBooking(global::System.Int32 id, global::System.Guid customer_id, global::System.Int32 travel_id, global::System.Int32 hotel_id, global::System.DateTime start_date, global::System.Int32 duration, global::System.Int32 guests, global::System.Guid booker_id, global::System.Int32 extra_id)
         {
             Booking booking = new Booking();
             booking.id = id;
@@ -334,6 +337,8 @@ namespace EssexBooking.Models
             booking.start_date = start_date;
             booking.duration = duration;
             booking.guests = guests;
+            booking.booker_id = booker_id;
+            booking.extra_id = extra_id;
             return booking;
         }
 
@@ -514,9 +519,9 @@ namespace EssexBooking.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Guid> booker_id
+        public global::System.Guid booker_id
         {
             get
             {
@@ -531,13 +536,75 @@ namespace EssexBooking.Models
                 Onbooker_idChanged();
             }
         }
-        private Nullable<global::System.Guid> _booker_id;
-        partial void Onbooker_idChanging(Nullable<global::System.Guid> value);
+        private global::System.Guid _booker_id;
+        partial void Onbooker_idChanging(global::System.Guid value);
         partial void Onbooker_idChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 extra_id
+        {
+            get
+            {
+                return _extra_id;
+            }
+            set
+            {
+                Onextra_idChanging(value);
+                ReportPropertyChanging("extra_id");
+                _extra_id = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("extra_id");
+                Onextra_idChanged();
+            }
+        }
+        private global::System.Int32 _extra_id;
+        partial void Onextra_idChanging(global::System.Int32 value);
+        partial void Onextra_idChanged();
 
         #endregion
     
         #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ASPNETDBModel", "FK_Bookings_Extras", "Extras")]
+        public Extra Extra
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Extra>("ASPNETDBModel.FK_Bookings_Extras", "Extras").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Extra>("ASPNETDBModel.FK_Bookings_Extras", "Extras").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Extra> ExtraReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Extra>("ASPNETDBModel.FK_Bookings_Extras", "Extras");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Extra>("ASPNETDBModel.FK_Bookings_Extras", "Extras", value);
+                }
+            }
+        }
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -774,6 +841,28 @@ namespace EssexBooking.Models
         #endregion
     
         #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ASPNETDBModel", "FK_Bookings_Extras", "Bookings")]
+        public EntityCollection<Booking> Bookings
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Booking>("ASPNETDBModel.FK_Bookings_Extras", "Bookings");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Booking>("ASPNETDBModel.FK_Bookings_Extras", "Bookings", value);
+                }
+            }
+        }
     
         /// <summary>
         /// No Metadata Documentation available.
