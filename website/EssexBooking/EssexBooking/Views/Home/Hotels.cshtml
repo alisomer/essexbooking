@@ -1,0 +1,42 @@
+﻿@model IEnumerable<EssexBooking.Models.Hotel>
+
+@{
+    ViewBag.Title = "Hotels";
+}
+
+<h2>Hotels</h2>
+
+<table>
+    <tr>
+        <th>
+            Name 
+        </th>
+        <th>
+            Hotel Category
+        </th>
+         <th>
+            Hotel Price
+        </th>
+         <th>
+            Resort
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr id='@(item.resort_id)'>
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HotelType.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HotelType.price) &pound;
+        </td>
+         <td>
+            @Html.DisplayFor(modelItem => item.Resort.name)
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,30 @@
+CE903 (MSc Group Project): Outline Agenda for Group Meeting
+13:00 - 14:00 2.2.2012
+1. Group members present
+
+2. Apologies for absence
+
+2.1. Get something to eat
+
+3. Minutes of previous meeting
+
+4. Actions from previous meeting
+- The requirements document so far.
+- Results of the skills audit.
+- Using Git
+
+5. New matters for consideration
+- Discuss final understanding of the Project Outline
+- Decide Web services / Web site
+- System Requirements Specification task breakdown round 2
+
+6. New actions to be carried out & individual responsibilities
+- including setting an agenda for the next meeting (new
+chairperson/current secretary)
+- including writing and distributing the minutes for this meeting (current
+secretary)
+- Allocation of System Requirements Specification tasks round 2
+
+7. Appointment of chairperson and secretary for the next meeting
+
+8. Date, time and place for the next formal meeting
