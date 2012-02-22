@@ -15,6 +15,10 @@
           <EntitySet Name="Resorts" EntityType="ASPNETDBModel.Store.Resorts" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Travel" EntityType="ASPNETDBModel.Store.Travel" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="TravelTypes" EntityType="ASPNETDBModel.Store.TravelTypes" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Bookings_Extras" Association="ASPNETDBModel.Store.FK_Bookings_Extras">
+            <End Role="Extras" EntitySet="Extras" />
+            <End Role="Bookings" EntitySet="Bookings" />
+          </AssociationSet>
           <AssociationSet Name="FK_Bookings_Hotels" Association="ASPNETDBModel.Store.FK_Bookings_Hotels">
             <End Role="Hotels" EntitySet="Hotels" />
             <End Role="Bookings" EntitySet="Bookings" />
@@ -52,14 +56,15 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="int" Nullable="false" />
           <Property Name="customer_id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="travel_id" Type="int" Nullable="false" />
           <Property Name="hotel_id" Type="int" Nullable="false" />
           <Property Name="start_date" Type="datetime" Nullable="false" />
           <Property Name="duration" Type="int" Nullable="false" />
           <Property Name="guests" Type="int" Nullable="false" />
-          <Property Name="booker_id" Type="uniqueidentifier" />
+          <Property Name="booker_id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="extra_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ExtraBookings">
           <Key>
@@ -134,6 +139,18 @@
           <Property Name="price" Type="decimal" Nullable="false" Precision="6" Scale="2" />
           <Property Name="available_days" Type="nvarchar" Nullable="false" MaxLength="50" />
         </EntityType>
+        <Association Name="FK_Bookings_Extras">
+          <End Role="Extras" Type="ASPNETDBModel.Store.Extras" Multiplicity="1" />
+          <End Role="Bookings" Type="ASPNETDBModel.Store.Bookings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Extras">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Bookings">
+              <PropertyRef Name="extra_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Bookings_Hotels">
           <End Role="Hotels" Type="ASPNETDBModel.Store.Hotels" Multiplicity="1" />
           <End Role="Bookings" Type="ASPNETDBModel.Store.Bookings" Multiplicity="*" />
@@ -235,7 +252,7 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ASPNETDBModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
-        <EntityContainer Name="ASPNETDBEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="ASPNETDBEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Bookings" EntityType="ASPNETDBModel.Booking" />
           <EntitySet Name="ExtraBookings" EntityType="ASPNETDBModel.ExtraBooking" />
           <EntitySet Name="Extras" EntityType="ASPNETDBModel.Extra" />
@@ -245,6 +262,10 @@
           <EntitySet Name="Resorts" EntityType="ASPNETDBModel.Resort" />
           <EntitySet Name="Travels" EntityType="ASPNETDBModel.Travel" />
           <EntitySet Name="TravelTypes" EntityType="ASPNETDBModel.TravelType" />
+          <AssociationSet Name="FK_Bookings_Extras" Association="ASPNETDBModel.FK_Bookings_Extras">
+            <End Role="Extras" EntitySet="Extras" />
+            <End Role="Bookings" EntitySet="Bookings" />
+          </AssociationSet>
           <AssociationSet Name="FK_Bookings_Hotels" Association="ASPNETDBModel.FK_Bookings_Hotels">
             <End Role="Hotels" EntitySet="Hotels" />
             <End Role="Bookings" EntitySet="Bookings" />
@@ -282,14 +303,16 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="customer_id" Type="Guid" Nullable="false" />
           <Property Name="travel_id" Type="Int32" Nullable="false" />
           <Property Name="hotel_id" Type="Int32" Nullable="false" />
           <Property Name="start_date" Type="DateTime" Nullable="false" />
           <Property Name="duration" Type="Int32" Nullable="false" />
           <Property Name="guests" Type="Int32" Nullable="false" />
-          <Property Name="booker_id" Type="Guid" />
+          <Property Name="booker_id" Type="Guid" Nullable="false" />
+          <Property Name="extra_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Extra" Relationship="ASPNETDBModel.FK_Bookings_Extras" FromRole="Bookings" ToRole="Extras" />
           <NavigationProperty Name="Hotel" Relationship="ASPNETDBModel.FK_Bookings_Hotels" FromRole="Bookings" ToRole="Hotels" />
           <NavigationProperty Name="Travel" Relationship="ASPNETDBModel.FK_Bookings_Travel" FromRole="Bookings" ToRole="Travel" />
         </EntityType>
@@ -313,6 +336,7 @@
           <Property Name="name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="description" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
           <Property Name="price" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+          <NavigationProperty Name="Bookings" Relationship="ASPNETDBModel.FK_Bookings_Extras" FromRole="Extras" ToRole="Bookings" />
           <NavigationProperty Name="ExtraBookings" Relationship="ASPNETDBModel.FK_ExtraBookings_ExtraBookings" FromRole="Extras" ToRole="ExtraBookings" />
           <NavigationProperty Name="Resort" Relationship="ASPNETDBModel.FK_Extras_Resorts" FromRole="Extras" ToRole="Resorts" />
         </EntityType>
@@ -380,6 +404,18 @@
           <Property Name="available_days" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Travels" Relationship="ASPNETDBModel.FK_Travel_Travel" FromRole="TravelTypes" ToRole="Travel" />
         </EntityType>
+        <Association Name="FK_Bookings_Extras">
+          <End Role="Extras" Type="ASPNETDBModel.Extra" Multiplicity="1" />
+          <End Role="Bookings" Type="ASPNETDBModel.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Extras">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Bookings">
+              <PropertyRef Name="extra_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Bookings_Hotels">
           <End Role="Hotels" Type="ASPNETDBModel.Hotel" Multiplicity="1" />
           <End Role="Bookings" Type="ASPNETDBModel.Booking" Multiplicity="*" />
@@ -481,7 +517,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ASPNETDBModelStoreContainer" CdmEntityContainer="ASPNETDBEntities">
+        <EntityContainerMapping StorageEntityContainer="ASPNETDBModelStoreContainer" CdmEntityContainer="ASPNETDBEntities1">
           <EntitySetMapping Name="Bookings"><EntityTypeMapping TypeName="ASPNETDBModel.Booking"><MappingFragment StoreEntitySet="Bookings">
             <ScalarProperty Name="id" ColumnName="id" />
             <ScalarProperty Name="customer_id" ColumnName="customer_id" />
@@ -491,6 +527,7 @@
             <ScalarProperty Name="duration" ColumnName="duration" />
             <ScalarProperty Name="guests" ColumnName="guests" />
             <ScalarProperty Name="booker_id" ColumnName="booker_id" />
+            <ScalarProperty Name="extra_id" ColumnName="extra_id" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="ExtraBookings"><EntityTypeMapping TypeName="ASPNETDBModel.ExtraBooking"><MappingFragment StoreEntitySet="ExtraBookings">
             <ScalarProperty Name="id" ColumnName="id" />
@@ -562,52 +599,53 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="AdoModels">
-        <EntityTypeShape EntityType="ASPNETDBModel.Booking" Width="1.5" PointX="5.25" PointY="2.625" Height="2.9417936197916656" IsExpanded="true" />
-        <EntityTypeShape EntityType="ASPNETDBModel.ExtraBooking" Width="1.5" PointX="5.25" PointY="12.25" Height="2.1725878906249996" IsExpanded="true" />
-        <EntityTypeShape EntityType="ASPNETDBModel.Extra" Width="1.5" PointX="3" PointY="12.125" Height="2.3648893229166674" IsExpanded="true" />
-        <EntityTypeShape EntityType="ASPNETDBModel.Hotel" Width="1.5" PointX="3" PointY="8.875" Height="2.3648893229166674" IsExpanded="true" />
-        <EntityTypeShape EntityType="ASPNETDBModel.HotelType" Width="1.5" PointX="0.75" PointY="7.75" Height="1.7879850260416674" IsExpanded="true" />
-        <EntityTypeShape EntityType="ASPNETDBModel.passanger" Width="1.5" PointX="5.25" PointY="6.625" Height="2.1725878906249987" IsExpanded="true" />
-        <EntityTypeShape EntityType="ASPNETDBModel.Resort" Width="1.5" PointX="0.75" PointY="10.375" Height="1.9802864583333317" IsExpanded="true" />
-        <EntityTypeShape EntityType="ASPNETDBModel.Travel" Width="1.5" PointX="3" PointY="2.875" Height="2.3648893229166674" IsExpanded="true" />
-        <EntityTypeShape EntityType="ASPNETDBModel.TravelType" Width="1.5" PointX="0.75" PointY="3" Height="1.9802864583333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASPNETDBModel.Booking" Width="1.5" PointX="6.25" PointY="0.5" Height="3.3263964843749996" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASPNETDBModel.ExtraBooking" Width="1.5" PointX="5.625" PointY="11.625" Height="2.1725878906249996" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASPNETDBModel.Extra" Width="1.5" PointX="3.125" PointY="11.75" Height="2.5571907552083335" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASPNETDBModel.Hotel" Width="1.5" PointX="3.5" PointY="7.75" Height="2.3648893229166656" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASPNETDBModel.HotelType" Width="1.5" PointX="0.75" PointY="6.5" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASPNETDBModel.passanger" Width="1.5" PointX="3.625" PointY="3.875" Height="2.1725878906249996" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASPNETDBModel.Resort" Width="1.5" PointX="0.75" PointY="9.5" Height="1.9802864583333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASPNETDBModel.Travel" Width="1.5" PointX="3.375" PointY="0.5" Height="2.3648893229166674" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASPNETDBModel.TravelType" Width="1.5" PointX="0.5" PointY="0.5" Height="1.9802864583333317" IsExpanded="true" />
+        <AssociationConnector Association="ASPNETDBModel.FK_Bookings_Extras" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.625" PointY="14.083639322916666" />
+          <ConnectorPoint PointX="7.46875" PointY="14.083639322916666" />
+          <ConnectorPoint PointX="7.46875" PointY="3.8263964843749996" />
+        </AssociationConnector>
         <AssociationConnector Association="ASPNETDBModel.FK_Bookings_Hotels" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="8.8761528461538468" />
-          <ConnectorPoint PointX="4.875" PointY="8.5011528461538468" />
-          <ConnectorPoint PointX="4.875" PointY="4.0958968098958328" />
-          <ConnectorPoint PointX="5.25" PointY="4.0958968098958328" />
+          <ConnectorPoint PointX="5" PointY="8.9324446614583337" />
+          <ConnectorPoint PointX="6.8281225" PointY="8.9324446614583337" />
+          <ConnectorPoint PointX="6.8281225" PointY="3.8263964843749996" />
         </AssociationConnector>
         <AssociationConnector Association="ASPNETDBModel.FK_Bookings_Travel" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="3.4229484049479164" />
-          <ConnectorPoint PointX="5.25" PointY="3.4229484049479164" />
+          <ConnectorPoint PointX="4.875" PointY="1.6824446614583337" />
+          <ConnectorPoint PointX="6.25" PointY="1.6824446614583337" />
         </AssociationConnector>
         <AssociationConnector Association="ASPNETDBModel.FK_ExtraBookings_ExtraBookings" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="13.3362939453125" />
-          <ConnectorPoint PointX="5.25" PointY="13.3362939453125" />
+          <ConnectorPoint PointX="4.625" PointY="12.7737939453125" />
+          <ConnectorPoint PointX="5.625" PointY="12.7737939453125" />
         </AssociationConnector>
         <AssociationConnector Association="ASPNETDBModel.FK_Extras_Resorts" ManuallyRouted="false">
-          <ConnectorPoint PointX="1.5" PointY="12.355286458333332" />
-          <ConnectorPoint PointX="1.5" PointY="13.422588390624998" />
-          <ConnectorPoint PointX="3" PointY="13.422588390624998" />
+          <ConnectorPoint PointX="2.25" PointY="10.828837890625" />
+          <ConnectorPoint PointX="3.28125" PointY="10.828837890625" />
+          <ConnectorPoint PointX="3.28125" PointY="11.75" />
         </AssociationConnector>
         <AssociationConnector Association="ASPNETDBModel.FK_Hotels_HotelTypes" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="9.2064925130208337" />
-          <ConnectorPoint PointX="3" PointY="9.2064925130208337" />
+          <ConnectorPoint PointX="2.25" PointY="8.0189925130208337" />
+          <ConnectorPoint PointX="3.5" PointY="8.0189925130208337" />
         </AssociationConnector>
         <AssociationConnector Association="ASPNETDBModel.FK_Hotels_Resorts" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="10.807444661458334" />
-          <ConnectorPoint PointX="3" PointY="10.807444661458334" />
+          <ConnectorPoint PointX="2.25" PointY="9.8074446614583337" />
+          <ConnectorPoint PointX="3.5" PointY="9.8074446614583337" />
         </AssociationConnector>
         <AssociationConnector Association="ASPNETDBModel.FK_passanger_Travel" ManuallyRouted="false">
-          <ConnectorPoint PointX="3.75" PointY="5.2398893229166674" />
-          <ConnectorPoint PointX="3.75" PointY="7.7112939453125" />
-          <ConnectorPoint PointX="4.791666666666667" PointY="7.7112939453124989" />
-          <ConnectorPoint PointX="4.958333333333333" PointY="7.7112939453125" />
-          <ConnectorPoint PointX="5.25" PointY="7.7112939453125" />
+          <ConnectorPoint PointX="4.25" PointY="2.8648893229166674" />
+          <ConnectorPoint PointX="4.25" PointY="3.875" />
         </AssociationConnector>
         <AssociationConnector Association="ASPNETDBModel.FK_Travel_Travel" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="3.9901432291666659" />
-          <ConnectorPoint PointX="3" PointY="3.9901432291666659" />
+          <ConnectorPoint PointX="2" PointY="1.4901432291666659" />
+          <ConnectorPoint PointX="3.375" PointY="1.4901432291666659" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>
