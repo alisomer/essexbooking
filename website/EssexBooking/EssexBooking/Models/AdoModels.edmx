@@ -252,7 +252,7 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ASPNETDBModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
-        <EntityContainer Name="ASPNETDBEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="ASPNETDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Bookings" EntityType="ASPNETDBModel.Booking" />
           <EntitySet Name="ExtraBookings" EntityType="ASPNETDBModel.ExtraBooking" />
           <EntitySet Name="Extras" EntityType="ASPNETDBModel.Extra" />
@@ -517,7 +517,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ASPNETDBModelStoreContainer" CdmEntityContainer="ASPNETDBEntities1">
+        <EntityContainerMapping StorageEntityContainer="ASPNETDBModelStoreContainer" CdmEntityContainer="ASPNETDBEntities">
           <EntitySetMapping Name="Bookings"><EntityTypeMapping TypeName="ASPNETDBModel.Booking"><MappingFragment StoreEntitySet="Bookings">
             <ScalarProperty Name="id" ColumnName="id" />
             <ScalarProperty Name="customer_id" ColumnName="customer_id" />
