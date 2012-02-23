@@ -67,19 +67,17 @@
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\TravelTypeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\Booking.cs" />
-    <Compile Include="Models\Cart.cs" />
-    <Compile Include="Models\HistoryModel.cs" />
-    <Compile Include="Models\Model1.Designer.cs">
+    <Compile Include="Models\AdoModels.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.edmx</DependentUpon>
+      <DependentUpon>AdoModels.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Booking.cs" />
+    <Compile Include="Models\Cart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -159,19 +157,19 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\TravelType\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Home\Hotels.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="Models\Model1.edmx">
+    <Content Include="Views\Account\ShowHistory.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="Models\AdoModels.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+      <LastGenOutput>AdoModels.Designer.cs</LastGenOutput>
     </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Account\ShowHistory.cshtml" />
+    <Content Include="Views\Home\Travel.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

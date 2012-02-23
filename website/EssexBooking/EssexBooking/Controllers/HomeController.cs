@@ -26,5 +26,10 @@ namespace EssexBooking.Controllers
         {
             return View(entities.Hotels);
         }
+
+        public ActionResult Travel()
+        {
+            return View(entities.TravelTypes);
+        }
     }
 }
