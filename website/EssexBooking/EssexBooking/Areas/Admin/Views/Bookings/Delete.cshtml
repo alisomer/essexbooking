@@ -1,0 +1,58 @@
+﻿@model EssexBooking.Models.Booking
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Booking</legend>
+
+    <div class="display-label">customer_id</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.customer_id)
+    </div>
+
+    <div class="display-label">Travel</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Travel.id)
+    </div>
+
+    <div class="display-label">Hotel</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Hotel.name)
+    </div>
+
+    <div class="display-label">start_date</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.start_date)
+    </div>
+
+    <div class="display-label">duration</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.duration)
+    </div>
+
+    <div class="display-label">guests</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.guests)
+    </div>
+
+    <div class="display-label">booker_id</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.booker_id)
+    </div>
+
+    <div class="display-label">Extra</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Extra.name)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}
