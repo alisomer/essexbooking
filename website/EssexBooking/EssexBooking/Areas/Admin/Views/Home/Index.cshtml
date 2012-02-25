@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "Admin Home Page";
+}
+
+<h2>@ViewBag.Message</h2>
+<p>
+	here will be a menu to all the items
+</p>
+
+<ul>
+	<li>@Html.ActionLink("Hotels", "Index", "Hotel")</li>
+	<li>@Html.ActionLink("Resorts", "Index", "Resort")</li>
+	<li>@Html.ActionLink("Extras", "Index", "Extras")</li>
+	<li>@Html.ActionLink("TravelType", "Index", "TravelType")</li>
+	<li>@Html.ActionLink("Bookings", "Index", "Bookings")</li>
+</ul>

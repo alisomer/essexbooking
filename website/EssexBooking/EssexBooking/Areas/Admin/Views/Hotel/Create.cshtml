@@ -1,0 +1,49 @@
+﻿@model EssexBooking.Models.Hotel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Hotel</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.resort_id, "Resort")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("resort_id", String.Empty)
+            @Html.ValidationMessageFor(model => model.resort_id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.hotel_type_id, "HotelType")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("hotel_type_id", String.Empty)
+            @Html.ValidationMessageFor(model => model.hotel_type_id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.name)
+            @Html.ValidationMessageFor(model => model.name)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

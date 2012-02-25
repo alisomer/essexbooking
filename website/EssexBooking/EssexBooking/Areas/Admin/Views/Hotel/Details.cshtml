@@ -1,0 +1,30 @@
+﻿@model EssexBooking.Models.Hotel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Hotel</legend>
+
+    <div class="display-label">Resort</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Resort.name)
+    </div>
+
+    <div class="display-label">HotelType</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.HotelType.name)
+    </div>
+
+    <div class="display-label">name</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.name)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

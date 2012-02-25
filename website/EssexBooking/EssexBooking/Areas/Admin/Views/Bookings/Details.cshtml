@@ -1,0 +1,55 @@
+﻿@model EssexBooking.Models.Booking
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Booking</legend>
+
+    <div class="display-label">customer_id</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.customer_id)
+    </div>
+
+    <div class="display-label">Travel</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Travel.id)
+    </div>
+
+    <div class="display-label">Hotel</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Hotel.name)
+    </div>
+
+    <div class="display-label">start_date</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.start_date)
+    </div>
+
+    <div class="display-label">duration</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.duration)
+    </div>
+
+    <div class="display-label">guests</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.guests)
+    </div>
+
+    <div class="display-label">booker_id</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.booker_id)
+    </div>
+
+    <div class="display-label">Extra</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Extra.name)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
