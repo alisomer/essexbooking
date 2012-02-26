@@ -1,0 +1,22 @@
+﻿@model IEnumerable<EssexBooking.Models.HistoryModel>
+           
+
+@{
+    ViewBag.Title = "ShowHistory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ShowHistory</h2>
+<table>
+    <tr>
+        <th> Booking ID</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.booking)
+            </td>
+        </tr>
+    }
+</table>
