@@ -1,0 +1,22 @@
+﻿@model EssexBooking.Models.Cart
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@section extraHead
+{
+<script type="text/javascript">
+    $(function () {
+        $(".start_date").datepicker({ minDate: 0, maxDate: "+1Y" });
+
+        $(".radioset").buttonset();
+    });
+</script>
+}
+
+<h2>Index</h2>
+@foreach (var b in Model.bookings)
+{
+   @Html.Partial("_BookingFormPartial", b)
+}

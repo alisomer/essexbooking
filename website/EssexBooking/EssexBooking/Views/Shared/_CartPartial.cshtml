@@ -1,0 +1,20 @@
+﻿@model EssexBooking.Models.Cart
+<div class="cart">
+<h3>Your Cart</h3>
+    <table>
+        @foreach (var booking in Model.bookings) {
+
+                <tr hotel_id='@(booking.hotel_id)'>
+                    <td>
+                        @Html.DisplayFor(modelItem => booking.Hotel.name)
+                    </td>
+                    <td>
+                        <button class="remove">remove</button>
+                    </td>
+
+                </tr>
+
+        }
+    </table>
+<a class="proceed" href="@Url.Action("Index","Booking")">Proceed to booking</a>
+</div>

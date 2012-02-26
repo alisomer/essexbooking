@@ -322,3 +322,20 @@ div#title {
 .tri-state {
     width: 6em;
 }
+
+.cart
+{
+    border: 2px solid #993361;   
+}
+
+.bookingForm
+{
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius:5px;
+}
+
+.formField
+{
+    margin: 20px 0;
+}

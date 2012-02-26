@@ -24,6 +24,7 @@ namespace EssexBooking.Controllers
 
         public ActionResult Hotels()
         {
+            ViewBag.cart = new Cart();
             return View(entities.Hotels);
         }
 
@@ -31,5 +32,7 @@ namespace EssexBooking.Controllers
         {
             return View(entities.TravelTypes);
         }
+
+
     }
 }

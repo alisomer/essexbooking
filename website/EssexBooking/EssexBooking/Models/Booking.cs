@@ -11,11 +11,6 @@ namespace EssexBooking.Models
 {
     public partial class Booking : EntityObject
     {
-        private List<ExtraBooking> extras = new List<ExtraBooking>();
-
-        public List<ExtraBooking> Extras
-        {
-            get { return extras; }
-        }
+        public int temp_id;
     }
 }

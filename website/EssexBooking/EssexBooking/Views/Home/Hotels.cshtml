@@ -3,7 +3,32 @@
 @{
     ViewBag.Title = "Hotels";
 }
+@section extraHead
+{
+<script type="text/javascript" src="/Scripts/AjaxProxy.js"></script>
+<script type="text/javascript">
 
+    updateCart = function (resp) {
+        $("#minicart .cart").replaceWith(resp);
+    };
+
+    $(function () {
+        $(".addToCart").click(function () {
+            var hotel_id = $(this).closest("[hotel_id]").attr("hotel_id");
+            AddHotelToCart(hotel_id, updateCart);
+
+        });
+
+        $(".cart .remove").live('click',function () {
+            var hotel_id = $(this).closest("[hotel_id]").attr("hotel_id");
+            RemoveHotelFromCart(hotel_id, updateCart);
+
+        });
+
+    });
+
+</script>
+}
 <h2>Hotels</h2>
 
 <table>
@@ -20,10 +45,13 @@
          <th>
             Resort
         </th>
+        <th>
+            add to cart
+        </th>
     </tr>
 
 @foreach (var item in Model) {
-    <tr id='@(item.resort_id)'>
+    <tr hotel_id='@(item.id)'>
         <td>
             @Html.DisplayFor(modelItem => item.name)
         </td>
@@ -36,7 +64,14 @@
          <td>
             @Html.DisplayFor(modelItem => item.Resort.name)
         </td>
+        <td>
+            <button class="addToCart">Add</button>
+        </td>
     </tr>
 }
 
 </table>
+
+<div id="minicart">
+@Html.Partial("_CartPartial", (EssexBooking.Models.Cart) ViewBag.Cart)
+</div>

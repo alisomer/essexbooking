@@ -8,14 +8,14 @@ namespace EssexBooking.Models
 {
     public class Cart
     {
-        private List<Booking> bookings;
+        public List<Booking> bookings{get;set;}
 
         public Cart()
         {
             Cart c = this.GetFromSession();
             if (c != null)
             {
-                bookings = c.Bookings;
+                bookings = c.bookings;
             }
             else
             {
@@ -24,7 +24,7 @@ namespace EssexBooking.Models
             }
         }
 
-        void AddToSession()
+        public void AddToSession()
         {
             System.Web.HttpContext.Current.Session["cart"] = this;
         }
@@ -49,17 +49,13 @@ namespace EssexBooking.Models
             {
                 entities.Bookings.AddObject(b);
                 entities.Travels.AddObject(b.Travel);
-                foreach (ExtraBooking e in b.Extras)
+               /* foreach (ExtraBooking e in b.ExtraBooking.)
                 {
                     entities.ExtraBookings.AddObject(e);
-                }
+                }*/
             }
             entities.SaveChanges();
         }
 
-        public List<Booking> Bookings
-        {
-            get { return bookings; }
-        }
     }
 }
