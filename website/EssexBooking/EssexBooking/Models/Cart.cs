@@ -8,7 +8,7 @@ namespace EssexBooking.Models
 {
     public class Cart
     {
-        public List<Booking> bookings{get;set;}
+        public Dictionary<int,Booking> bookings{get;set;}
 
         public Cart()
         {
@@ -19,11 +19,11 @@ namespace EssexBooking.Models
             }
             else
             {
-                bookings = new List<Booking>();
+                bookings = new Dictionary<int, Booking>();
                 this.AddToSession();
             }
         }
-
+        //Turns out that this method is unecessary.
         public void AddToSession()
         {
             System.Web.HttpContext.Current.Session["cart"] = this;
@@ -36,16 +36,13 @@ namespace EssexBooking.Models
 
         public void Empty()
         {
-            foreach (Booking b in bookings)
-            {
-                bookings.Remove(b);
-            }
+            bookings = new Dictionary<int, Booking>();
         }
 
         public void Checkout()
         {
             ASPNETDBEntities entities = new ASPNETDBEntities();
-            foreach (Booking b in bookings)
+            foreach (Booking b in bookings.Values)
             {
                 entities.Bookings.AddObject(b);
                 entities.Travels.AddObject(b.Travel);

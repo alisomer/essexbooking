@@ -6,11 +6,28 @@
 
 @section extraHead
 {
+
+<script type="text/javascript" src="/Scripts/AjaxProxy.js"></script>
 <script type="text/javascript">
+
+
     $(function () {
-        $(".start_date").datepicker({ minDate: 0, maxDate: "+1Y" });
+        $(".start_date").datepicker({ minDate: 0, maxDate: "+1Y", dateFormat: 'dd-mm-yy' });
 
         $(".radioset").buttonset();
+
+        $(".bookingForm .save").click(function () {
+            var form = $(this).closest(".bookingForm");
+            UpdateBooking({
+                temp_id: form.attr("temp_id"),
+                start_date: form.find(".start_date").val(),
+                duration: form.find(".duration input:checked").val(),
+                guests: form.find("select[name=guests]").val()
+
+            },
+            function (resp) { console.log("ok"); })
+
+        });
     });
 </script>
 }
@@ -18,5 +35,5 @@
 <h2>Index</h2>
 @foreach (var b in Model.bookings)
 {
-   @Html.Partial("_BookingFormPartial", b)
+   @Html.Partial("_BookingFormPartial", b.Value)
 }

@@ -4,9 +4,9 @@
     <table>
         @foreach (var booking in Model.bookings) {
 
-                <tr hotel_id='@(booking.hotel_id)'>
+                <tr temp_id='@(booking.Key)'>
                     <td>
-                        @Html.DisplayFor(modelItem => booking.Hotel.name)
+                        @Html.DisplayFor(modelItem => booking.Value.Hotel.name)
                     </td>
                     <td>
                         <button class="remove">remove</button>

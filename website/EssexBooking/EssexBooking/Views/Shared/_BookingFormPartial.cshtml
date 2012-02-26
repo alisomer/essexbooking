@@ -5,25 +5,25 @@
     string prefix = Model.temp_id.ToString();
 }
 
-<div class="bookingForm">
+<div temp_id="@Model.temp_id" class="bookingForm">
+    <h2>Booking for @Model.Hotel.name</h2>
 
-<h2>Booking for @Model.Hotel.name</h2>
-
-<div class="formField">Starting date <div class="start_date"></div></div>
-<div class="formField">
-    Duration 
-    <div class="radioset">
-        <label for="@(prefix)_duration_7">1 week</label><input checked="checked" id="@(prefix)_duration_7" type="radio" name="@(prefix)_duration" value="7"/>
-        <label for="@(prefix)_duration_14">2 weeks</label><input id="@(prefix)_duration_14" type="radio" name="@(prefix)_duration" value="14"/>
+    <div class="formField">Starting date <div class="start_date"></div></div>
+    <div class="formField">
+        Duration 
+        <div class="radioset duration">
+            <label for="@(prefix)_duration_7">1 week</label><input @(Model.duration == 7 ? "checked='checked'" : "") id="@(prefix)_duration_7" type="radio" name="@(prefix)_duration" value="7"/>
+            <label for="@(prefix)_duration_14">2 weeks</label><input @(Model.duration == 14 ? "checked='checked'" : "") id="@(prefix)_duration_14" type="radio" name="@(prefix)_duration" value="14"/>
+        </div>
     </div>
-</div>
-<div class="formField">
-    guests <select name="guests">
-        @for(int i=1; i<=20;i++){
-            <option value="@i">@i</option>
-        }
-
-    </select>
-</div>
-
+    <div class="formField">
+        guests <select name="guests">
+            @for(int i=1; i<=20;i++){
+                <option value="@i">@i</option>
+            }
+        </select>
+        Val from obj = @(Model.guests)
+        <!--TODO: pre select from dropdown -->
+    </div>
+    <button class="save">Save</button>
 </div>

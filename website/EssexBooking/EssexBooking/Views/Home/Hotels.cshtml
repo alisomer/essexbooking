@@ -20,8 +20,8 @@
         });
 
         $(".cart .remove").live('click',function () {
-            var hotel_id = $(this).closest("[hotel_id]").attr("hotel_id");
-            RemoveHotelFromCart(hotel_id, updateCart);
+            var temp_id = $(this).closest("[temp_id]").attr("temp_id");
+            RemoveBookingFromCart(temp_id, updateCart);
 
         });
 
