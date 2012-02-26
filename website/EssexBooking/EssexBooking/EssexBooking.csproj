@@ -69,6 +69,7 @@
     <Compile Include="Controllers\AjaxController.cs" />
     <Compile Include="Controllers\BookingController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TelesalesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -80,6 +81,8 @@
     </Compile>
     <Compile Include="Models\Booking.cs" />
     <Compile Include="Models\Cart.cs" />
+    <Compile Include="Models\EntitiesRepository.cs" />
+    <Compile Include="Models\TelesalesViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -199,6 +202,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_BookingFormPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Telesales\TelesalesList.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
