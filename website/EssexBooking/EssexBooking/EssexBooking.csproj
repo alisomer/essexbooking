@@ -81,7 +81,8 @@
     </Compile>
     <Compile Include="Models\Booking.cs" />
     <Compile Include="Models\Cart.cs" />
-    <Compile Include="Models\HistoryModel.cs" />    <Compile Include="Models\EntitiesRepository.cs" />
+    <Compile Include="Models\HistoryModel.cs" />
+    <Compile Include="Models\EntitiesRepository.cs" />
     <Compile Include="Models\TelesalesViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -205,6 +206,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Telesales\TelesalesList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_HotelFormPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_TravelFormPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_PassengerFormPartial.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

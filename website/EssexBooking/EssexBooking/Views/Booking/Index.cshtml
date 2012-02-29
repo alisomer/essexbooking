@@ -10,9 +10,32 @@
 <script type="text/javascript" src="/Scripts/AjaxProxy.js"></script>
 <script type="text/javascript">
 
-
     $(function () {
-        $(".start_date").datepicker({ minDate: 0, maxDate: "+1Y", dateFormat: 'dd-mm-yy' });
+        $(".start_date").datepicker({ minDate: 0, maxDate: "+1Y", dateFormat: 'mm dd yy',
+            beforeShowDay: function (date) {
+                var dateSelected = new Date($(this).closest(".bookingForm").find(".start_date").val());
+                var range = $(this).closest(".bookingForm").find(".duration input:checked").val();
+                var endDate = new Date(dateSelected);
+                var dateC = "";
+                endDate.setDate(endDate.getDate() + parseInt(range));
+
+                if (range != null && endDate > date && date > dateSelected) {
+                    dateC = "ui-state-active";
+
+                }
+                return [true, dateC];
+            },
+            onSelect: function (dateText, inst) {
+                var date = new Date(dateText);
+                if (date.getDay() != 3 && date.getDay() != 6) {
+                    $(this).closest(".bookingForm").find("input[value=2]").button({ "disabled": true });
+                    $(this).closest(".bookingForm").find("input[value=1]").attr("checked", true);
+                    $(this).closest(".bookingForm").find(".radioset").buttonset("refresh");
+                } else {
+                    $(this).closest(".bookingForm").find("input[value=2]").button({ "disabled": false });
+                }
+            }
+        });
 
         $(".radioset").buttonset();
 
@@ -22,12 +45,16 @@
                 temp_id: form.attr("temp_id"),
                 start_date: form.find(".start_date").val(),
                 duration: form.find(".duration input:checked").val(),
-                guests: form.find("select[name=guests]").val()
+                guests: form.find("select[name=guests]").val(),
+                travel_type_id: form.find(".travel_type input:checked").val()
 
             },
             function (resp) { console.log("ok"); })
 
         });
+
+        $(".duration input").change(function () { $(".start_date").datepicker("refresh"); });
+
     });
 </script>
 }

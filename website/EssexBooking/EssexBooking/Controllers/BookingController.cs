@@ -12,9 +12,12 @@ namespace EssexBooking.Controllers
         //
         // GET: /Booking/
 
+        ASPNETDBEntities entities = new ASPNETDBEntities();
+
         public ActionResult Index()
         {
             Cart cart = new Cart();
+            ViewBag.TravelTypes = entities.TravelTypes;
             return View(cart);
         }
 

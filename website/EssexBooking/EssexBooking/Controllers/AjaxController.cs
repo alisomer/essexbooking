@@ -58,6 +58,7 @@ namespace EssexBooking.Controllers
             public DateTime start_date { get; set; }
             public int duration { get; set; }
             public int guests { get; set; }
+            public int travel_type_id { get; set; }
         }
 
         [HttpPost]
@@ -69,6 +70,13 @@ namespace EssexBooking.Controllers
             if(cart.bookings.ContainsKey(br.temp_id)){
                 cart.bookings[br.temp_id].guests = br.guests;
                 cart.bookings[br.temp_id].duration = br.duration;
+                
+                Travel travel= new Travel();
+                travel.TravelType = entities.TravelTypes.FirstOrDefault(tt => tt.id == br.travel_type_id);
+                travel.departure = br.start_date;
+                travel.arrival = br.start_date.AddDays(br.duration);
+                cart.bookings[br.temp_id].Travel = travel;
+                 
                 updated = true;
             }
 
