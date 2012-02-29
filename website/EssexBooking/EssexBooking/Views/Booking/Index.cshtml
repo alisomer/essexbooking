@@ -14,6 +14,10 @@
     $(function () {
         $(".start_date").datepicker({ minDate: 0, maxDate: "+1Y", dateFormat: 'dd-mm-yy' });
 
+        $(".extra_booking_date").datepicker({ showOn: "button", buttonImage: "../../Content/images/calendar.gif",buttonImageOnly: true, minDate: 0, maxDate: "+1Y", dateFormat: 'dd-mm-yy' });
+
+        
+
         $(".radioset").buttonset();
 
         $(".bookingForm .save").click(function () {
@@ -26,6 +30,18 @@
 
             },
             function (resp) { console.log("ok"); })
+
+        });
+
+        displayExtraCart = function (resp) {
+            $("#miniextracart .extrabookingcart").replaceWith(resp);
+        };
+        
+        $(".addExtraToBooking").click(function () {
+            var extra_id = $(this).closest("[data-extra_id]").data("extra_id");
+            var number = $(this).closest(".number").val();
+            var temp_id = $(this).closest("[temp_id]").attr("temp_id");
+            AddExtraToBooking(temp_id, extra_id, number, displayExtraCart);
 
         });
     });

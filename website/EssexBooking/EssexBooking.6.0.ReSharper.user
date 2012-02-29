@@ -1,13 +1,56 @@
 <Configuration>
   <RecentFiles>
     <RecentFiles>
-      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Controllers/f:HomeController.cs" caret="351" fromTop="15" />
+      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Models/f:HistoryModel.cs" caret="0" fromTop="0" />
       <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Models/f:AccountModels.cs" caret="0" fromTop="0" />
-      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Models/f:AdoModels.Designer.cs" caret="644" fromTop="15" />
-      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Views/d:Home/f:Index.cshtml" caret="205" fromTop="8" />
+      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Models/f:TelesalesViewModel.cs" caret="743" fromTop="20" />
+      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Views/d:Shared/f:_Layout.cshtml" caret="576" fromTop="14" />
+      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Models/f:EntitiesRepository.cs" caret="192" fromTop="9" />
+      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/f:Web.config" caret="917" fromTop="10" />
+      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Controllers/f:TelesalesController.cs" caret="0" fromTop="0" />
+      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Views/d:Telesales/f:TelesalesList.cshtml" caret="2060" fromTop="19" />
+      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Views/d:Shared/f:_ExtraBookingCartPartial.cshtml" caret="187" fromTop="8" />
+      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Controllers/f:BookingController.cs" caret="345" fromTop="16" />
+      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Models/f:Cart.cs" caret="0" fromTop="0" />
+      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Models/f:Booking.cs" caret="359" fromTop="16" />
+      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Controllers/f:HomeController.cs" caret="684" fromTop="27" />
+      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Views/d:Home/f:Hotels.cshtml" caret="209" fromTop="10" />
+      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Views/d:Shared/f:_CartPartial.cshtml" caret="448" fromTop="15" />
+      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Views/d:Shared/f:_BookingFormPartial.cshtml" caret="1248" fromTop="30" />
+      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Scripts/f:AjaxProxy.js" caret="811" fromTop="20" />
+      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Controllers/f:AjaxController.cs" caret="921" fromTop="2" />
+      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Views/d:Shared/f:_ExtraPartial.cshtml" caret="276" fromTop="14" />
+      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Views/d:Home/f:Index.cshtml" caret="0" fromTop="0" />
+      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Views/d:Booking/f:Index.cshtml" caret="847" fromTop="15" />
     </RecentFiles>
     <RecentEdits>
-      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Models/f:AccountModels.cs" caret="0" fromTop="0" />
+      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Views/d:Shared/f:_ExtraPartial.cshtml" caret="261" fromTop="14" />
+      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Controllers/f:AjaxController.cs" caret="3188" fromTop="24" />
+      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Controllers/f:AjaxController.cs" caret="2815" fromTop="24" />
+      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Controllers/f:AjaxController.cs" caret="1666" fromTop="16" />
+      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Views/d:Shared/f:_ExtraPartial.cshtml" caret="113" fromTop="9" />
+      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Scripts/f:AjaxProxy.js" caret="1067" fromTop="35" />
+      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Scripts/f:AjaxProxy.js" caret="1007" fromTop="33" />
+      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Views/d:Booking/f:Index.cshtml" caret="1508" fromTop="38" />
+      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Views/d:Shared/f:_ExtraPartial.cshtml" caret="314" fromTop="14" />
+      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Views/d:Shared/f:_ExtraPartial.cshtml" caret="100" fromTop="1" />
+      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Controllers/f:BookingController.cs" caret="345" fromTop="16" />
+      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Views/d:Booking/f:Index.cshtml" caret="446" fromTop="16" />
+      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Views/d:Shared/f:_ExtraPartial.cshtml" caret="430" fromTop="27" />
+      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Views/d:Shared/f:_ExtraPartial.cshtml" caret="614" fromTop="24" />
+      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Views/d:Shared/f:_ExtraPartial.cshtml" caret="434" fromTop="19" />
+      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Models/f:Cart.cs" caret="427" fromTop="13" />
+      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Controllers/f:AjaxController.cs" caret="1080" fromTop="18" />
+      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Controllers/f:AjaxController.cs" caret="577" fromTop="14" />
+      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Controllers/f:AjaxController.cs" caret="1222" fromTop="24" />
+      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Views/d:Shared/f:_ExtraBookingCartPartial.cshtml" caret="199" fromTop="12" />
+      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Views/d:Shared/f:_ExtraBookingCartPartial.cshtml" caret="382" fromTop="17" />
+      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Views/d:Shared/f:_ExtraBookingCartPartial.cshtml" caret="452" fromTop="22" />
+      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Views/d:Shared/f:_ExtraBookingCartPartial.cshtml" caret="187" fromTop="8" />
+      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Views/d:Booking/f:Index.cshtml" caret="1491" fromTop="28" />
+      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Views/d:Shared/f:_ExtraPartial.cshtml" caret="907" fromTop="33" />
+      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Views/d:Shared/f:_BookingFormPartial.cshtml" caret="1248" fromTop="30" />
+      <File id="C67D4A11-F2C4-4C58-8966-A659A9E707DE/d:Views/d:Booking/f:Index.cshtml" caret="1106" fromTop="24" />
     </RecentEdits>
   </RecentFiles>
   <NAntValidationSettings>
@@ -28,4 +71,184 @@
       <setting name="SolutionAnalysisEnabled">False</setting>
     </boolean>
   </SettingsComponent>
+  <CompletionStatisticsManager>
+    <ItemStatistics item="CSharpCodeCompletionContext">
+      <Item value="Extra`0" priority="142" />
+      <Item value="extra" priority="395" />
+      <Item value="Booking`0" priority="210" />
+      <Item value="ExtractTemplateValuesMethod`0" priority="32" />
+      <Item value="Html" priority="329" />
+      <Item value="item" priority="63" />
+      <Item value="model" priority="282" />
+      <Item value="Model" priority="416" />
+      <Item value="public" priority="63" />
+      <Item value="ActionResult`0" priority="31" />
+      <Item value="int" priority="190" />
+      <Item value="Cart`0" priority="90" />
+      <Item value="cart" priority="288" />
+      <Item value="new" priority="575" />
+      <Item value="Cart" priority="57" />
+      <Item value="Booking" priority="86" />
+      <Item value="booking" priority="190" />
+      <Item value="ExtraBooking`0" priority="287" />
+      <Item value="extraBooking" priority="386" />
+      <Item value="ExtraBooking" priority="115" />
+      <Item value="extra_id" priority="191" />
+      <Item value="newbooking" priority="63" />
+      <Item value="DropDownList`0" priority="3" />
+      <Item value="c" priority="31" />
+      <Item value="SelectList" priority="29" />
+      <Item value="List" priority="95" />
+      <Item value="extraBookings" priority="193" />
+      <Item value="List&lt;ExtraBooking&gt;" priority="144" />
+      <Item value="foreach" priority="59" />
+      <Item value="var" priority="95" />
+      <Item value="ObjectInfo`0" priority="31" />
+      <Item value="in" priority="63" />
+      <Item value="if" priority="31" />
+      <Item value="null" priority="31" />
+      <Item value="else" priority="31" />
+      <Item value="amount" priority="31" />
+      <Item value="extrasList" priority="31" />
+      <Item value="temp_id" priority="63" />
+      <Item value="Dictionary" priority="127" />
+      <Item value="Dictionary&lt;int,ExtraBooking&gt;" priority="58" />
+      <Item value="return" priority="63" />
+      <Item value="View`0" priority="63" />
+      <Item value="div" priority="29" />
+      <Item value="br" priority="63" />
+      <Item value="IEnumerable" priority="26" />
+      <Item value="entities" priority="31" />
+      <Item value="ViewBag" priority="31" />
+      <Item value="InputExtensions`0" priority="29" />
+      <Item value="ExtraBookingCart`0" priority="58" />
+      <Item value="extraBookingCart" priority="96" />
+      <Item value="ExtraBookingCart" priority="28" />
+      <Item value="r" priority="31" />
+      <Item value="extratemp_id" priority="31" />
+      <Item value="extrabooking" priority="59" />
+      <Item value="EssexBooking" priority="31" />
+      <Item value="Models" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:EssexBooking.Models.Extra">
+      <Item value="name" priority="107" />
+      <Item value="price" priority="53" />
+      <Item value="description" priority="53" />
+      <Item value="id" priority="82" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Object">
+      <Item value="GetType`0" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="RazorTransitionCompletionContext">
+      <Item value="Html" priority="87" />
+      <Item value="model" priority="35" />
+      <Item value="extra" priority="81" />
+      <Item value="Model" priority="9" />
+      <Item value="foreach" priority="15" />
+      <Item value="booking" priority="7" />
+      <Item value="extrabooking" priority="17" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Web.Mvc.HtmlHelper`1">
+      <Item value="Partial`0" priority="53" />
+      <Item value="TextBox`0" priority="107" />
+      <Item value="Label`0" priority="80" />
+      <Item value="DropDownList`0" priority="26" />
+      <Item value="DropDownListFor`2" priority="26" />
+      <Item value="DisplayFor`2" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="HtmlCodeCompletionContext">
+      <Item value="td" priority="72" />
+      <Item value="colspan" priority="5" />
+      <Item value="input" priority="36" />
+      <Item value="type" priority="29" />
+      <Item value="placeholder" priority="5" />
+      <Item value="th" priority="60" />
+      <Item value="h4" priority="5" />
+      <Item value="text" priority="5" />
+      <Item value="class" priority="11" />
+      <Item value="readonly" priority="11" />
+      <Item value="button" priority="11" />
+      <Item value="onclick" priority="5" />
+      <Item value="addToCart" priority="12" />
+      <Item value="tr" priority="23" />
+      <Item value="tbody" priority="5" />
+      <Item value="div" priority="7" />
+      <Item value="table" priority="5" />
+      <Item value="style" priority="5" />
+      <Item value="size" priority="6" />
+      <Item value="InputExtensions`0" priority="7" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:EssexBooking.Models.Hotel">
+      <Item value="Bookings" priority="26" />
+      <Item value="Resort" priority="435" />
+      <Item value="resort_id" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:EssexBooking.Models.Resort">
+      <Item value="Extras" priority="432" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Data.Objects.DataClasses.EntityCollection`1">
+      <Item value="First`1" priority="26" />
+      <Item value="Add`0" priority="53" />
+      <Item value="Select`2" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:EssexBooking.Models.Booking">
+      <Item value="ExtraBooking" priority="80" />
+      <Item value="Hotel" priority="432" />
+      <Item value="extra_id" priority="27" />
+      <Item value="id" priority="85" />
+      <Item value="ExtraBookings" priority="22" />
+      <Item value="temp_extras" priority="134" />
+    </ItemStatistics>
+    <ItemStatistics item="HtmlEntityCodeCompletionContext">
+      <Item value="&amp;euro;" priority="4" />
+    </ItemStatistics>
+    <ItemStatistics item="JavaScriptSpecificContextQualified">
+      <Item value="data" priority="9" />
+      <Item value="ajax" priority="8" />
+      <Item value="closest" priority="8" />
+      <Item value="val" priority="8" />
+    </ItemStatistics>
+    <ItemStatistics item="JavaScriptSpecificContext">
+      <Item value="function" priority="21" />
+      <Item value="$" priority="29" />
+      <Item value="extra_id" priority="10" />
+      <Item value="callback" priority="10" />
+      <Item value="model" priority="5" />
+      <Item value="Model" priority="5" />
+      <Item value="id" priority="5" />
+      <Item value="var" priority="10" />
+      <Item value="alert" priority="10" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:EssexBooking.Models.Cart">
+      <Item value="bookings" priority="242" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Collections.Generic.Dictionary`2">
+      <Item value="Add`0" priority="107" />
+      <Item value="Values" priority="53" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:EssexBooking.Models.ExtraBooking">
+      <Item value="extra_id" priority="103" />
+      <Item value="booking_id" priority="26" />
+      <Item value="participants" priority="81" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Collections.Generic.List`1">
+      <Item value="Add`0" priority="80" />
+    </ItemStatistics>
+    <ItemStatistics item="CssCodeCompletionContext">
+      <Item value="size" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:EssexBooking.Controllers.AjaxController+BookingRequest">
+      <Item value="temp_id" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:EssexBooking.Models.ExtraBookingCart">
+      <Item value="extrabookings" priority="53" />
+      <Item value="extratemp_id" priority="53" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Random">
+      <Item value="Next`0" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Collections.Generic.KeyValuePair`2">
+      <Item value="Value" priority="26" />
+    </ItemStatistics>
+  </CompletionStatisticsManager>
 </Configuration>
