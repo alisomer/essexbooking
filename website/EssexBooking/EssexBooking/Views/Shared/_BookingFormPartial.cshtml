@@ -24,6 +24,13 @@
         </select>
         Val from obj = @(Model.guests)
         <!--TODO: pre select from dropdown -->
+
+        @Html.Partial("_ExtraPartial", Model.Hotel.Resort.Extras)
+
+        <div id="miniextracart">
+          @Html.Partial("_ExtraBookingCartPartial", Model.temp_extras)
+        </div>
     </div>
+
     <button class="save">Save</button>
 </div>

@@ -1,0 +1,37 @@
+﻿@using System.Collections
+@using EssexBooking.Models
+@model IEnumerable<EssexBooking.Models.Extra>
+           
+
+<div class="extras">    
+<table>
+<tr>
+    <th>Extras</th>
+    <th>Number</th>
+    <th>Price</th>
+    <th>Date</th>
+    <th>Description</th>
+    <tr></tr>
+</tr>   
+
+        @foreach (var extra in Model)
+        {
+            <tr data-extra_id = @extra.id>
+                <td>@extra.name</td>
+                <td><div class="formField">
+                <select name="number">
+            @for(int i=1; i<=20;i++){
+                <option value="@i">@i</option>
+            }
+        </select></div></td>
+                <td>@extra.price</td>
+               <td><input class="extra_booking_date"></input></td>             
+                <td>@extra.description</td>
+                <td><button class="addExtraToBooking">Add</button></td>
+            </tr>
+        }
+</table>
+
+</div>
+
+
