@@ -12,5 +12,6 @@ namespace EssexBooking.Models
     public partial class Booking : EntityObject
     {
         public int temp_id { get; set; }
+        public Dictionary<int, ExtraBooking> temp_extras { get; set; }
     }
 }

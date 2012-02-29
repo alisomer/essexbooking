@@ -36,3 +36,12 @@ function UpdateBooking(data, callback) {
     });
 
 }
+
+function AddExtraToBooking(temp_id, extra_id, number, callback) {
+    $.ajax({
+            data: { 'temp_id': temp_id, 'extra_id': extra_id, 'number': number },
+            url: '/Ajax/AddExtraToBooking',
+            type: "POST",
+            success: callback
+        });
+}

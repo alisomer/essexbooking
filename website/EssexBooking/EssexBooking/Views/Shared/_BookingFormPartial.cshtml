@@ -12,4 +12,9 @@
    {
        @Html.Partial("_PassengerFormPartial", Model)
    }
+        @Html.Partial("_ExtraPartial", Model.Hotel.Resort.Extras)
+
+        <div id="miniextracart">
+          @Html.Partial("_ExtraBookingCartPartial", Model.temp_extras)
+        </div>
 </div>

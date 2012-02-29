@@ -9,7 +9,6 @@
           <EntitySet Name="aspnet_Membership" EntityType="ASPNETDBModel.Store.aspnet_Membership" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="aspnet_Roles" EntityType="ASPNETDBModel.Store.aspnet_Roles" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="aspnet_Users" EntityType="ASPNETDBModel.Store.aspnet_Users" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="aspnet_UsersInRoles" EntityType="ASPNETDBModel.Store.aspnet_UsersInRoles" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Bookings" EntityType="ASPNETDBModel.Store.Bookings" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ExtraBookings" EntityType="ASPNETDBModel.Store.ExtraBookings" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Extras" EntityType="ASPNETDBModel.Store.Extras" store:Type="Tables" Schema="dbo" />
@@ -23,16 +22,8 @@
             <End Role="aspnet_Users" EntitySet="aspnet_Users" />
             <End Role="aspnet_Membership" EntitySet="aspnet_Membership" />
           </AssociationSet>
-          <AssociationSet Name="FK__aspnet_Us__RoleI__4AB81AF0" Association="ASPNETDBModel.Store.FK__aspnet_Us__RoleI__4AB81AF0">
-            <End Role="aspnet_Roles" EntitySet="aspnet_Roles" />
-            <End Role="aspnet_UsersInRoles" EntitySet="aspnet_UsersInRoles" />
-          </AssociationSet>
-          <AssociationSet Name="FK__aspnet_Us__UserI__49C3F6B7" Association="ASPNETDBModel.Store.FK__aspnet_Us__UserI__49C3F6B7">
-            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
-            <End Role="aspnet_UsersInRoles" EntitySet="aspnet_UsersInRoles" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Bookings_ExtraBookings" Association="ASPNETDBModel.Store.FK_Bookings_ExtraBookings">
-            <End Role="ExtraBookings" EntitySet="ExtraBookings" />
+          <AssociationSet Name="FK_Bookings_aspnet_Membership" Association="ASPNETDBModel.Store.FK_Bookings_aspnet_Membership">
+            <End Role="aspnet_Membership" EntitySet="aspnet_Membership" />
             <End Role="Bookings" EntitySet="Bookings" />
           </AssociationSet>
           <AssociationSet Name="FK_Bookings_Hotels" Association="ASPNETDBModel.Store.FK_Bookings_Hotels">
@@ -42,6 +33,10 @@
           <AssociationSet Name="FK_Bookings_Travel" Association="ASPNETDBModel.Store.FK_Bookings_Travel">
             <End Role="Travel" EntitySet="Travel" />
             <End Role="Bookings" EntitySet="Bookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExtraBookings_Bookings" Association="ASPNETDBModel.Store.FK_ExtraBookings_Bookings">
+            <End Role="Bookings" EntitySet="Bookings" />
+            <End Role="ExtraBookings" EntitySet="ExtraBookings" />
           </AssociationSet>
           <AssociationSet Name="FK_ExtraBookings_ExtraBookings" Association="ASPNETDBModel.Store.FK_ExtraBookings_ExtraBookings">
             <End Role="Extras" EntitySet="Extras" />
@@ -116,14 +111,6 @@
           <Property Name="IsAnonymous" Type="bit" Nullable="false" />
           <Property Name="LastActivityDate" Type="datetime" Nullable="false" />
         </EntityType>
-        <EntityType Name="aspnet_UsersInRoles">
-          <Key>
-            <PropertyRef Name="UserId" />
-            <PropertyRef Name="RoleId" />
-          </Key>
-          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
-        </EntityType>
         <EntityType Name="Bookings">
           <Key>
             <PropertyRef Name="id" />
@@ -136,7 +123,6 @@
           <Property Name="duration" Type="int" Nullable="false" />
           <Property Name="guests" Type="int" Nullable="false" />
           <Property Name="booker_id" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="extra_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ExtraBookings">
           <Key>
@@ -223,39 +209,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__aspnet_Us__RoleI__4AB81AF0">
-          <End Role="aspnet_Roles" Type="ASPNETDBModel.Store.aspnet_Roles" Multiplicity="1" />
-          <End Role="aspnet_UsersInRoles" Type="ASPNETDBModel.Store.aspnet_UsersInRoles" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aspnet_Roles">
-              <PropertyRef Name="RoleId" />
-            </Principal>
-            <Dependent Role="aspnet_UsersInRoles">
-              <PropertyRef Name="RoleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__aspnet_Us__UserI__49C3F6B7">
-          <End Role="aspnet_Users" Type="ASPNETDBModel.Store.aspnet_Users" Multiplicity="1" />
-          <End Role="aspnet_UsersInRoles" Type="ASPNETDBModel.Store.aspnet_UsersInRoles" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aspnet_Users">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="aspnet_UsersInRoles">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Bookings_ExtraBookings">
-          <End Role="ExtraBookings" Type="ASPNETDBModel.Store.ExtraBookings" Multiplicity="1" />
+        <Association Name="FK_Bookings_aspnet_Membership">
+          <End Role="aspnet_Membership" Type="ASPNETDBModel.Store.aspnet_Membership" Multiplicity="1" />
           <End Role="Bookings" Type="ASPNETDBModel.Store.Bookings" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ExtraBookings">
-              <PropertyRef Name="id" />
+            <Principal Role="aspnet_Membership">
+              <PropertyRef Name="UserId" />
             </Principal>
             <Dependent Role="Bookings">
-              <PropertyRef Name="extra_id" />
+              <PropertyRef Name="customer_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -280,6 +242,18 @@
             </Principal>
             <Dependent Role="Bookings">
               <PropertyRef Name="travel_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExtraBookings_Bookings">
+          <End Role="Bookings" Type="ASPNETDBModel.Store.Bookings" Multiplicity="1" />
+          <End Role="ExtraBookings" Type="ASPNETDBModel.Store.ExtraBookings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bookings">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ExtraBookings">
+              <PropertyRef Name="booking_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -355,368 +329,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="aspnet_AnyDataInTables" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="TablesToCheck" Type="int" Mode="In" />
-        </Function>
-        <Function Name="aspnet_Applications_CreateApplication" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="ApplicationName" Type="nvarchar" Mode="In" />
-          <Parameter Name="ApplicationId" Type="uniqueidentifier" Mode="InOut" />
-        </Function>
-        <Function Name="aspnet_CheckSchemaVersion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Feature" Type="nvarchar" Mode="In" />
-          <Parameter Name="CompatibleSchemaVersion" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="aspnet_Membership_ChangePasswordQuestionAndAnswer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="ApplicationName" Type="nvarchar" Mode="In" />
-          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
-          <Parameter Name="NewPasswordQuestion" Type="nvarchar" Mode="In" />
-          <Parameter Name="NewPasswordAnswer" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="aspnet_Membership_CreateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="ApplicationName" Type="nvarchar" Mode="In" />
-          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
-          <Parameter Name="Password" Type="nvarchar" Mode="In" />
-          <Parameter Name="PasswordSalt" Type="nvarchar" Mode="In" />
-          <Parameter Name="Email" Type="nvarchar" Mode="In" />
-          <Parameter Name="PasswordQuestion" Type="nvarchar" Mode="In" />
-          <Parameter Name="PasswordAnswer" Type="nvarchar" Mode="In" />
-          <Parameter Name="IsApproved" Type="bit" Mode="In" />
-          <Parameter Name="CurrentTimeUtc" Type="datetime" Mode="In" />
-          <Parameter Name="CreateDate" Type="datetime" Mode="In" />
-          <Parameter Name="UniqueEmail" Type="int" Mode="In" />
-          <Parameter Name="PasswordFormat" Type="int" Mode="In" />
-          <Parameter Name="UserId" Type="uniqueidentifier" Mode="InOut" />
-        </Function>
-        <Function Name="aspnet_Membership_FindUsersByEmail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="ApplicationName" Type="nvarchar" Mode="In" />
-          <Parameter Name="EmailToMatch" Type="nvarchar" Mode="In" />
-          <Parameter Name="PageIndex" Type="int" Mode="In" />
-          <Parameter Name="PageSize" Type="int" Mode="In" />
-        </Function>
-        <Function Name="aspnet_Membership_FindUsersByName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="ApplicationName" Type="nvarchar" Mode="In" />
-          <Parameter Name="UserNameToMatch" Type="nvarchar" Mode="In" />
-          <Parameter Name="PageIndex" Type="int" Mode="In" />
-          <Parameter Name="PageSize" Type="int" Mode="In" />
-        </Function>
-        <Function Name="aspnet_Membership_GetAllUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="ApplicationName" Type="nvarchar" Mode="In" />
-          <Parameter Name="PageIndex" Type="int" Mode="In" />
-          <Parameter Name="PageSize" Type="int" Mode="In" />
-        </Function>
-        <Function Name="aspnet_Membership_GetNumberOfUsersOnline" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="ApplicationName" Type="nvarchar" Mode="In" />
-          <Parameter Name="MinutesSinceLastInActive" Type="int" Mode="In" />
-          <Parameter Name="CurrentTimeUtc" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="aspnet_Membership_GetPassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="ApplicationName" Type="nvarchar" Mode="In" />
-          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
-          <Parameter Name="MaxInvalidPasswordAttempts" Type="int" Mode="In" />
-          <Parameter Name="PasswordAttemptWindow" Type="int" Mode="In" />
-          <Parameter Name="CurrentTimeUtc" Type="datetime" Mode="In" />
-          <Parameter Name="PasswordAnswer" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="aspnet_Membership_GetPasswordWithFormat" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="ApplicationName" Type="nvarchar" Mode="In" />
-          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
-          <Parameter Name="UpdateLastLoginActivityDate" Type="bit" Mode="In" />
-          <Parameter Name="CurrentTimeUtc" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="aspnet_Membership_GetUserByEmail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="ApplicationName" Type="nvarchar" Mode="In" />
-          <Parameter Name="Email" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="aspnet_Membership_GetUserByName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="ApplicationName" Type="nvarchar" Mode="In" />
-          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
-          <Parameter Name="CurrentTimeUtc" Type="datetime" Mode="In" />
-          <Parameter Name="UpdateLastActivity" Type="bit" Mode="In" />
-        </Function>
-        <Function Name="aspnet_Membership_GetUserByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="UserId" Type="uniqueidentifier" Mode="In" />
-          <Parameter Name="CurrentTimeUtc" Type="datetime" Mode="In" />
-          <Parameter Name="UpdateLastActivity" Type="bit" Mode="In" />
-        </Function>
-        <Function Name="aspnet_Membership_ResetPassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="ApplicationName" Type="nvarchar" Mode="In" />
-          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
-          <Parameter Name="NewPassword" Type="nvarchar" Mode="In" />
-          <Parameter Name="MaxInvalidPasswordAttempts" Type="int" Mode="In" />
-          <Parameter Name="PasswordAttemptWindow" Type="int" Mode="In" />
-          <Parameter Name="PasswordSalt" Type="nvarchar" Mode="In" />
-          <Parameter Name="CurrentTimeUtc" Type="datetime" Mode="In" />
-          <Parameter Name="PasswordFormat" Type="int" Mode="In" />
-          <Parameter Name="PasswordAnswer" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="aspnet_Membership_SetPassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="ApplicationName" Type="nvarchar" Mode="In" />
-          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
-          <Parameter Name="NewPassword" Type="nvarchar" Mode="In" />
-          <Parameter Name="PasswordSalt" Type="nvarchar" Mode="In" />
-          <Parameter Name="CurrentTimeUtc" Type="datetime" Mode="In" />
-          <Parameter Name="PasswordFormat" Type="int" Mode="In" />
-        </Function>
-        <Function Name="aspnet_Membership_UnlockUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="ApplicationName" Type="nvarchar" Mode="In" />
-          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="aspnet_Membership_UpdateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="ApplicationName" Type="nvarchar" Mode="In" />
-          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
-          <Parameter Name="Email" Type="nvarchar" Mode="In" />
-          <Parameter Name="Comment" Type="ntext" Mode="In" />
-          <Parameter Name="IsApproved" Type="bit" Mode="In" />
-          <Parameter Name="LastLoginDate" Type="datetime" Mode="In" />
-          <Parameter Name="LastActivityDate" Type="datetime" Mode="In" />
-          <Parameter Name="UniqueEmail" Type="int" Mode="In" />
-          <Parameter Name="CurrentTimeUtc" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="aspnet_Membership_UpdateUserInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="ApplicationName" Type="nvarchar" Mode="In" />
-          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
-          <Parameter Name="IsPasswordCorrect" Type="bit" Mode="In" />
-          <Parameter Name="UpdateLastLoginActivityDate" Type="bit" Mode="In" />
-          <Parameter Name="MaxInvalidPasswordAttempts" Type="int" Mode="In" />
-          <Parameter Name="PasswordAttemptWindow" Type="int" Mode="In" />
-          <Parameter Name="CurrentTimeUtc" Type="datetime" Mode="In" />
-          <Parameter Name="LastLoginDate" Type="datetime" Mode="In" />
-          <Parameter Name="LastActivityDate" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="aspnet_Paths_CreatePath" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="ApplicationId" Type="uniqueidentifier" Mode="In" />
-          <Parameter Name="Path" Type="nvarchar" Mode="In" />
-          <Parameter Name="PathId" Type="uniqueidentifier" Mode="InOut" />
-        </Function>
-        <Function Name="aspnet_Personalization_GetApplicationId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="ApplicationName" Type="nvarchar" Mode="In" />
-          <Parameter Name="ApplicationId" Type="uniqueidentifier" Mode="InOut" />
-        </Function>
-        <Function Name="aspnet_PersonalizationAdministration_DeleteAllState" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="AllUsersScope" Type="bit" Mode="In" />
-          <Parameter Name="ApplicationName" Type="nvarchar" Mode="In" />
-          <Parameter Name="Count" Type="int" Mode="InOut" />
-        </Function>
-        <Function Name="aspnet_PersonalizationAdministration_FindState" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="AllUsersScope" Type="bit" Mode="In" />
-          <Parameter Name="ApplicationName" Type="nvarchar" Mode="In" />
-          <Parameter Name="PageIndex" Type="int" Mode="In" />
-          <Parameter Name="PageSize" Type="int" Mode="In" />
-          <Parameter Name="Path" Type="nvarchar" Mode="In" />
-          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
-          <Parameter Name="InactiveSinceDate" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="aspnet_PersonalizationAdministration_GetCountOfState" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Count" Type="int" Mode="InOut" />
-          <Parameter Name="AllUsersScope" Type="bit" Mode="In" />
-          <Parameter Name="ApplicationName" Type="nvarchar" Mode="In" />
-          <Parameter Name="Path" Type="nvarchar" Mode="In" />
-          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
-          <Parameter Name="InactiveSinceDate" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="aspnet_PersonalizationAdministration_ResetSharedState" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Count" Type="int" Mode="InOut" />
-          <Parameter Name="ApplicationName" Type="nvarchar" Mode="In" />
-          <Parameter Name="Path" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="aspnet_PersonalizationAdministration_ResetUserState" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Count" Type="int" Mode="InOut" />
-          <Parameter Name="ApplicationName" Type="nvarchar" Mode="In" />
-          <Parameter Name="InactiveSinceDate" Type="datetime" Mode="In" />
-          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
-          <Parameter Name="Path" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="aspnet_PersonalizationAllUsers_GetPageSettings" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="ApplicationName" Type="nvarchar" Mode="In" />
-          <Parameter Name="Path" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="aspnet_PersonalizationAllUsers_ResetPageSettings" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="ApplicationName" Type="nvarchar" Mode="In" />
-          <Parameter Name="Path" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="aspnet_PersonalizationAllUsers_SetPageSettings" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="ApplicationName" Type="nvarchar" Mode="In" />
-          <Parameter Name="Path" Type="nvarchar" Mode="In" />
-          <Parameter Name="PageSettings" Type="image" Mode="In" />
-          <Parameter Name="CurrentTimeUtc" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="aspnet_PersonalizationPerUser_GetPageSettings" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="ApplicationName" Type="nvarchar" Mode="In" />
-          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
-          <Parameter Name="Path" Type="nvarchar" Mode="In" />
-          <Parameter Name="CurrentTimeUtc" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="aspnet_PersonalizationPerUser_ResetPageSettings" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="ApplicationName" Type="nvarchar" Mode="In" />
-          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
-          <Parameter Name="Path" Type="nvarchar" Mode="In" />
-          <Parameter Name="CurrentTimeUtc" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="aspnet_PersonalizationPerUser_SetPageSettings" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="ApplicationName" Type="nvarchar" Mode="In" />
-          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
-          <Parameter Name="Path" Type="nvarchar" Mode="In" />
-          <Parameter Name="PageSettings" Type="image" Mode="In" />
-          <Parameter Name="CurrentTimeUtc" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="aspnet_Profile_DeleteInactiveProfiles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="ApplicationName" Type="nvarchar" Mode="In" />
-          <Parameter Name="ProfileAuthOptions" Type="int" Mode="In" />
-          <Parameter Name="InactiveSinceDate" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="aspnet_Profile_DeleteProfiles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="ApplicationName" Type="nvarchar" Mode="In" />
-          <Parameter Name="UserNames" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="aspnet_Profile_GetNumberOfInactiveProfiles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="ApplicationName" Type="nvarchar" Mode="In" />
-          <Parameter Name="ProfileAuthOptions" Type="int" Mode="In" />
-          <Parameter Name="InactiveSinceDate" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="aspnet_Profile_GetProfiles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="ApplicationName" Type="nvarchar" Mode="In" />
-          <Parameter Name="ProfileAuthOptions" Type="int" Mode="In" />
-          <Parameter Name="PageIndex" Type="int" Mode="In" />
-          <Parameter Name="PageSize" Type="int" Mode="In" />
-          <Parameter Name="UserNameToMatch" Type="nvarchar" Mode="In" />
-          <Parameter Name="InactiveSinceDate" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="aspnet_Profile_GetProperties" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="ApplicationName" Type="nvarchar" Mode="In" />
-          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
-          <Parameter Name="CurrentTimeUtc" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="aspnet_Profile_SetProperties" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="ApplicationName" Type="nvarchar" Mode="In" />
-          <Parameter Name="PropertyNames" Type="ntext" Mode="In" />
-          <Parameter Name="PropertyValuesString" Type="ntext" Mode="In" />
-          <Parameter Name="PropertyValuesBinary" Type="image" Mode="In" />
-          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
-          <Parameter Name="IsUserAnonymous" Type="bit" Mode="In" />
-          <Parameter Name="CurrentTimeUtc" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="aspnet_RegisterSchemaVersion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Feature" Type="nvarchar" Mode="In" />
-          <Parameter Name="CompatibleSchemaVersion" Type="nvarchar" Mode="In" />
-          <Parameter Name="IsCurrentVersion" Type="bit" Mode="In" />
-          <Parameter Name="RemoveIncompatibleSchema" Type="bit" Mode="In" />
-        </Function>
-        <Function Name="aspnet_Roles_CreateRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="ApplicationName" Type="nvarchar" Mode="In" />
-          <Parameter Name="RoleName" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="aspnet_Roles_DeleteRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="ApplicationName" Type="nvarchar" Mode="In" />
-          <Parameter Name="RoleName" Type="nvarchar" Mode="In" />
-          <Parameter Name="DeleteOnlyIfRoleIsEmpty" Type="bit" Mode="In" />
-        </Function>
-        <Function Name="aspnet_Roles_GetAllRoles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="ApplicationName" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="aspnet_Roles_RoleExists" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="ApplicationName" Type="nvarchar" Mode="In" />
-          <Parameter Name="RoleName" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="aspnet_Setup_RemoveAllRoleMembers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="name" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="aspnet_Setup_RestorePermissions" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="name" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="aspnet_UnRegisterSchemaVersion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Feature" Type="nvarchar" Mode="In" />
-          <Parameter Name="CompatibleSchemaVersion" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="aspnet_Users_CreateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="ApplicationId" Type="uniqueidentifier" Mode="In" />
-          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
-          <Parameter Name="IsUserAnonymous" Type="bit" Mode="In" />
-          <Parameter Name="LastActivityDate" Type="datetime" Mode="In" />
-          <Parameter Name="UserId" Type="uniqueidentifier" Mode="InOut" />
-        </Function>
-        <Function Name="aspnet_Users_DeleteUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="ApplicationName" Type="nvarchar" Mode="In" />
-          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
-          <Parameter Name="TablesToDeleteFrom" Type="int" Mode="In" />
-          <Parameter Name="NumTablesDeletedFrom" Type="int" Mode="InOut" />
-        </Function>
-        <Function Name="aspnet_UsersInRoles_AddUsersToRoles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="ApplicationName" Type="nvarchar" Mode="In" />
-          <Parameter Name="UserNames" Type="nvarchar" Mode="In" />
-          <Parameter Name="RoleNames" Type="nvarchar" Mode="In" />
-          <Parameter Name="CurrentTimeUtc" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="aspnet_UsersInRoles_FindUsersInRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="ApplicationName" Type="nvarchar" Mode="In" />
-          <Parameter Name="RoleName" Type="nvarchar" Mode="In" />
-          <Parameter Name="UserNameToMatch" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="aspnet_UsersInRoles_GetRolesForUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="ApplicationName" Type="nvarchar" Mode="In" />
-          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="aspnet_UsersInRoles_GetUsersInRoles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="ApplicationName" Type="nvarchar" Mode="In" />
-          <Parameter Name="RoleName" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="aspnet_UsersInRoles_IsUserInRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="ApplicationName" Type="nvarchar" Mode="In" />
-          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
-          <Parameter Name="RoleName" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="aspnet_UsersInRoles_RemoveUsersFromRoles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="ApplicationName" Type="nvarchar" Mode="In" />
-          <Parameter Name="UserNames" Type="nvarchar" Mode="In" />
-          <Parameter Name="RoleNames" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="aspnet_WebEvent_LogEvent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="EventId" Type="char" Mode="In" />
-          <Parameter Name="EventTimeUtc" Type="datetime" Mode="In" />
-          <Parameter Name="EventTime" Type="datetime" Mode="In" />
-          <Parameter Name="EventType" Type="nvarchar" Mode="In" />
-          <Parameter Name="EventSequence" Type="decimal" Mode="In" />
-          <Parameter Name="EventOccurrence" Type="decimal" Mode="In" />
-          <Parameter Name="EventCode" Type="int" Mode="In" />
-          <Parameter Name="EventDetailCode" Type="int" Mode="In" />
-          <Parameter Name="Message" Type="nvarchar" Mode="In" />
-          <Parameter Name="ApplicationPath" Type="nvarchar" Mode="In" />
-          <Parameter Name="ApplicationVirtualPath" Type="nvarchar" Mode="In" />
-          <Parameter Name="MachineName" Type="nvarchar" Mode="In" />
-          <Parameter Name="RequestUrl" Type="nvarchar" Mode="In" />
-          <Parameter Name="ExceptionType" Type="nvarchar" Mode="In" />
-          <Parameter Name="Details" Type="ntext" Mode="In" />
-        </Function>
-        <Function Name="fn_diagramobjects" ReturnType="int" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
@@ -739,8 +351,8 @@
             <End Role="aspnet_Users" EntitySet="aspnet_Users" />
             <End Role="aspnet_Membership" EntitySet="aspnet_Membership" />
           </AssociationSet>
-          <AssociationSet Name="FK_Bookings_ExtraBookings" Association="ASPNETDBModel.FK_Bookings_ExtraBookings">
-            <End Role="ExtraBookings" EntitySet="ExtraBookings" />
+          <AssociationSet Name="FK_Bookings_aspnet_Membership" Association="ASPNETDBModel.FK_Bookings_aspnet_Membership">
+            <End Role="aspnet_Membership" EntitySet="aspnet_Membership" />
             <End Role="Bookings" EntitySet="Bookings" />
           </AssociationSet>
           <AssociationSet Name="FK_Bookings_Hotels" Association="ASPNETDBModel.FK_Bookings_Hotels">
@@ -750,6 +362,10 @@
           <AssociationSet Name="FK_Bookings_Travel" Association="ASPNETDBModel.FK_Bookings_Travel">
             <End Role="Travel" EntitySet="Travels" />
             <End Role="Bookings" EntitySet="Bookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExtraBookings_Bookings" Association="ASPNETDBModel.FK_ExtraBookings_Bookings">
+            <End Role="Bookings" EntitySet="Bookings" />
+            <End Role="ExtraBookings" EntitySet="ExtraBookings" />
           </AssociationSet>
           <AssociationSet Name="FK_ExtraBookings_ExtraBookings" Association="ASPNETDBModel.FK_ExtraBookings_ExtraBookings">
             <End Role="Extras" EntitySet="Extras" />
@@ -774,10 +390,6 @@
           <AssociationSet Name="FK_Travel_Travel" Association="ASPNETDBModel.FK_Travel_Travel">
             <End Role="TravelTypes" EntitySet="TravelTypes" />
             <End Role="Travel" EntitySet="Travels" />
-          </AssociationSet>
-          <AssociationSet Name="aspnet_UsersInRoles" Association="ASPNETDBModel.aspnet_UsersInRoles">
-            <End Role="aspnet_Roles" EntitySet="aspnet_Roles" />
-            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="aspnet_Membership">
@@ -806,6 +418,7 @@
           <Property Name="FailedPasswordAnswerAttemptWindowStart" Type="DateTime" Nullable="false" />
           <Property Name="Comment" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="aspnet_Users" Relationship="ASPNETDBModel.FK__aspnet_Me__UserI__22AA2996" FromRole="aspnet_Membership" ToRole="aspnet_Users" />
+          <NavigationProperty Name="Bookings" Relationship="ASPNETDBModel.FK_Bookings_aspnet_Membership" FromRole="aspnet_Membership" ToRole="Bookings" />
         </EntityType>
         <EntityType Name="aspnet_Roles">
           <Key>
@@ -816,7 +429,6 @@
           <Property Name="RoleName" Type="String" Nullable="false" MaxLength="256" Unicode="true" FixedLength="false" />
           <Property Name="LoweredRoleName" Type="String" Nullable="false" MaxLength="256" Unicode="true" FixedLength="false" />
           <Property Name="Description" Type="String" MaxLength="256" Unicode="true" FixedLength="false" />
-          <NavigationProperty Name="aspnet_Users" Relationship="ASPNETDBModel.aspnet_UsersInRoles" FromRole="aspnet_Roles" ToRole="aspnet_Users" />
         </EntityType>
         <EntityType Name="aspnet_Users">
           <Key>
@@ -830,7 +442,6 @@
           <Property Name="IsAnonymous" Type="Boolean" Nullable="false" />
           <Property Name="LastActivityDate" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="aspnet_Membership" Relationship="ASPNETDBModel.FK__aspnet_Me__UserI__22AA2996" FromRole="aspnet_Users" ToRole="aspnet_Membership" />
-          <NavigationProperty Name="aspnet_Roles" Relationship="ASPNETDBModel.aspnet_UsersInRoles" FromRole="aspnet_Users" ToRole="aspnet_Roles" />
         </EntityType>
         <EntityType Name="Booking">
           <Key>
@@ -844,10 +455,10 @@
           <Property Name="duration" Type="Int32" Nullable="false" />
           <Property Name="guests" Type="Int32" Nullable="false" />
           <Property Name="booker_id" Type="Guid" Nullable="false" />
-          <Property Name="extra_id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ExtraBooking" Relationship="ASPNETDBModel.FK_Bookings_ExtraBookings" FromRole="Bookings" ToRole="ExtraBookings" />
+          <NavigationProperty Name="aspnet_Membership" Relationship="ASPNETDBModel.FK_Bookings_aspnet_Membership" FromRole="Bookings" ToRole="aspnet_Membership" />
           <NavigationProperty Name="Hotel" Relationship="ASPNETDBModel.FK_Bookings_Hotels" FromRole="Bookings" ToRole="Hotels" />
           <NavigationProperty Name="Travel" Relationship="ASPNETDBModel.FK_Bookings_Travel" FromRole="Bookings" ToRole="Travel" />
+          <NavigationProperty Name="ExtraBookings" Relationship="ASPNETDBModel.FK_ExtraBookings_Bookings" FromRole="Bookings" ToRole="ExtraBookings" />
         </EntityType>
         <EntityType Name="ExtraBooking">
           <Key>
@@ -858,7 +469,7 @@
           <Property Name="booking_id" Type="Int32" Nullable="false" />
           <Property Name="participants" Type="Int32" Nullable="false" />
           <Property Name="booked_date" Type="DateTime" Nullable="false" />
-          <NavigationProperty Name="Bookings" Relationship="ASPNETDBModel.FK_Bookings_ExtraBookings" FromRole="ExtraBookings" ToRole="Bookings" />
+          <NavigationProperty Name="Booking" Relationship="ASPNETDBModel.FK_ExtraBookings_Bookings" FromRole="ExtraBookings" ToRole="Bookings" />
           <NavigationProperty Name="Extra" Relationship="ASPNETDBModel.FK_ExtraBookings_ExtraBookings" FromRole="ExtraBookings" ToRole="Extras" />
         </EntityType>
         <EntityType Name="Extra">
@@ -949,15 +560,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Bookings_ExtraBookings">
-          <End Role="ExtraBookings" Type="ASPNETDBModel.ExtraBooking" Multiplicity="1" />
+        <Association Name="FK_Bookings_aspnet_Membership">
+          <End Role="aspnet_Membership" Type="ASPNETDBModel.aspnet_Membership" Multiplicity="1" />
           <End Role="Bookings" Type="ASPNETDBModel.Booking" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ExtraBookings">
-              <PropertyRef Name="id" />
+            <Principal Role="aspnet_Membership">
+              <PropertyRef Name="UserId" />
             </Principal>
             <Dependent Role="Bookings">
-              <PropertyRef Name="extra_id" />
+              <PropertyRef Name="customer_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -982,6 +593,18 @@
             </Principal>
             <Dependent Role="Bookings">
               <PropertyRef Name="travel_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExtraBookings_Bookings">
+          <End Role="Bookings" Type="ASPNETDBModel.Booking" Multiplicity="1" />
+          <End Role="ExtraBookings" Type="ASPNETDBModel.ExtraBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bookings">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ExtraBookings">
+              <PropertyRef Name="booking_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1057,10 +680,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="aspnet_UsersInRoles">
-          <End Role="aspnet_Roles" Type="ASPNETDBModel.aspnet_Roles" Multiplicity="*" />
-          <End Role="aspnet_Users" Type="ASPNETDBModel.aspnet_Users" Multiplicity="*" />
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1115,7 +734,6 @@
             <ScalarProperty Name="duration" ColumnName="duration" />
             <ScalarProperty Name="guests" ColumnName="guests" />
             <ScalarProperty Name="booker_id" ColumnName="booker_id" />
-            <ScalarProperty Name="extra_id" ColumnName="extra_id" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="ExtraBookings"><EntityTypeMapping TypeName="ASPNETDBModel.ExtraBooking"><MappingFragment StoreEntitySet="ExtraBookings">
             <ScalarProperty Name="id" ColumnName="id" />
@@ -1166,14 +784,6 @@
             <ScalarProperty Name="price" ColumnName="price" />
             <ScalarProperty Name="available_days" ColumnName="available_days" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <AssociationSetMapping Name="aspnet_UsersInRoles" TypeName="ASPNETDBModel.aspnet_UsersInRoles" StoreEntitySet="aspnet_UsersInRoles">
-            <EndProperty Name="aspnet_Roles">
-              <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-            </EndProperty>
-            <EndProperty Name="aspnet_Users">
-              <ScalarProperty Name="UserId" ColumnName="UserId" />
-            </EndProperty>
-          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1194,76 +804,80 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="Model1">
-        <EntityTypeShape EntityType="ASPNETDBModel.aspnet_Membership" Width="1.5" PointX="12.125" PointY="4.625" Height="5.2494108072916674" IsExpanded="true" />
-        <EntityTypeShape EntityType="ASPNETDBModel.aspnet_Roles" Width="1.5" PointX="12.125" PointY="0.5" Height="2.1725878906249996" IsExpanded="true" />
-        <EntityTypeShape EntityType="ASPNETDBModel.aspnet_Users" Width="1.5" PointX="9.5" PointY="3.625" Height="2.7494921874999996" IsExpanded="true" />
-        <EntityTypeShape EntityType="ASPNETDBModel.Booking" Width="1.5" PointX="5.25" PointY="3.875" Height="3.3263964843749996" IsExpanded="true" />
-        <EntityTypeShape EntityType="ASPNETDBModel.ExtraBooking" Width="1.5" PointX="3" PointY="0.75" Height="2.3648893229166656" IsExpanded="true" />
-        <EntityTypeShape EntityType="ASPNETDBModel.Extra" Width="1.5" PointX="0.75" PointY="8" Height="2.3648893229166674" IsExpanded="true" />
-        <EntityTypeShape EntityType="ASPNETDBModel.Hotel" Width="1.5" PointX="3" PointY="14.875" Height="2.3648893229166692" IsExpanded="true" />
-        <EntityTypeShape EntityType="ASPNETDBModel.HotelType" Width="1.5" PointX="0.75" PointY="15.125" Height="1.7879850260416692" IsExpanded="true" />
-        <EntityTypeShape EntityType="ASPNETDBModel.Passanger" Width="1.5" PointX="5.25" PointY="8.5" Height="2.1725878906249996" IsExpanded="true" />
-        <EntityTypeShape EntityType="ASPNETDBModel.Resort" Width="1.5" PointX="1.5" PointY="11.25" Height="1.9802864583333317" IsExpanded="true" />
-        <EntityTypeShape EntityType="ASPNETDBModel.Travel" Width="1.5" PointX="3" PointY="4.25" Height="2.3648893229166674" IsExpanded="true" />
-        <EntityTypeShape EntityType="ASPNETDBModel.TravelType" Width="1.5" PointX="0.75" PointY="4.5" Height="1.9802864583333317" IsExpanded="true" />
+      <Diagram Name="AdoModels">
+        <EntityTypeShape EntityType="ASPNETDBModel.aspnet_Membership" Width="1.5" PointX="3" PointY="8.625" Height="5.4417122395833317" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASPNETDBModel.aspnet_Roles" Width="1.5" PointX="5.75" PointY="8.75" Height="1.9802864583333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASPNETDBModel.aspnet_Users" Width="1.5" PointX="0.75" PointY="10" Height="2.5571907552083317" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASPNETDBModel.Booking" Width="1.5" PointX="5.25" PointY="0.75" Height="3.3263964843749996" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASPNETDBModel.ExtraBooking" Width="1.5" PointX="5.25" PointY="5.25" Height="2.3648893229166656" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASPNETDBModel.Extra" Width="1.5" PointX="3" PointY="5.25" Height="2.3648893229166674" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASPNETDBModel.Hotel" Width="1.5" PointX="3" PointY="1.25" Height="2.3648893229166674" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASPNETDBModel.HotelType" Width="1.5" PointX="0.75" PointY="2" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASPNETDBModel.Passanger" Width="1.5" PointX="5.25" PointY="14.875" Height="2.1725878906249996" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASPNETDBModel.Resort" Width="1.5" PointX="0.75" PointY="5.375" Height="1.9802864583333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASPNETDBModel.Travel" Width="1.5" PointX="3" PointY="14.75" Height="2.3648893229166674" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASPNETDBModel.TravelType" Width="1.5" PointX="0.75" PointY="15" Height="1.9802864583333317" IsExpanded="true" />
         <AssociationConnector Association="ASPNETDBModel.FK__aspnet_Me__UserI__22AA2996" ManuallyRouted="false">
-          <ConnectorPoint PointX="11" PointY="5.49974609375" />
-          <ConnectorPoint PointX="12.125" PointY="5.49974609375" />
+          <ConnectorPoint PointX="2.25" PointY="11.278595377604166" />
+          <ConnectorPoint PointX="3" PointY="11.278595377604166" />
         </AssociationConnector>
-        <AssociationConnector Association="ASPNETDBModel.FK_Bookings_ExtraBookings" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="1.9324446614583328" />
-          <ConnectorPoint PointX="6" PointY="1.9324446614583328" />
-          <ConnectorPoint PointX="6" PointY="3.875" />
+        <AssociationConnector Association="ASPNETDBModel.FK_Bookings_aspnet_Membership" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="8.6261528461538468" />
+          <ConnectorPoint PointX="4.875" PointY="8.2511528461538468" />
+          <ConnectorPoint PointX="4.875" PointY="2.4131982421875" />
+          <ConnectorPoint PointX="4.979166666666667" PointY="2.4131982421874993" />
+          <ConnectorPoint PointX="5.145833333333333" PointY="2.4131982421875" />
+          <ConnectorPoint PointX="5.25" PointY="2.4131982421875" />
         </AssociationConnector>
         <AssociationConnector Association="ASPNETDBModel.FK_Bookings_Hotels" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="14.876152846153847" />
-          <ConnectorPoint PointX="4.875" PointY="14.501152846153847" />
-          <ConnectorPoint PointX="4.875" PointY="5.5381982421875" />
-          <ConnectorPoint PointX="5.25" PointY="5.5381982421875" />
+          <ConnectorPoint PointX="4.5" PointY="3.0765437825520836" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="3.0765437825520832" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="3.0765437825520836" />
+          <ConnectorPoint PointX="4.979166666666667" PointY="3.0765437825520832" />
+          <ConnectorPoint PointX="5.145833333333333" PointY="3.0765437825520836" />
+          <ConnectorPoint PointX="5.25" PointY="3.0765437825520836" />
         </AssociationConnector>
         <AssociationConnector Association="ASPNETDBModel.FK_Bookings_Travel" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="4.83159912109375" />
-          <ConnectorPoint PointX="5.25" PointY="4.83159912109375" />
+          <ConnectorPoint PointX="4.5" PointY="14.813460538461539" />
+          <ConnectorPoint PointX="5.0625" PointY="14.250960538461541" />
+          <ConnectorPoint PointX="5.0625" PointY="1.5503471210937492" />
+          <ConnectorPoint PointX="5.25" PointY="1.5503471210937492" />
+        </AssociationConnector>
+        <AssociationConnector Association="ASPNETDBModel.FK_ExtraBookings_Bookings" ManuallyRouted="false">
+          <ConnectorPoint PointX="6" PointY="4.076396484375" />
+          <ConnectorPoint PointX="6" PointY="5.25" />
         </AssociationConnector>
         <AssociationConnector Association="ASPNETDBModel.FK_ExtraBookings_ExtraBookings" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="8.0011528461538468" />
-          <ConnectorPoint PointX="2.625" PointY="7.6261528461538468" />
-          <ConnectorPoint PointX="2.625" PointY="1.9324446614583328" />
-          <ConnectorPoint PointX="3" PointY="1.9324446614583328" />
+          <ConnectorPoint PointX="4.5" PointY="6.4324446614583328" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="6.4324446614583319" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="6.4324446614583328" />
+          <ConnectorPoint PointX="4.979166666666667" PointY="6.4324446614583319" />
+          <ConnectorPoint PointX="5.145833333333333" PointY="6.4324446614583328" />
+          <ConnectorPoint PointX="5.25" PointY="6.4324446614583328" />
         </AssociationConnector>
         <AssociationConnector Association="ASPNETDBModel.FK_Extras_Resorts" ManuallyRouted="false">
-          <ConnectorPoint PointX="1.875" PointY="11.25" />
-          <ConnectorPoint PointX="1.875" PointY="10.364889322916667" />
+          <ConnectorPoint PointX="2.25" PointY="6.3651432291666659" />
+          <ConnectorPoint PointX="3" PointY="6.3651432291666659" />
         </AssociationConnector>
         <AssociationConnector Association="ASPNETDBModel.FK_Hotels_HotelTypes" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="16.018992513020834" />
-          <ConnectorPoint PointX="2.5416666666666665" PointY="16.018992513020834" />
-          <ConnectorPoint PointX="2.7083333333333335" PointY="16.018992513020834" />
-          <ConnectorPoint PointX="3" PointY="16.018992513020834" />
+          <ConnectorPoint PointX="2.25" PointY="2.8074446614583337" />
+          <ConnectorPoint PointX="2.5416666666666665" PointY="2.8074446614583333" />
+          <ConnectorPoint PointX="2.7083333333333335" PointY="2.8074446614583337" />
+          <ConnectorPoint PointX="3" PointY="2.8074446614583337" />
         </AssociationConnector>
         <AssociationConnector Association="ASPNETDBModel.FK_Hotels_Resorts" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.625" PointY="13.230286458333332" />
-          <ConnectorPoint PointX="2.625" PointY="17.107687174479167" />
-          <ConnectorPoint PointX="3" PointY="17.107687174479167" />
+          <ConnectorPoint PointX="2.25" PointY="5.375" />
+          <ConnectorPoint PointX="2.625" PointY="5" />
+          <ConnectorPoint PointX="2.625" PointY="1.9974703307291661" />
+          <ConnectorPoint PointX="3" PointY="1.9974703307291661" />
         </AssociationConnector>
         <AssociationConnector Association="ASPNETDBModel.FK_passanger_Travel" ManuallyRouted="false">
-          <ConnectorPoint PointX="3.75" PointY="6.6148893229166674" />
-          <ConnectorPoint PointX="3.75" PointY="9.5862939453125" />
-          <ConnectorPoint PointX="4.791666666666667" PointY="9.5862939453125" />
-          <ConnectorPoint PointX="4.958333333333333" PointY="9.5862939453125" />
-          <ConnectorPoint PointX="5.25" PointY="9.5862939453125" />
+          <ConnectorPoint PointX="4.5" PointY="15.9612939453125" />
+          <ConnectorPoint PointX="5.25" PointY="15.9612939453125" />
         </AssociationConnector>
         <AssociationConnector Association="ASPNETDBModel.FK_Travel_Travel" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="5.4901432291666659" />
-          <ConnectorPoint PointX="2.5416666666666665" PointY="5.490143229166665" />
-          <ConnectorPoint PointX="2.7083333333333335" PointY="5.4901432291666659" />
-          <ConnectorPoint PointX="3" PointY="5.4901432291666659" />
-        </AssociationConnector>
-        <AssociationConnector Association="ASPNETDBModel.aspnet_UsersInRoles" ManuallyRouted="false">
-          <ConnectorPoint PointX="12.125" PointY="1.5862939453124998" />
-          <ConnectorPoint PointX="10.25" PointY="1.5862939453124998" />
-          <ConnectorPoint PointX="10.25" PointY="3.625" />
+          <ConnectorPoint PointX="2.25" PointY="15.990143229166666" />
+          <ConnectorPoint PointX="3" PointY="15.990143229166666" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

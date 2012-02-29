@@ -91,6 +91,7 @@
     <Content Include="App_Data\ASPNETDB_log.ldf">
       <DependentUpon>ASPNETDB.MDF</DependentUpon>
     </Content>
+    <Content Include="Content\images\calendar.gif" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -187,12 +188,6 @@
     <Content Include="Views\Account\ShowHistory.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="Models\AdoModels.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>AdoModels.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Home\Travel.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -206,6 +201,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Telesales\TelesalesList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_ExtraPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_ExtraBookingCartPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_HotelFormPartial.cshtml" />

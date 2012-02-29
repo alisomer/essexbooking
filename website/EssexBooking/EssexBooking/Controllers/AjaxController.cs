@@ -17,6 +17,22 @@ namespace EssexBooking.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public ActionResult AddExtraToBooking(int temp_id, int extra_id, int number=1)
+        {
+            Cart cart = new Cart();
+          //  ExtraBookingCart extraBookingCart = new ExtraBookingCart();
+            ExtraBooking extraBooking = new ExtraBooking();
+            extraBooking.extra_id = extra_id;
+            extraBooking.participants = number;
+            Random r = new Random();
+            int extrabooktemp_id = r.Next();
+            cart.bookings[temp_id].temp_extras.Add(extrabooktemp_id, extraBooking);
+           // extraBookingCart.extratemp_id = extrabooktemp_id;
+           // extraBookingCart.extrabookings.Add(extraBookingCart.extratemp_id, extraBooking);
+
+            return PartialView("_ExtraBookingCartPartial", cart.bookings[temp_id].temp_extras);
+        }
 
         public ActionResult AddHotelToCart(int hotel_id)
         {
@@ -26,9 +42,10 @@ namespace EssexBooking.Controllers
             Random r = new Random();
             newbooking.temp_id = r.Next();//as a temp id to give ids to radios etc
             newbooking.Hotel = entities.Hotels.FirstOrDefault(h => h.id == hotel_id);
+            newbooking.temp_extras = new Dictionary<int, ExtraBooking>();
             //cart.bookings.Add(newbooking);
             cart.bookings.Add(newbooking.temp_id, newbooking);
-            cart.AddToSession();
+
             return PartialView("_CartPartial", cart);
         }
         /*
@@ -79,7 +96,12 @@ namespace EssexBooking.Controllers
                  
                 updated = true;
             }
+            
+            //List of ExtraBooking
+           
 
+        //    cart.bookings[br.temp_id].ExtraBookings.Add();
+            
             return Json(new { success = updated});
             
         }
