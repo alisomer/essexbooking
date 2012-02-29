@@ -18,15 +18,15 @@ using System.Runtime.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
-[assembly: EdmRelationshipAttribute("aspnetdbModel", "FK_Bookings_ExtraBookings", "ExtraBookings", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(EssexBooking.Models.ExtraBooking), "Bookings", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(EssexBooking.Models.Booking), true)]
-[assembly: EdmRelationshipAttribute("aspnetdbModel", "FK_Bookings_Hotels", "Hotels", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(EssexBooking.Models.Hotel), "Bookings", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(EssexBooking.Models.Booking), true)]
-[assembly: EdmRelationshipAttribute("aspnetdbModel", "FK_Bookings_Travel", "Travel", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(EssexBooking.Models.Travel), "Bookings", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(EssexBooking.Models.Booking), true)]
-[assembly: EdmRelationshipAttribute("aspnetdbModel", "FK_ExtraBookings_ExtraBookings", "Extras", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(EssexBooking.Models.Extra), "ExtraBookings", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(EssexBooking.Models.ExtraBooking), true)]
-[assembly: EdmRelationshipAttribute("aspnetdbModel", "FK_Extras_Resorts", "Resorts", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(EssexBooking.Models.Resort), "Extras", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(EssexBooking.Models.Extra), true)]
-[assembly: EdmRelationshipAttribute("aspnetdbModel", "FK_Hotels_HotelTypes", "HotelTypes", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(EssexBooking.Models.HotelType), "Hotels", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(EssexBooking.Models.Hotel), true)]
-[assembly: EdmRelationshipAttribute("aspnetdbModel", "FK_Hotels_Resorts", "Resorts", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(EssexBooking.Models.Resort), "Hotels", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(EssexBooking.Models.Hotel), true)]
-[assembly: EdmRelationshipAttribute("aspnetdbModel", "FK_Passanger_Travel1", "Travel", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(EssexBooking.Models.Travel), "Passanger", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(EssexBooking.Models.Passanger), true)]
-[assembly: EdmRelationshipAttribute("aspnetdbModel", "FK_Travel_Travel", "TravelTypes", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(EssexBooking.Models.TravelType), "Travel", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(EssexBooking.Models.Travel), true)]
+[assembly: EdmRelationshipAttribute("ASPNETDBModel", "FK_Bookings_ExtraBookings", "ExtraBookings", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(EssexBooking.Models.ExtraBooking), "Bookings", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(EssexBooking.Models.Booking), true)]
+[assembly: EdmRelationshipAttribute("ASPNETDBModel", "FK_Bookings_Hotels", "Hotels", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(EssexBooking.Models.Hotel), "Bookings", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(EssexBooking.Models.Booking), true)]
+[assembly: EdmRelationshipAttribute("ASPNETDBModel", "FK_Bookings_Travel", "Travel", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(EssexBooking.Models.Travel), "Bookings", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(EssexBooking.Models.Booking), true)]
+[assembly: EdmRelationshipAttribute("ASPNETDBModel", "FK_ExtraBookings_ExtraBookings", "Extras", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(EssexBooking.Models.Extra), "ExtraBookings", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(EssexBooking.Models.ExtraBooking), true)]
+[assembly: EdmRelationshipAttribute("ASPNETDBModel", "FK_Extras_Resorts", "Resorts", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(EssexBooking.Models.Resort), "Extras", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(EssexBooking.Models.Extra), true)]
+[assembly: EdmRelationshipAttribute("ASPNETDBModel", "FK_Hotels_HotelTypes", "HotelTypes", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(EssexBooking.Models.HotelType), "Hotels", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(EssexBooking.Models.Hotel), true)]
+[assembly: EdmRelationshipAttribute("ASPNETDBModel", "FK_Hotels_Resorts", "Resorts", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(EssexBooking.Models.Resort), "Hotels", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(EssexBooking.Models.Hotel), true)]
+[assembly: EdmRelationshipAttribute("ASPNETDBModel", "FK_Passanger_Travel1", "Travel", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(EssexBooking.Models.Travel), "Passanger", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(EssexBooking.Models.Passanger), true)]
+[assembly: EdmRelationshipAttribute("ASPNETDBModel", "FK_Travel_Travel", "TravelTypes", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(EssexBooking.Models.TravelType), "Travel", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(EssexBooking.Models.Travel), true)]
 
 #endregion
 
@@ -308,7 +308,7 @@ namespace EssexBooking.Models
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="aspnetdbModel", Name="Booking")]
+    [EdmEntityTypeAttribute(NamespaceName="ASPNETDBModel", Name="Booking")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class Booking : EntityObject
@@ -574,16 +574,16 @@ namespace EssexBooking.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("aspnetdbModel", "FK_Bookings_ExtraBookings", "ExtraBookings")]
+        [EdmRelationshipNavigationPropertyAttribute("ASPNETDBModel", "FK_Bookings_ExtraBookings", "ExtraBookings")]
         public ExtraBooking ExtraBooking
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExtraBooking>("aspnetdbModel.FK_Bookings_ExtraBookings", "ExtraBookings").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExtraBooking>("ASPNETDBModel.FK_Bookings_ExtraBookings", "ExtraBookings").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExtraBooking>("aspnetdbModel.FK_Bookings_ExtraBookings", "ExtraBookings").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExtraBooking>("ASPNETDBModel.FK_Bookings_ExtraBookings", "ExtraBookings").Value = value;
             }
         }
         /// <summary>
@@ -595,13 +595,13 @@ namespace EssexBooking.Models
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExtraBooking>("aspnetdbModel.FK_Bookings_ExtraBookings", "ExtraBookings");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExtraBooking>("ASPNETDBModel.FK_Bookings_ExtraBookings", "ExtraBookings");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ExtraBooking>("aspnetdbModel.FK_Bookings_ExtraBookings", "ExtraBookings", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ExtraBooking>("ASPNETDBModel.FK_Bookings_ExtraBookings", "ExtraBookings", value);
                 }
             }
         }
@@ -612,16 +612,16 @@ namespace EssexBooking.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("aspnetdbModel", "FK_Bookings_Hotels", "Hotels")]
+        [EdmRelationshipNavigationPropertyAttribute("ASPNETDBModel", "FK_Bookings_Hotels", "Hotels")]
         public Hotel Hotel
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Hotel>("aspnetdbModel.FK_Bookings_Hotels", "Hotels").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Hotel>("ASPNETDBModel.FK_Bookings_Hotels", "Hotels").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Hotel>("aspnetdbModel.FK_Bookings_Hotels", "Hotels").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Hotel>("ASPNETDBModel.FK_Bookings_Hotels", "Hotels").Value = value;
             }
         }
         /// <summary>
@@ -633,13 +633,13 @@ namespace EssexBooking.Models
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Hotel>("aspnetdbModel.FK_Bookings_Hotels", "Hotels");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Hotel>("ASPNETDBModel.FK_Bookings_Hotels", "Hotels");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Hotel>("aspnetdbModel.FK_Bookings_Hotels", "Hotels", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Hotel>("ASPNETDBModel.FK_Bookings_Hotels", "Hotels", value);
                 }
             }
         }
@@ -650,16 +650,16 @@ namespace EssexBooking.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("aspnetdbModel", "FK_Bookings_Travel", "Travel")]
+        [EdmRelationshipNavigationPropertyAttribute("ASPNETDBModel", "FK_Bookings_Travel", "Travel")]
         public Travel Travel
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Travel>("aspnetdbModel.FK_Bookings_Travel", "Travel").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Travel>("ASPNETDBModel.FK_Bookings_Travel", "Travel").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Travel>("aspnetdbModel.FK_Bookings_Travel", "Travel").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Travel>("ASPNETDBModel.FK_Bookings_Travel", "Travel").Value = value;
             }
         }
         /// <summary>
@@ -671,13 +671,13 @@ namespace EssexBooking.Models
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Travel>("aspnetdbModel.FK_Bookings_Travel", "Travel");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Travel>("ASPNETDBModel.FK_Bookings_Travel", "Travel");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Travel>("aspnetdbModel.FK_Bookings_Travel", "Travel", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Travel>("ASPNETDBModel.FK_Bookings_Travel", "Travel", value);
                 }
             }
         }
@@ -688,7 +688,7 @@ namespace EssexBooking.Models
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="aspnetdbModel", Name="Extra")]
+    [EdmEntityTypeAttribute(NamespaceName="ASPNETDBModel", Name="Extra")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class Extra : EntityObject
@@ -848,18 +848,18 @@ namespace EssexBooking.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("aspnetdbModel", "FK_ExtraBookings_ExtraBookings", "ExtraBookings")]
+        [EdmRelationshipNavigationPropertyAttribute("ASPNETDBModel", "FK_ExtraBookings_ExtraBookings", "ExtraBookings")]
         public EntityCollection<ExtraBooking> ExtraBookings
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ExtraBooking>("aspnetdbModel.FK_ExtraBookings_ExtraBookings", "ExtraBookings");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ExtraBooking>("ASPNETDBModel.FK_ExtraBookings_ExtraBookings", "ExtraBookings");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ExtraBooking>("aspnetdbModel.FK_ExtraBookings_ExtraBookings", "ExtraBookings", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ExtraBooking>("ASPNETDBModel.FK_ExtraBookings_ExtraBookings", "ExtraBookings", value);
                 }
             }
         }
@@ -870,16 +870,16 @@ namespace EssexBooking.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("aspnetdbModel", "FK_Extras_Resorts", "Resorts")]
+        [EdmRelationshipNavigationPropertyAttribute("ASPNETDBModel", "FK_Extras_Resorts", "Resorts")]
         public Resort Resort
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Resort>("aspnetdbModel.FK_Extras_Resorts", "Resorts").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Resort>("ASPNETDBModel.FK_Extras_Resorts", "Resorts").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Resort>("aspnetdbModel.FK_Extras_Resorts", "Resorts").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Resort>("ASPNETDBModel.FK_Extras_Resorts", "Resorts").Value = value;
             }
         }
         /// <summary>
@@ -891,13 +891,13 @@ namespace EssexBooking.Models
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Resort>("aspnetdbModel.FK_Extras_Resorts", "Resorts");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Resort>("ASPNETDBModel.FK_Extras_Resorts", "Resorts");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Resort>("aspnetdbModel.FK_Extras_Resorts", "Resorts", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Resort>("ASPNETDBModel.FK_Extras_Resorts", "Resorts", value);
                 }
             }
         }
@@ -908,7 +908,7 @@ namespace EssexBooking.Models
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="aspnetdbModel", Name="ExtraBooking")]
+    [EdmEntityTypeAttribute(NamespaceName="ASPNETDBModel", Name="ExtraBooking")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class ExtraBooking : EntityObject
@@ -1070,18 +1070,18 @@ namespace EssexBooking.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("aspnetdbModel", "FK_Bookings_ExtraBookings", "Bookings")]
+        [EdmRelationshipNavigationPropertyAttribute("ASPNETDBModel", "FK_Bookings_ExtraBookings", "Bookings")]
         public EntityCollection<Booking> Bookings
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Booking>("aspnetdbModel.FK_Bookings_ExtraBookings", "Bookings");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Booking>("ASPNETDBModel.FK_Bookings_ExtraBookings", "Bookings");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Booking>("aspnetdbModel.FK_Bookings_ExtraBookings", "Bookings", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Booking>("ASPNETDBModel.FK_Bookings_ExtraBookings", "Bookings", value);
                 }
             }
         }
@@ -1092,16 +1092,16 @@ namespace EssexBooking.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("aspnetdbModel", "FK_ExtraBookings_ExtraBookings", "Extras")]
+        [EdmRelationshipNavigationPropertyAttribute("ASPNETDBModel", "FK_ExtraBookings_ExtraBookings", "Extras")]
         public Extra Extra
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Extra>("aspnetdbModel.FK_ExtraBookings_ExtraBookings", "Extras").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Extra>("ASPNETDBModel.FK_ExtraBookings_ExtraBookings", "Extras").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Extra>("aspnetdbModel.FK_ExtraBookings_ExtraBookings", "Extras").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Extra>("ASPNETDBModel.FK_ExtraBookings_ExtraBookings", "Extras").Value = value;
             }
         }
         /// <summary>
@@ -1113,13 +1113,13 @@ namespace EssexBooking.Models
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Extra>("aspnetdbModel.FK_ExtraBookings_ExtraBookings", "Extras");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Extra>("ASPNETDBModel.FK_ExtraBookings_ExtraBookings", "Extras");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Extra>("aspnetdbModel.FK_ExtraBookings_ExtraBookings", "Extras", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Extra>("ASPNETDBModel.FK_ExtraBookings_ExtraBookings", "Extras", value);
                 }
             }
         }
@@ -1130,7 +1130,7 @@ namespace EssexBooking.Models
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="aspnetdbModel", Name="Hotel")]
+    [EdmEntityTypeAttribute(NamespaceName="ASPNETDBModel", Name="Hotel")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class Hotel : EntityObject
@@ -1266,18 +1266,18 @@ namespace EssexBooking.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("aspnetdbModel", "FK_Bookings_Hotels", "Bookings")]
+        [EdmRelationshipNavigationPropertyAttribute("ASPNETDBModel", "FK_Bookings_Hotels", "Bookings")]
         public EntityCollection<Booking> Bookings
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Booking>("aspnetdbModel.FK_Bookings_Hotels", "Bookings");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Booking>("ASPNETDBModel.FK_Bookings_Hotels", "Bookings");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Booking>("aspnetdbModel.FK_Bookings_Hotels", "Bookings", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Booking>("ASPNETDBModel.FK_Bookings_Hotels", "Bookings", value);
                 }
             }
         }
@@ -1288,16 +1288,16 @@ namespace EssexBooking.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("aspnetdbModel", "FK_Hotels_HotelTypes", "HotelTypes")]
+        [EdmRelationshipNavigationPropertyAttribute("ASPNETDBModel", "FK_Hotels_HotelTypes", "HotelTypes")]
         public HotelType HotelType
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<HotelType>("aspnetdbModel.FK_Hotels_HotelTypes", "HotelTypes").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<HotelType>("ASPNETDBModel.FK_Hotels_HotelTypes", "HotelTypes").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<HotelType>("aspnetdbModel.FK_Hotels_HotelTypes", "HotelTypes").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<HotelType>("ASPNETDBModel.FK_Hotels_HotelTypes", "HotelTypes").Value = value;
             }
         }
         /// <summary>
@@ -1309,13 +1309,13 @@ namespace EssexBooking.Models
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<HotelType>("aspnetdbModel.FK_Hotels_HotelTypes", "HotelTypes");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<HotelType>("ASPNETDBModel.FK_Hotels_HotelTypes", "HotelTypes");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<HotelType>("aspnetdbModel.FK_Hotels_HotelTypes", "HotelTypes", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<HotelType>("ASPNETDBModel.FK_Hotels_HotelTypes", "HotelTypes", value);
                 }
             }
         }
@@ -1326,16 +1326,16 @@ namespace EssexBooking.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("aspnetdbModel", "FK_Hotels_Resorts", "Resorts")]
+        [EdmRelationshipNavigationPropertyAttribute("ASPNETDBModel", "FK_Hotels_Resorts", "Resorts")]
         public Resort Resort
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Resort>("aspnetdbModel.FK_Hotels_Resorts", "Resorts").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Resort>("ASPNETDBModel.FK_Hotels_Resorts", "Resorts").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Resort>("aspnetdbModel.FK_Hotels_Resorts", "Resorts").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Resort>("ASPNETDBModel.FK_Hotels_Resorts", "Resorts").Value = value;
             }
         }
         /// <summary>
@@ -1347,13 +1347,13 @@ namespace EssexBooking.Models
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Resort>("aspnetdbModel.FK_Hotels_Resorts", "Resorts");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Resort>("ASPNETDBModel.FK_Hotels_Resorts", "Resorts");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Resort>("aspnetdbModel.FK_Hotels_Resorts", "Resorts", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Resort>("ASPNETDBModel.FK_Hotels_Resorts", "Resorts", value);
                 }
             }
         }
@@ -1364,7 +1364,7 @@ namespace EssexBooking.Models
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="aspnetdbModel", Name="HotelType")]
+    [EdmEntityTypeAttribute(NamespaceName="ASPNETDBModel", Name="HotelType")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class HotelType : EntityObject
@@ -1474,18 +1474,18 @@ namespace EssexBooking.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("aspnetdbModel", "FK_Hotels_HotelTypes", "Hotels")]
+        [EdmRelationshipNavigationPropertyAttribute("ASPNETDBModel", "FK_Hotels_HotelTypes", "Hotels")]
         public EntityCollection<Hotel> Hotels
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Hotel>("aspnetdbModel.FK_Hotels_HotelTypes", "Hotels");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Hotel>("ASPNETDBModel.FK_Hotels_HotelTypes", "Hotels");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Hotel>("aspnetdbModel.FK_Hotels_HotelTypes", "Hotels", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Hotel>("ASPNETDBModel.FK_Hotels_HotelTypes", "Hotels", value);
                 }
             }
         }
@@ -1496,7 +1496,7 @@ namespace EssexBooking.Models
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="aspnetdbModel", Name="Passanger")]
+    [EdmEntityTypeAttribute(NamespaceName="ASPNETDBModel", Name="Passanger")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class Passanger : EntityObject
@@ -1656,16 +1656,16 @@ namespace EssexBooking.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("aspnetdbModel", "FK_Passanger_Travel1", "Travel")]
+        [EdmRelationshipNavigationPropertyAttribute("ASPNETDBModel", "FK_Passanger_Travel1", "Travel")]
         public Travel Travel
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Travel>("aspnetdbModel.FK_Passanger_Travel1", "Travel").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Travel>("ASPNETDBModel.FK_Passanger_Travel1", "Travel").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Travel>("aspnetdbModel.FK_Passanger_Travel1", "Travel").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Travel>("ASPNETDBModel.FK_Passanger_Travel1", "Travel").Value = value;
             }
         }
         /// <summary>
@@ -1677,13 +1677,13 @@ namespace EssexBooking.Models
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Travel>("aspnetdbModel.FK_Passanger_Travel1", "Travel");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Travel>("ASPNETDBModel.FK_Passanger_Travel1", "Travel");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Travel>("aspnetdbModel.FK_Passanger_Travel1", "Travel", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Travel>("ASPNETDBModel.FK_Passanger_Travel1", "Travel", value);
                 }
             }
         }
@@ -1694,7 +1694,7 @@ namespace EssexBooking.Models
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="aspnetdbModel", Name="Resort")]
+    [EdmEntityTypeAttribute(NamespaceName="ASPNETDBModel", Name="Resort")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class Resort : EntityObject
@@ -1802,18 +1802,18 @@ namespace EssexBooking.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("aspnetdbModel", "FK_Extras_Resorts", "Extras")]
+        [EdmRelationshipNavigationPropertyAttribute("ASPNETDBModel", "FK_Extras_Resorts", "Extras")]
         public EntityCollection<Extra> Extras
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Extra>("aspnetdbModel.FK_Extras_Resorts", "Extras");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Extra>("ASPNETDBModel.FK_Extras_Resorts", "Extras");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Extra>("aspnetdbModel.FK_Extras_Resorts", "Extras", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Extra>("ASPNETDBModel.FK_Extras_Resorts", "Extras", value);
                 }
             }
         }
@@ -1824,18 +1824,18 @@ namespace EssexBooking.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("aspnetdbModel", "FK_Hotels_Resorts", "Hotels")]
+        [EdmRelationshipNavigationPropertyAttribute("ASPNETDBModel", "FK_Hotels_Resorts", "Hotels")]
         public EntityCollection<Hotel> Hotels
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Hotel>("aspnetdbModel.FK_Hotels_Resorts", "Hotels");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Hotel>("ASPNETDBModel.FK_Hotels_Resorts", "Hotels");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Hotel>("aspnetdbModel.FK_Hotels_Resorts", "Hotels", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Hotel>("ASPNETDBModel.FK_Hotels_Resorts", "Hotels", value);
                 }
             }
         }
@@ -1846,7 +1846,7 @@ namespace EssexBooking.Models
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="aspnetdbModel", Name="Travel")]
+    [EdmEntityTypeAttribute(NamespaceName="ASPNETDBModel", Name="Travel")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class Travel : EntityObject
@@ -1982,18 +1982,18 @@ namespace EssexBooking.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("aspnetdbModel", "FK_Bookings_Travel", "Bookings")]
+        [EdmRelationshipNavigationPropertyAttribute("ASPNETDBModel", "FK_Bookings_Travel", "Bookings")]
         public EntityCollection<Booking> Bookings
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Booking>("aspnetdbModel.FK_Bookings_Travel", "Bookings");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Booking>("ASPNETDBModel.FK_Bookings_Travel", "Bookings");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Booking>("aspnetdbModel.FK_Bookings_Travel", "Bookings", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Booking>("ASPNETDBModel.FK_Bookings_Travel", "Bookings", value);
                 }
             }
         }
@@ -2004,18 +2004,18 @@ namespace EssexBooking.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("aspnetdbModel", "FK_Passanger_Travel1", "Passanger")]
+        [EdmRelationshipNavigationPropertyAttribute("ASPNETDBModel", "FK_Passanger_Travel1", "Passanger")]
         public EntityCollection<Passanger> Passangers
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Passanger>("aspnetdbModel.FK_Passanger_Travel1", "Passanger");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Passanger>("ASPNETDBModel.FK_Passanger_Travel1", "Passanger");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Passanger>("aspnetdbModel.FK_Passanger_Travel1", "Passanger", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Passanger>("ASPNETDBModel.FK_Passanger_Travel1", "Passanger", value);
                 }
             }
         }
@@ -2026,16 +2026,16 @@ namespace EssexBooking.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("aspnetdbModel", "FK_Travel_Travel", "TravelTypes")]
+        [EdmRelationshipNavigationPropertyAttribute("ASPNETDBModel", "FK_Travel_Travel", "TravelTypes")]
         public TravelType TravelType
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TravelType>("aspnetdbModel.FK_Travel_Travel", "TravelTypes").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TravelType>("ASPNETDBModel.FK_Travel_Travel", "TravelTypes").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TravelType>("aspnetdbModel.FK_Travel_Travel", "TravelTypes").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TravelType>("ASPNETDBModel.FK_Travel_Travel", "TravelTypes").Value = value;
             }
         }
         /// <summary>
@@ -2047,13 +2047,13 @@ namespace EssexBooking.Models
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TravelType>("aspnetdbModel.FK_Travel_Travel", "TravelTypes");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TravelType>("ASPNETDBModel.FK_Travel_Travel", "TravelTypes");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<TravelType>("aspnetdbModel.FK_Travel_Travel", "TravelTypes", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<TravelType>("ASPNETDBModel.FK_Travel_Travel", "TravelTypes", value);
                 }
             }
         }
@@ -2064,7 +2064,7 @@ namespace EssexBooking.Models
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="aspnetdbModel", Name="TravelType")]
+    [EdmEntityTypeAttribute(NamespaceName="ASPNETDBModel", Name="TravelType")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class TravelType : EntityObject
@@ -2200,18 +2200,18 @@ namespace EssexBooking.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("aspnetdbModel", "FK_Travel_Travel", "Travel")]
+        [EdmRelationshipNavigationPropertyAttribute("ASPNETDBModel", "FK_Travel_Travel", "Travel")]
         public EntityCollection<Travel> Travels
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Travel>("aspnetdbModel.FK_Travel_Travel", "Travel");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Travel>("ASPNETDBModel.FK_Travel_Travel", "Travel");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Travel>("aspnetdbModel.FK_Travel_Travel", "Travel", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Travel>("ASPNETDBModel.FK_Travel_Travel", "Travel", value);
                 }
             }
         }
