@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Security;
@@ -8,20 +9,23 @@ namespace EssexBooking.Models
 {
     public class Cart
     {
-        public Dictionary<int,Booking> bookings{get;set;}
+        public ASPNETDBEntities ctx;
 
         public Cart()
         {
             Cart c = this.GetFromSession();
             if (c != null)
             {
-                bookings = c.bookings;
+                ctx = c.ctx;
             }
             else
             {
-                bookings = new Dictionary<int, Booking>();
+                ctx = new ASPNETDBEntities();
                 this.AddToSession();
             }
+
+            
+
         }
         //Turns out that this method is unecessary.
         public void AddToSession()
@@ -36,22 +40,36 @@ namespace EssexBooking.Models
 
         public void Empty()
         {
-            bookings = new Dictionary<int, Booking>();
+            ctx = new ASPNETDBEntities();
         }
 
         public void Checkout()
         {
-            ASPNETDBEntities entities = new ASPNETDBEntities();
-            foreach (Booking b in bookings.Values)
-            {
-                entities.Bookings.AddObject(b);
-                entities.Travels.AddObject(b.Travel);
-               /* foreach (ExtraBooking e in b.ExtraBooking.)
-                {
-                    entities.ExtraBookings.AddObject(e);
-                }*/
-            }
-            entities.SaveChanges();
+            ctx.SaveChanges();
+            Empty();
+        }
+
+        public void Add(Travel travel)
+        {
+            ctx.Travels.AddObject(travel);
+        }
+
+        public void Add(Passanger passenger)
+        {
+            ctx.Passangers.AddObject(passenger);
+        }
+
+        public Booking GetBooking(Guid id)
+        {
+            return GetBookings().FirstOrDefault(b => b.id== id);
+
+        }
+
+        public IEnumerable<Booking> GetBookings()
+        {
+            return
+                ctx.ObjectStateManager.GetObjectStateEntries(EntityState.Added).Select(obj => obj.Entity).OfType
+                    <Booking>();
         }
 
     }

@@ -1,7 +1,7 @@
 ﻿@model EssexBooking.Models.Booking
 
 @{
-    string prefix = Model.temp_id.ToString();
+    string prefix = Model.id.ToString();
 }
 
 <div class="hotelForm">
@@ -24,5 +24,4 @@
         Val from obj = @(Model.guests)
         <!--TODO: pre select from dropdown -->
     </div>
-    <button class="save">Save</button>
 </div>

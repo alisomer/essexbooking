@@ -44,4 +44,13 @@ function AddExtraToBooking(temp_id, extra_id, number, callback) {
             type: "POST",
             success: callback
         });
+    }
+
+function setGuests(temp_id, guests, callback) {
+    $.ajax({
+        data: {'temp_id': temp_id, 'guests': guests},
+        url: '/Ajax/SetGuests',
+        type: "POST",
+        success: callback
+    });    
 }

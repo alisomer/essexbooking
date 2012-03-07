@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -9,14 +10,7 @@ namespace EssexBooking.Controllers
 {
     public class AjaxController : Controller
     {
-        public ASPNETDBEntities entities = new ASPNETDBEntities();
-        //
-        // GET: /Ajax/
 
-        public ActionResult Index()
-        {
-            return View();
-        }
         [HttpPost]
         public ActionResult AddExtraToBooking(int temp_id, int extra_id, int number=1)
         {
@@ -27,11 +21,23 @@ namespace EssexBooking.Controllers
             extraBooking.participants = number;
             Random r = new Random();
             int extrabooktemp_id = r.Next();
-            cart.bookings[temp_id].temp_extras.Add(extrabooktemp_id, extraBooking);
+            
+            
+            
+            //cart.bookings[temp_id].temp_extras.Add(extrabooktemp_id, extraBooking);
+
+
+
+
            // extraBookingCart.extratemp_id = extrabooktemp_id;
            // extraBookingCart.extrabookings.Add(extraBookingCart.extratemp_id, extraBooking);
 
-            return PartialView("_ExtraBookingCartPartial", cart.bookings[temp_id].temp_extras);
+
+
+           //return PartialView("_ExtraBookingCartPartial", cart.bookings[temp_id].temp_extras);
+            return PartialView("_ExtraBookingCartPartial");//TODO:FIX
+
+
         }
 
         public ActionResult AddHotelToCart(int hotel_id)
@@ -39,39 +45,25 @@ namespace EssexBooking.Controllers
             Cart cart = new Cart();
             Booking newbooking = new Booking();
 
-            Random r = new Random();
-            newbooking.temp_id = r.Next();//as a temp id to give ids to radios etc
-            newbooking.Hotel = entities.Hotels.FirstOrDefault(h => h.id == hotel_id);
-            newbooking.temp_extras = new Dictionary<int, ExtraBooking>();
-            //cart.bookings.Add(newbooking);
-            cart.bookings.Add(newbooking.temp_id, newbooking);
+            newbooking.id = Guid.NewGuid();
+            newbooking.Hotel = cart.ctx.Hotels.FirstOrDefault(h => h.id == hotel_id);
+            cart.ctx.Bookings.AddObject(newbooking);
 
             return PartialView("_CartPartial", cart);
         }
-        /*
-        public ActionResult RemoveHotelFromCart(int hotel_id)
+       
+        public ActionResult RemoveBookingFromCart(Guid temp_id)
         {
+            
             Cart cart = new Cart();
-            //cart.bookings.Remove(cart.bookings.Where(b => b.Value.hotel_id == hotel_id).ToList().Key);
-            foreach(var b in cart.bookings.Where(b => b.Value.hotel_id == hotel_id).ToList() ){
-                cart.bookings.Remove(b.Key);
-            }
-            cart.AddToSession();
-            return PartialView("_CartPartial", cart);
-        }
-        */
-
-        public ActionResult RemoveBookingFromCart(int temp_id)
-        {
-            Cart cart = new Cart();
-            cart.bookings.Remove(temp_id);
+            cart.ctx.DeleteObject(cart.GetBooking(temp_id));
             cart.AddToSession();
             return PartialView("_CartPartial", cart);
         }
 
         public class BookingRequest
         {
-            public int temp_id { get; set; }
+            public Guid temp_id { get; set; }
             public DateTime start_date { get; set; }
             public int duration { get; set; }
             public int guests { get; set; }
@@ -81,30 +73,34 @@ namespace EssexBooking.Controllers
         [HttpPost]
         public JsonResult UpdateBooking(BookingRequest br)
         {
+            Guid cusID = new Guid("5ae593b4-066d-4744-b9e0-35030455005b");
             Cart cart = new Cart();
-  
-            bool updated = false;
-            if(cart.bookings.ContainsKey(br.temp_id)){
-                cart.bookings[br.temp_id].guests = br.guests;
-                cart.bookings[br.temp_id].duration = br.duration;
-                
-                Travel travel= new Travel();
-                travel.TravelType = entities.TravelTypes.FirstOrDefault(tt => tt.id == br.travel_type_id);
-                travel.departure = br.start_date;
-                travel.arrival = br.start_date.AddDays(br.duration);
-                cart.bookings[br.temp_id].Travel = travel;
-                 
-                updated = true;
-            }
-            
-            //List of ExtraBooking
-           
 
-        //    cart.bookings[br.temp_id].ExtraBookings.Add();
-            
-            return Json(new { success = updated});
-            
+            Booking b = cart.GetBooking(br.temp_id);
+            b.guests = br.guests;
+            b.duration = br.duration;
+            b.start_date = br.start_date;
+            b.customer_id = cusID;
+
+
+            Travel travel = new Travel
+            {
+                id = Guid.NewGuid(),
+                travel_type_id = br.travel_type_id,
+                departure = br.start_date,
+                arrival = br.start_date
+            };
+
+            b.Travel = travel;
+            return Json(new {  });
+
         }
 
+        public ActionResult SetGuests(Guid temp_id, int guests)
+        {
+            Cart cart = new Cart();
+            cart.GetBooking(temp_id).guests = guests;
+            return PartialView("_PassengerFormPartial", guests);
+        }
     }
 }

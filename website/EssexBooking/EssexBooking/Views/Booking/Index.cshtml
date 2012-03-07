@@ -66,12 +66,22 @@
             AddExtraToBooking(temp_id, extra_id, number, displayExtraCart);
 
         });
+
+        $("[name=guests]").change(function () {
+            console.log("changed");
+            $(this).closest(".bookingForm").addClass("addGuests");
+            setGuests($(this).closest("[temp_id]").attr("temp_id"), $(this).val(), function (resp) {
+                $(".bookingForm.addGuests").find(".passenger").html(resp);
+                $(".bookingForm.addGuests").removeClass("addGuests");
+                console.log("ok");
+            });
+        });
     });
 </script>
 }
 
 <h2>Index</h2>
-@foreach (var b in Model.bookings)
+@foreach (var b in Model.GetBookings())
 {
-   @Html.Partial("_BookingFormPartial", b.Value)
+   @Html.Partial("_BookingFormPartial", b)
 }

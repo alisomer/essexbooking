@@ -2,19 +2,21 @@
 
 @{
     ViewBag.Title = "_BookingFormPartial";
-    string prefix = Model.temp_id.ToString();
+    string prefix = Model.id.ToString();
 }
 
-<div temp_id="@Model.temp_id" class="bookingForm">
+<div temp_id="@Model.id" class="bookingForm">
+    <h3>Hotel</h3>
    @Html.Partial("_HotelFormPartial", Model)
+    <h3>Passenger</h3>
+    <div class="passenger">@Html.Partial("_PassengerFormPartial", Model.guests)</div>
+    <h3>Travel</h3>
    @Html.Partial("_TravelFormPartial", Model)
-   @for (var i = 0; i < Model.guests; i++)
-   {
-       @Html.Partial("_PassengerFormPartial", Model)
-   }
+
         @Html.Partial("_ExtraPartial", Model.Hotel.Resort.Extras)
 
         <div id="miniextracart">
-          @Html.Partial("_ExtraBookingCartPartial", Model.temp_extras)
+          @Html.Partial("_ExtraBookingCartPartial", Model.ExtraBookings)
         </div>
+        <button class="save">Save</button>
 </div>

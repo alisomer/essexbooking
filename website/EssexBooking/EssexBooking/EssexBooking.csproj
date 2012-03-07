@@ -74,7 +74,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\AdoModels1.Designer.cs">
+    <Compile Include="Models\AdoModels.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AdoModels.edmx</DependentUpon>
@@ -220,7 +220,7 @@
   <ItemGroup>
     <EntityDeploy Include="Models\AdoModels.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>AdoModels1.Designer.cs</LastGenOutput>
+      <LastGenOutput>AdoModels.Designer.cs</LastGenOutput>
     </EntityDeploy>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

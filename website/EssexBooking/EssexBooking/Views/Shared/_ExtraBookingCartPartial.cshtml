@@ -1,5 +1,4 @@
-﻿@using EssexBooking.Models
-@model Dictionary<int, ExtraBooking>
+﻿@model IEnumerable<EssexBooking.Models.ExtraBooking>
 <div class="extrabookingcart">
 <h3>Your Extra Cart</h3>
     <table>
@@ -12,8 +11,8 @@
       
         @foreach (var extrabooking in Model) {
         
-                <tr extratemp_id='@extrabooking.Key'>
-                    <td>@extrabooking.Value.participants</td>                  
+                <tr extratemp_id='@extrabooking.id'>
+                    <td>@extrabooking.participants</td>
 
                 </tr>
 

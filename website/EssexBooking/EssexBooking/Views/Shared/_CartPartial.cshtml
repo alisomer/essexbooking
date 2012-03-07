@@ -2,11 +2,11 @@
 <div class="cart">
 <h3>Your Cart</h3>
     <table>
-        @foreach (var booking in Model.bookings) {
+        @foreach (var booking in Model.GetBookings()) {
 
-                <tr temp_id='@(booking.Key)'>
+                <tr temp_id='@(booking.id)'>
                     <td>
-                        @Html.DisplayFor(modelItem => booking.Value.Hotel.name)
+                        @Html.DisplayFor(modelItem => booking.Hotel.name)
                     </td>
                     <td>
                         <button class="remove">remove</button>

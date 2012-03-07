@@ -27,7 +27,7 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("ASPNETDBModel", "FK_Extras_Resorts", "Resorts", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(EssexBooking.Models.Resort), "Extras", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(EssexBooking.Models.Extra), true)]
 [assembly: EdmRelationshipAttribute("ASPNETDBModel", "FK_Hotels_HotelTypes", "HotelTypes", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(EssexBooking.Models.HotelType), "Hotels", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(EssexBooking.Models.Hotel), true)]
 [assembly: EdmRelationshipAttribute("ASPNETDBModel", "FK_Hotels_Resorts", "Resorts", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(EssexBooking.Models.Resort), "Hotels", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(EssexBooking.Models.Hotel), true)]
-[assembly: EdmRelationshipAttribute("ASPNETDBModel", "FK_passanger_Travel", "Travel", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(EssexBooking.Models.Travel), "Passanger", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(EssexBooking.Models.Passanger), true)]
+[assembly: EdmRelationshipAttribute("ASPNETDBModel", "FK_Passanger_Travel", "Travel", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(EssexBooking.Models.Travel), "Passanger", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(EssexBooking.Models.Passanger), true)]
 [assembly: EdmRelationshipAttribute("ASPNETDBModel", "FK_Travel_Travel", "TravelTypes", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(EssexBooking.Models.TravelType), "Travel", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(EssexBooking.Models.Travel), true)]
 
 #endregion
@@ -1432,8 +1432,7 @@ namespace EssexBooking.Models
         /// <param name="start_date">Initial value of the start_date property.</param>
         /// <param name="duration">Initial value of the duration property.</param>
         /// <param name="guests">Initial value of the guests property.</param>
-        /// <param name="booker_id">Initial value of the booker_id property.</param>
-        public static Booking CreateBooking(global::System.Int32 id, global::System.Guid customer_id, global::System.Int32 travel_id, global::System.Int32 hotel_id, global::System.DateTime start_date, global::System.Int32 duration, global::System.Int32 guests, global::System.Guid booker_id)
+        public static Booking CreateBooking(global::System.Guid id, global::System.Guid customer_id, global::System.Guid travel_id, global::System.Int32 hotel_id, global::System.DateTime start_date, global::System.Int32 duration, global::System.Int32 guests)
         {
             Booking booking = new Booking();
             booking.id = id;
@@ -1443,7 +1442,6 @@ namespace EssexBooking.Models
             booking.start_date = start_date;
             booking.duration = duration;
             booking.guests = guests;
-            booking.booker_id = booker_id;
             return booking;
         }
 
@@ -1455,7 +1453,7 @@ namespace EssexBooking.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 id
+        public global::System.Guid id
         {
             get
             {
@@ -1473,8 +1471,8 @@ namespace EssexBooking.Models
                 }
             }
         }
-        private global::System.Int32 _id;
-        partial void OnidChanging(global::System.Int32 value);
+        private global::System.Guid _id;
+        partial void OnidChanging(global::System.Guid value);
         partial void OnidChanged();
     
         /// <summary>
@@ -1506,7 +1504,7 @@ namespace EssexBooking.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 travel_id
+        public global::System.Guid travel_id
         {
             get
             {
@@ -1521,8 +1519,8 @@ namespace EssexBooking.Models
                 Ontravel_idChanged();
             }
         }
-        private global::System.Int32 _travel_id;
-        partial void Ontravel_idChanging(global::System.Int32 value);
+        private global::System.Guid _travel_id;
+        partial void Ontravel_idChanging(global::System.Guid value);
         partial void Ontravel_idChanged();
     
         /// <summary>
@@ -1624,9 +1622,9 @@ namespace EssexBooking.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Guid booker_id
+        public Nullable<global::System.Guid> booker_id
         {
             get
             {
@@ -1641,8 +1639,8 @@ namespace EssexBooking.Models
                 Onbooker_idChanged();
             }
         }
-        private global::System.Guid _booker_id;
-        partial void Onbooker_idChanging(global::System.Guid value);
+        private Nullable<global::System.Guid> _booker_id;
+        partial void Onbooker_idChanging(Nullable<global::System.Guid> value);
         partial void Onbooker_idChanged();
 
         #endregion
@@ -2026,7 +2024,7 @@ namespace EssexBooking.Models
         /// <param name="booking_id">Initial value of the booking_id property.</param>
         /// <param name="participants">Initial value of the participants property.</param>
         /// <param name="booked_date">Initial value of the booked_date property.</param>
-        public static ExtraBooking CreateExtraBooking(global::System.Int32 id, global::System.Int32 extra_id, global::System.Int32 booking_id, global::System.Int32 participants, global::System.DateTime booked_date)
+        public static ExtraBooking CreateExtraBooking(global::System.Int32 id, global::System.Int32 extra_id, global::System.Guid booking_id, global::System.Int32 participants, global::System.DateTime booked_date)
         {
             ExtraBooking extraBooking = new ExtraBooking();
             extraBooking.id = id;
@@ -2096,7 +2094,7 @@ namespace EssexBooking.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 booking_id
+        public global::System.Guid booking_id
         {
             get
             {
@@ -2111,8 +2109,8 @@ namespace EssexBooking.Models
                 Onbooking_idChanged();
             }
         }
-        private global::System.Int32 _booking_id;
-        partial void Onbooking_idChanging(global::System.Int32 value);
+        private global::System.Guid _booking_id;
+        partial void Onbooking_idChanging(global::System.Guid value);
         partial void Onbooking_idChanged();
     
         /// <summary>
@@ -2629,7 +2627,7 @@ namespace EssexBooking.Models
         /// <param name="travel_id">Initial value of the travel_id property.</param>
         /// <param name="first_name">Initial value of the first_name property.</param>
         /// <param name="last_name">Initial value of the last_name property.</param>
-        public static Passanger CreatePassanger(global::System.Int32 id, global::System.Int32 travel_id, global::System.String first_name, global::System.String last_name)
+        public static Passanger CreatePassanger(global::System.Int32 id, global::System.Guid travel_id, global::System.String first_name, global::System.String last_name)
         {
             Passanger passanger = new Passanger();
             passanger.id = id;
@@ -2674,7 +2672,7 @@ namespace EssexBooking.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 travel_id
+        public global::System.Guid travel_id
         {
             get
             {
@@ -2689,8 +2687,8 @@ namespace EssexBooking.Models
                 Ontravel_idChanged();
             }
         }
-        private global::System.Int32 _travel_id;
-        partial void Ontravel_idChanging(global::System.Int32 value);
+        private global::System.Guid _travel_id;
+        partial void Ontravel_idChanging(global::System.Guid value);
         partial void Ontravel_idChanged();
     
         /// <summary>
@@ -2775,16 +2773,16 @@ namespace EssexBooking.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ASPNETDBModel", "FK_passanger_Travel", "Travel")]
+        [EdmRelationshipNavigationPropertyAttribute("ASPNETDBModel", "FK_Passanger_Travel", "Travel")]
         public Travel Travel
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Travel>("ASPNETDBModel.FK_passanger_Travel", "Travel").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Travel>("ASPNETDBModel.FK_Passanger_Travel", "Travel").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Travel>("ASPNETDBModel.FK_passanger_Travel", "Travel").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Travel>("ASPNETDBModel.FK_Passanger_Travel", "Travel").Value = value;
             }
         }
         /// <summary>
@@ -2796,13 +2794,13 @@ namespace EssexBooking.Models
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Travel>("ASPNETDBModel.FK_passanger_Travel", "Travel");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Travel>("ASPNETDBModel.FK_Passanger_Travel", "Travel");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Travel>("ASPNETDBModel.FK_passanger_Travel", "Travel", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Travel>("ASPNETDBModel.FK_Passanger_Travel", "Travel", value);
                 }
             }
         }
@@ -2979,7 +2977,7 @@ namespace EssexBooking.Models
         /// <param name="travel_type_id">Initial value of the travel_type_id property.</param>
         /// <param name="departure">Initial value of the departure property.</param>
         /// <param name="arrival">Initial value of the arrival property.</param>
-        public static Travel CreateTravel(global::System.Int32 id, global::System.Int32 travel_type_id, global::System.DateTime departure, global::System.DateTime arrival)
+        public static Travel CreateTravel(global::System.Guid id, global::System.Int32 travel_type_id, global::System.DateTime departure, global::System.DateTime arrival)
         {
             Travel travel = new Travel();
             travel.id = id;
@@ -2997,7 +2995,7 @@ namespace EssexBooking.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 id
+        public global::System.Guid id
         {
             get
             {
@@ -3015,8 +3013,8 @@ namespace EssexBooking.Models
                 }
             }
         }
-        private global::System.Int32 _id;
-        partial void OnidChanging(global::System.Int32 value);
+        private global::System.Guid _id;
+        partial void OnidChanging(global::System.Guid value);
         partial void OnidChanged();
     
         /// <summary>
@@ -3123,18 +3121,18 @@ namespace EssexBooking.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ASPNETDBModel", "FK_passanger_Travel", "Passanger")]
+        [EdmRelationshipNavigationPropertyAttribute("ASPNETDBModel", "FK_Passanger_Travel", "Passanger")]
         public EntityCollection<Passanger> Passangers
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Passanger>("ASPNETDBModel.FK_passanger_Travel", "Passanger");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Passanger>("ASPNETDBModel.FK_Passanger_Travel", "Passanger");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Passanger>("ASPNETDBModel.FK_passanger_Travel", "Passanger", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Passanger>("ASPNETDBModel.FK_Passanger_Travel", "Passanger", value);
                 }
             }
         }

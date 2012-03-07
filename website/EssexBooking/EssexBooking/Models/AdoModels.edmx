@@ -54,7 +54,7 @@
             <End Role="Resorts" EntitySet="Resorts" />
             <End Role="Hotels" EntitySet="Hotels" />
           </AssociationSet>
-          <AssociationSet Name="FK_passanger_Travel" Association="ASPNETDBModel.Store.FK_passanger_Travel">
+          <AssociationSet Name="FK_Passanger_Travel" Association="ASPNETDBModel.Store.FK_Passanger_Travel">
             <End Role="Travel" EntitySet="Travel" />
             <End Role="Passanger" EntitySet="Passanger" />
           </AssociationSet>
@@ -115,14 +115,14 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="customer_id" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="travel_id" Type="int" Nullable="false" />
+          <Property Name="travel_id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="hotel_id" Type="int" Nullable="false" />
-          <Property Name="start_date" Type="datetime" Nullable="false" />
+          <Property Name="start_date" Type="datetime2" Nullable="false" />
           <Property Name="duration" Type="int" Nullable="false" />
           <Property Name="guests" Type="int" Nullable="false" />
-          <Property Name="booker_id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="booker_id" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="ExtraBookings">
           <Key>
@@ -130,7 +130,7 @@
           </Key>
           <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="extra_id" Type="int" Nullable="false" />
-          <Property Name="booking_id" Type="int" Nullable="false" />
+          <Property Name="booking_id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="participants" Type="int" Nullable="false" />
           <Property Name="booked_date" Type="datetime" Nullable="false" />
         </EntityType>
@@ -166,7 +166,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="travel_id" Type="int" Nullable="false" />
+          <Property Name="travel_id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="first_name" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="last_name" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="passaport_no" Type="nvarchar" MaxLength="50" />
@@ -183,10 +183,10 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="travel_type_id" Type="int" Nullable="false" />
-          <Property Name="departure" Type="datetime" Nullable="false" />
-          <Property Name="arrival" Type="datetime" Nullable="false" />
+          <Property Name="departure" Type="datetime2" Nullable="false" />
+          <Property Name="arrival" Type="datetime2" Nullable="false" />
         </EntityType>
         <EntityType Name="TravelTypes">
           <Key>
@@ -305,7 +305,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_passanger_Travel">
+        <Association Name="FK_Passanger_Travel">
           <End Role="Travel" Type="ASPNETDBModel.Store.Travel" Multiplicity="1" />
           <End Role="Passanger" Type="ASPNETDBModel.Store.Passanger" Multiplicity="*" />
           <ReferentialConstraint>
@@ -383,7 +383,7 @@
             <End Role="Resorts" EntitySet="Resorts" />
             <End Role="Hotels" EntitySet="Hotels" />
           </AssociationSet>
-          <AssociationSet Name="FK_passanger_Travel" Association="ASPNETDBModel.FK_passanger_Travel">
+          <AssociationSet Name="FK_Passanger_Travel" Association="ASPNETDBModel.FK_Passanger_Travel">
             <End Role="Travel" EntitySet="Travels" />
             <End Role="Passanger" EntitySet="Passangers" />
           </AssociationSet>
@@ -447,14 +447,14 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Guid" Nullable="false" />
           <Property Name="customer_id" Type="Guid" Nullable="false" />
-          <Property Name="travel_id" Type="Int32" Nullable="false" />
+          <Property Name="travel_id" Type="Guid" Nullable="false" />
           <Property Name="hotel_id" Type="Int32" Nullable="false" />
           <Property Name="start_date" Type="DateTime" Nullable="false" />
           <Property Name="duration" Type="Int32" Nullable="false" />
           <Property Name="guests" Type="Int32" Nullable="false" />
-          <Property Name="booker_id" Type="Guid" Nullable="false" />
+          <Property Name="booker_id" Type="Guid" />
           <NavigationProperty Name="aspnet_Membership" Relationship="ASPNETDBModel.FK_Bookings_aspnet_Membership" FromRole="Bookings" ToRole="aspnet_Membership" />
           <NavigationProperty Name="Hotel" Relationship="ASPNETDBModel.FK_Bookings_Hotels" FromRole="Bookings" ToRole="Hotels" />
           <NavigationProperty Name="Travel" Relationship="ASPNETDBModel.FK_Bookings_Travel" FromRole="Bookings" ToRole="Travel" />
@@ -466,7 +466,7 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="extra_id" Type="Int32" Nullable="false" />
-          <Property Name="booking_id" Type="Int32" Nullable="false" />
+          <Property Name="booking_id" Type="Guid" Nullable="false" />
           <Property Name="participants" Type="Int32" Nullable="false" />
           <Property Name="booked_date" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="Booking" Relationship="ASPNETDBModel.FK_ExtraBookings_Bookings" FromRole="ExtraBookings" ToRole="Bookings" />
@@ -510,11 +510,11 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="travel_id" Type="Int32" Nullable="false" />
+          <Property Name="travel_id" Type="Guid" Nullable="false" />
           <Property Name="first_name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="last_name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="passaport_no" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <NavigationProperty Name="Travel" Relationship="ASPNETDBModel.FK_passanger_Travel" FromRole="Passanger" ToRole="Travel" />
+          <NavigationProperty Name="Travel" Relationship="ASPNETDBModel.FK_Passanger_Travel" FromRole="Passanger" ToRole="Travel" />
         </EntityType>
         <EntityType Name="Resort">
           <Key>
@@ -530,12 +530,12 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="Guid" Nullable="false" />
           <Property Name="travel_type_id" Type="Int32" Nullable="false" />
           <Property Name="departure" Type="DateTime" Nullable="false" />
           <Property Name="arrival" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="Bookings" Relationship="ASPNETDBModel.FK_Bookings_Travel" FromRole="Travel" ToRole="Bookings" />
-          <NavigationProperty Name="Passangers" Relationship="ASPNETDBModel.FK_passanger_Travel" FromRole="Travel" ToRole="Passanger" />
+          <NavigationProperty Name="Passangers" Relationship="ASPNETDBModel.FK_Passanger_Travel" FromRole="Travel" ToRole="Passanger" />
           <NavigationProperty Name="TravelType" Relationship="ASPNETDBModel.FK_Travel_Travel" FromRole="Travel" ToRole="TravelTypes" />
         </EntityType>
         <EntityType Name="TravelType">
@@ -656,7 +656,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_passanger_Travel">
+        <Association Name="FK_Passanger_Travel">
           <End Role="Travel" Type="ASPNETDBModel.Travel" Multiplicity="1" />
           <End Role="Passanger" Type="ASPNETDBModel.Passanger" Multiplicity="*" />
           <ReferentialConstraint>
@@ -871,7 +871,7 @@
           <ConnectorPoint PointX="2.625" PointY="1.9974703307291661" />
           <ConnectorPoint PointX="3" PointY="1.9974703307291661" />
         </AssociationConnector>
-        <AssociationConnector Association="ASPNETDBModel.FK_passanger_Travel" ManuallyRouted="false">
+        <AssociationConnector Association="ASPNETDBModel.FK_Passanger_Travel" ManuallyRouted="false">
           <ConnectorPoint PointX="4.5" PointY="15.9612939453125" />
           <ConnectorPoint PointX="5.25" PointY="15.9612939453125" />
         </AssociationConnector>
