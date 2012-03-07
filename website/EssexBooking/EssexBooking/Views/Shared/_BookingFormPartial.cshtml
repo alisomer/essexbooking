@@ -6,15 +6,15 @@
 }
 
 <div temp_id="@Model.temp_id" class="bookingForm">
-   @Html.Partial("_HotelFormPartial", Model)
-   @Html.Partial("_TravelFormPartial", Model)
-   @for (var i = 0; i < Model.guests; i++)
-   {
-       @Html.Partial("_PassengerFormPartial", Model)
-   }
-        @Html.Partial("_ExtraPartial", Model.Hotel.Resort.Extras)
+    @Html.Partial("_HotelFormPartial", Model)
+    @Html.Partial("_TravelFormPartial", Model)
+    @for (var i = 0; i < Model.guests; i++)
+    {
+        @Html.Partial("_PassengerFormPartial", Model)
+    }
+    @Html.Partial("_ExtraPartial", Model.Hotel.Resort.Extras)
 
-        <div id="miniextracart">
-          @Html.Partial("_ExtraBookingCartPartial", Model.temp_extras)
-        </div>
+    <div id="miniextracart">
+        @Html.Partial("_ExtraBookingCartPartial", Model.temp_extras)
+    </div>
 </div>

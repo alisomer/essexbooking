@@ -37,11 +37,11 @@ function UpdateBooking(data, callback) {
 
 }
 
-function AddExtraToBooking(temp_id, extra_id, number, callback) {
+function AddExtraToBooking(temp_id, extra_id, number, extra_date, callback) {
     $.ajax({
-            data: { 'temp_id': temp_id, 'extra_id': extra_id, 'number': number },
+        data: { 'temp_id': temp_id, 'extra_id': extra_id, 'number': number, 'extra_date': extra_date},
             url: '/Ajax/AddExtraToBooking',
             type: "POST",
             success: callback
         });
-}
+    }

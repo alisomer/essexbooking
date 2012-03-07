@@ -3,34 +3,38 @@
 @model IEnumerable<EssexBooking.Models.Extra>
            
 
-<div class="extras">    
-<table>
-<tr>
-    <th>Extras</th>
-    <th>Number</th>
-    <th>Price</th>
-    <th>Date</th>
-    <th>Description</th>
-    <tr></tr>
-</tr>   
+<div class="extras">
+    <h3>Available Extras</h3>
+    <table>
+        <tr>
+            <th>Extras</th>
+            <th>Number</th>
+            <th>Price</th>
+            <th>Date</th>
+            <th>Description</th>
+        </tr>   
 
         @foreach (var extra in Model)
         {
-            <tr data-extra_id = @extra.id>
-                <td>@extra.name</td>
-                <td><div class="formField">
-                <select name="number">
+        <tr data-extra_id="@extra.id">
+            <td>@extra.name</td>
+            <td><div class="formField">
+                <select class="participant_number" name="number">
             @for(int i=1; i<=20;i++){
-                <option value="@i">@i</option>
+                    <option value="@i">@i</option>
             }
-        </select></div></td>
-                <td>@extra.price</td>
-               <td><input class="extra_booking_date"></input></td>             
-                <td>@extra.description</td>
-                <td><button class="addExtraToBooking">Add</button></td>
-            </tr>
+                </select>
+            </div></td>
+            <td>@extra.price</td>
+            <td><input class="extra_booking_date" /></td>             
+            <td>@extra.description</td>
+            <td><button class="ui-button ui-button-text-icon-primary addExtraToBooking">
+                <span class="ui-button-icon-primary ui-icon ui-icon-plus"></span>
+                <span class="ui-button-text">Add</span>
+            </button></td>
+        </tr>
         }
-</table>
+    </table>
 
 </div>
 
