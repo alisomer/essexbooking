@@ -12,10 +12,10 @@
         </tr> 
         @foreach (var extrabooking in Model)
         {
-        <tr extratemp_id="@extrabooking.Key">
+        <tr extratemp_id="@extrabooking.id">
             <td>@ViewBag.extra_name</td>
-            <td>@extrabooking.Value.participants</td>   
-            <td>@extrabooking.Value.booked_date.ToShortDateString()</td>               
+            <td>@extrabooking.participants</td>   
+            <td>@extrabooking.booked_date.ToShortDateString()</td>               
             <td>@ViewBag.extra_total_price</td>
         </tr>
         }

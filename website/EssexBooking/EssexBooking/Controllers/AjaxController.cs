@@ -13,16 +13,18 @@ namespace EssexBooking.Controllers
 
 
         [HttpPost]
-        public ActionResult AddExtraToBooking(int temp_id, int extra_id, int number, DateTime extra_date)
+        public ActionResult AddExtraToBooking(Guid temp_id, int extra_id, int number, DateTime extra_date)
         {
             Cart cart = new Cart();
             ExtraBooking extraBooking = new ExtraBooking();
             extraBooking.extra_id = extra_id;
             extraBooking.participants = number;
             extraBooking.booked_date = extra_date;
-            var query = entities.Extras.FirstOrDefault(x => x.id == extra_id);
-            ViewBag.extra_name = query.name;
-            decimal total_price = number * query.price;
+            Extra extra = cart.ctx.Extras.FirstOrDefault(x => x.id == extra_id);
+            extraBooking.Extra = extra;
+            cart.GetBooking(temp_id).ExtraBookings.Add(extraBooking);
+            ViewBag.extra_name = extra.name;
+            decimal total_price = number * extra.price;
             ViewBag.extra_total_price = total_price;
             Random r = new Random();
             int extrabooktemp_id = r.Next();
@@ -38,7 +40,7 @@ namespace EssexBooking.Controllers
 
 
            //return PartialView("_ExtraBookingCartPartial", cart.bookings[temp_id].temp_extras);
-            return PartialView("_ExtraBookingCartPartial");//TODO:FIX
+            return PartialView("_ExtraBookingCartPartial", cart.GetBooking(temp_id).ExtraBookings);//TODO:FIX
 
 
         }

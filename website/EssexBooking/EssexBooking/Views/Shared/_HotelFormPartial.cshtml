@@ -7,12 +7,11 @@
 <div class="hotelForm">
     <h2>Booking for @Model.Hotel.name</h2>
 
-    <div class="formField">Starting date @Html.EditorFor(model => model.start_date, new { @class = "start_date" })</div>
+    <div class="formField"><div class="start_date"></div></div>
     <div class="formField">
         Duration 
         <div class="radioset duration">
             <label for="@(prefix)_duration_7">1 week</label><input @(Model.duration == 7 ? "checked='checked'" : "") id="@(prefix)_duration_7" type="radio" name="@(prefix)_duration" value="7"/>
-            @Html.RadioButtonFor(model => model.duration, new { @checked , @value = 7 })
             <label for="@(prefix)_duration_14">2 weeks</label><input @(Model.duration == 14 ? "checked='checked'" : "") id="@(prefix)_duration_14" type="radio" name="@(prefix)_duration" value="14"/>
         </div>
     </div>

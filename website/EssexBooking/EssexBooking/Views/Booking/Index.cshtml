@@ -10,12 +10,32 @@
 <script type="text/javascript" src="/Scripts/AjaxProxy.js"></script>
 <script type="text/javascript">
     $(function () {
-        $(".extra_booking_date").datepicker({ showOn: "button", buttonImage: "../../Content/images/calendar.gif", buttonImageOnly: true,
-            minDate: 0, maxDate: "+1Y", dateFormat: 'dd-mm-yy'
-            //      onSelect: function (dateText, inst) {
-            //     var extra_date = new Date(dateText);
-            ///return extra_date;
-            // }
+        $(".extra_booking_date").datepicker({ showOn: "button", buttonImage: "../../Content/images/calendar.gif", buttonImageOnly: true, minDate: 0, maxDate: "+1Y", dateFormat: 'dd-mm-yy' });
+
+        $(".start_date").datepicker({ minDate: 0, maxDate: "+1Y", dateFormat: 'mm dd yy',
+            beforeShowDay: function (date) {
+                var dateSelected = new Date($(this).closest(".bookingForm").find(".start_date").val());
+                var range = $(this).closest(".bookingForm").find(".duration input:checked").val();
+                var endDate = new Date(dateSelected);
+                var dateC = "";
+                endDate.setDate(endDate.getDate() + parseInt(range));
+
+                if (range != null && endDate > date && date > dateSelected) {
+                    dateC = "ui-state-active";
+
+                }
+                return [true, dateC];
+            },
+            onSelect: function (dateText, inst) {
+                var date = new Date(dateText);
+                if (date.getDay() != 3 && date.getDay() != 6) {
+                    $(this).closest(".bookingForm").find("input[value=2]").button({ "disabled": true });
+                    $(this).closest(".bookingForm").find("input[value=1]").attr("checked", true);
+                    $(this).closest(".bookingForm").find(".radioset").buttonset("refresh");
+                } else {
+                    $(this).closest(".bookingForm").find("input[value=2]").button({ "disabled": false });
+                }
+            }
         });
 
         $(".start_date").datepicker({ minDate: 0, maxDate: "+1Y", dateFormat: 'dd/mm/yy',
@@ -76,12 +96,10 @@
         });
 
         $("[name=guests]").change(function () {
-            console.log("changed");
             $(this).closest(".bookingForm").addClass("addGuests");
             setGuests($(this).closest("[temp_id]").attr("temp_id"), $(this).val(), function (resp) {
                 $(".bookingForm.addGuests").find(".passenger").html(resp);
                 $(".bookingForm.addGuests").removeClass("addGuests");
-                console.log("ok");
             });
         });
     });
