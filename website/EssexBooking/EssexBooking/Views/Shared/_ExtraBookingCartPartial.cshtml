@@ -1,21 +1,23 @@
 ﻿@model IEnumerable<EssexBooking.Models.ExtraBooking>
+
+
 <div class="extrabookingcart">
-<h3>Your Extra Cart</h3>
+    <h3>Your Extra Cart</h3>
     <table>
-    <tr>
-        
-        <th>Number</th>
-        
-    </tr> 
-
-      
-        @foreach (var extrabooking in Model) {
-        
-                <tr extratemp_id='@extrabooking.id'>
-                    <td>@extrabooking.participants</td>
-
-                </tr>
-
+        <tr>
+            <th>Extra Name</th>
+            <th>Number</th> 
+            <th>Date</th>
+            <th>Price</th>
+        </tr> 
+        @foreach (var extrabooking in Model)
+        {
+        <tr extratemp_id="@extrabooking.Key">
+            <td>@ViewBag.extra_name</td>
+            <td>@extrabooking.Value.participants</td>   
+            <td>@extrabooking.Value.booked_date.ToShortDateString()</td>               
+            <td>@ViewBag.extra_total_price</td>
+        </tr>
         }
     </table>
 </div>

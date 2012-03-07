@@ -11,14 +11,19 @@ namespace EssexBooking.Controllers
     public class AjaxController : Controller
     {
 
+
         [HttpPost]
-        public ActionResult AddExtraToBooking(int temp_id, int extra_id, int number=1)
+        public ActionResult AddExtraToBooking(int temp_id, int extra_id, int number, DateTime extra_date)
         {
             Cart cart = new Cart();
-          //  ExtraBookingCart extraBookingCart = new ExtraBookingCart();
             ExtraBooking extraBooking = new ExtraBooking();
             extraBooking.extra_id = extra_id;
             extraBooking.participants = number;
+            extraBooking.booked_date = extra_date;
+            var query = entities.Extras.FirstOrDefault(x => x.id == extra_id);
+            ViewBag.extra_name = query.name;
+            decimal total_price = number * query.price;
+            ViewBag.extra_total_price = total_price;
             Random r = new Random();
             int extrabooktemp_id = r.Next();
             
@@ -29,8 +34,6 @@ namespace EssexBooking.Controllers
 
 
 
-           // extraBookingCart.extratemp_id = extrabooktemp_id;
-           // extraBookingCart.extrabookings.Add(extraBookingCart.extratemp_id, extraBooking);
 
 
 
@@ -39,6 +42,7 @@ namespace EssexBooking.Controllers
 
 
         }
+
 
         public ActionResult AddHotelToCart(int hotel_id)
         {

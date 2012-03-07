@@ -13,7 +13,7 @@ namespace EssexBooking.Controllers
         public ActionResult Index()
         {
             ViewBag.Message = "Welcome to ASP.NET MVC!";
-
+            ViewBag.cart = new Cart();
             return View();
         }
 
@@ -32,7 +32,13 @@ namespace EssexBooking.Controllers
         {
             return View(entities.TravelTypes);
         }
-
+        public ActionResult Extras()
+        {
+            ViewBag.cart = new Cart();
+            //Booking booking = entities.Bookings.FirstOrDefault(x => x.id == booking_id);
+            Booking booking = entities.Bookings.FirstOrDefault();
+            return View(booking);
+        }
 
     }
 }
