@@ -46,11 +46,29 @@ function AddExtraToBooking(temp_id, extra_id, number, extra_date, callback) {
         });
     }
 
-function setGuests(temp_id, guests, callback) {
-    $.ajax({
-        data: {'temp_id': temp_id, 'guests': guests},
-        url: '/Ajax/SetGuests',
-        type: "POST",
-        success: callback
-    });    
-}
+    function setGuests(temp_id, guests, callback) {
+        $.ajax({
+            data: { 'temp_id': temp_id, 'guests': guests },
+            url: '/Ajax/SetGuests',
+            type: "POST",
+            success: callback
+        });
+    }
+
+    function setRooms(temp_id, guests, callback) {
+        $.ajax({
+            data: { 'temp_id': temp_id, 'guests': guests },
+            url: '/Ajax/SetRooms',
+            type: "POST",
+            success: callback
+        });
+    }
+
+    function setDoubles(temp_id, rooms, guests, callback) {
+        $.ajax({
+            data: { 'temp_id': temp_id, 'rooms': rooms,  'guests': guests},
+            url: '/Ajax/SetDoubles',
+            type: "POST",
+            success: callback
+        });
+    }

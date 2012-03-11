@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using EssexBooking.Models;
+using System.Web.Script.Serialization;
 
 namespace EssexBooking.Controllers
 {
@@ -81,25 +82,34 @@ namespace EssexBooking.Controllers
         {
             Guid cusID = new Guid("5ae593b4-066d-4744-b9e0-35030455005b");
             Cart cart = new Cart();
+            Boolean success = true;
+            List<String> errors = new List<String>();
+            Validator v = new Validator();
 
-            Booking b = cart.GetBooking(br.temp_id);
-            b.guests = br.guests;
-            b.duration = br.duration;
-            b.start_date = br.start_date;
-            b.customer_id = cusID;
+            errors.Add(v.ValidateTravel(br.start_date, br.travel_type_id));
+            success = v.Success(errors);
 
-
-            Travel travel = new Travel
+            if (success)
             {
-                id = Guid.NewGuid(),
-                travel_type_id = br.travel_type_id,
-                departure = br.start_date,
-                arrival = br.start_date
-            };
+                Booking b = cart.GetBooking(br.temp_id);
+                b.guests = br.guests;
+                b.duration = br.duration;
+                b.start_date = br.start_date;
+                b.customer_id = cusID;
 
-            b.Travel = travel;
-            return Json(new {  });
 
+                Travel travel = new Travel
+                {
+                    id = Guid.NewGuid(),
+                    travel_type_id = br.travel_type_id,
+                    departure = br.start_date,
+                    arrival = br.start_date
+                };
+
+                b.Travel = travel;
+                
+            }
+            return Json(new { success = success});
         }
 
         public ActionResult SetGuests(Guid temp_id, int guests)
@@ -107,6 +117,19 @@ namespace EssexBooking.Controllers
             Cart cart = new Cart();
             cart.GetBooking(temp_id).guests = guests;
             return PartialView("_PassengerFormPartial", guests);
+        }
+
+        public ActionResult SetRooms(Guid temp_id, int guests)
+        {
+            Cart cart = new Cart();
+            cart.GetBooking(temp_id).guests = guests;
+            return PartialView("_RoomsFormPartial", guests);
+        }
+
+        public ActionResult SetDoubles(Guid temp_id, int rooms, int guests)
+        {
+            Cart cart = new Cart();
+            return PartialView("_DoublesFormPartial", guests-rooms);
         }
     }
 }

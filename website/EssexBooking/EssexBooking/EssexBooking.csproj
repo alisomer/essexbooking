@@ -86,6 +86,7 @@
     <Compile Include="Models\EntitiesRepository.cs" />
     <Compile Include="Models\TeleSalesPanelViewModel.cs" />
     <Compile Include="Models\TelesalesViewModel.cs" />
+    <Compile Include="Models\Validator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -226,7 +227,7 @@
       <LastGenOutput>AdoModels.Designer.cs</LastGenOutput>
     </EntityDeploy>
   </ItemGroup>
-  <ItemGroup>
+  <ItemGroup>    <Content Include="Views\Shared\_RoomsFormPartial.cshtml" />  </ItemGroup>  <ItemGroup>    <Content Include="Views\Shared\_DoublesFormPartial.cshtml" />  </ItemGroup>  <ItemGroup>
     <Content Include="Views\Telesales\CustomerForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
