@@ -1,0 +1,44 @@
+﻿@model EssexBooking.Models.TeleSalesPanelViewModel
+
+<div id="TsPanel">
+    <div class="PanelContainer">
+        @if (Model.customer != null)
+        {
+            @Html.Partial("_CustomerDetailsPartial", Model.customer)
+            @Html.ActionLink("Edit", "CustomerForm", "TeleSales")<br /> <a href="#" class="removeCustomer">Remove</a>
+            
+        }
+        else
+        {
+            @Html.ActionLink("Create a customer", "CustomerForm", "TeleSales");
+        }
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $("#TsPanel").hover(function () {
+            $(this).stop(true, true).animate({ marginLeft: "-1px" });
+        }, function () {
+            $(this).stop(true, true).animate({ marginLeft: "-280px" });
+        });
+
+        $(".removeCustomer").click(function () {
+            var r = confirm("Remove customer from your panel?");
+            if (r == true) {
+                $.ajax({
+                    url: '/TeleSales/RemoveCustomer',
+                    cache: false,
+                    success: function (resp) {
+                        $("#TeleSalesPanelWrap").html(resp);
+                    }
+                });
+            }
+            else {
+                
+            }
+            
+        });
+    });
+</script>

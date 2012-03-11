@@ -11,11 +11,17 @@
     <script src="@Url.Content("~/Scripts/jquery-ui-1.8.11.min.js")" type="text/javascript"></script>
 
     <script type="text/javascript">
-    
+        
     </script>
     @RenderSection("extraHead", required: false)
 </head>
 <body>
+@if (User.IsInRole("TelesaleStaff"))
+{
+<div id="TeleSalesPanelWrap">
+    @Html.Partial("_TeleSalesPanelPartial", new TeleSalesPanelViewModel());
+</div>
+}
     <div class="page">
         <div id="header">
             <div id="title">

@@ -340,3 +340,18 @@ div#title {
     margin: 20px 0;
 }
 
+#TsPanel
+{
+    background: none repeat scroll 0 0 #ccffcc;
+    border: 1px solid;
+    margin-left: -280px;
+    position: fixed;
+    left: 0;
+    width: 300px;
+    z-index: 2000;   
+}
+
+#TsPanel .PanelContainer
+{
+    margin: 20px;   
+}

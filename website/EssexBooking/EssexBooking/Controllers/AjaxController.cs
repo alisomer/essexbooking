@@ -40,7 +40,7 @@ namespace EssexBooking.Controllers
 
 
            //return PartialView("_ExtraBookingCartPartial", cart.bookings[temp_id].temp_extras);
-            return PartialView("_ExtraBookingCartPartial", cart.GetBooking(temp_id).ExtraBookings);//TODO:FIX
+            return PartialView("_ExtraBookingCartPartial", cart.GetBooking(temp_id).ExtraBookings);
 
 
         }

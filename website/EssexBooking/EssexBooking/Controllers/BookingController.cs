@@ -17,6 +17,12 @@ namespace EssexBooking.Controllers
         public ActionResult Index()
         {
             Cart cart = new Cart();
+
+            if (cart.isEmpty())
+            {
+                return RedirectToAction("Index","Home");
+            }
+
             ViewBag.TravelTypes = entities.TravelTypes;
             return View(cart);
         }

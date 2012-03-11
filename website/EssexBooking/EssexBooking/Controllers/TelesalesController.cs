@@ -9,7 +9,7 @@ using EssexBooking.Models;
 
 namespace EssexBooking.Controllers
 {
-    public class TelesalesController : Controller
+    public class TeleSalesController : Controller
     {
         private ASPNETDBEntities entities = new ASPNETDBEntities();
         //
@@ -48,6 +48,25 @@ namespace EssexBooking.Controllers
             ViewBag.TravelType = new SelectList(traveltypes);
 
             return View(new TelesalesViewModel());
+        }
+
+        public ActionResult CustomerForm()
+        {
+            return View(System.Web.HttpContext.Current.Session["customer"]);
+        }
+
+        [HttpPost]
+        public ActionResult CustomerForm(Customer c)
+        {
+            System.Web.HttpContext.Current.Session["customer"] = c;
+            return RedirectToAction("Hotels", "Home");
+
+        }
+
+        public ActionResult RemoveCustomer()
+        {
+            System.Web.HttpContext.Current.Session["customer"] = null;
+            return PartialView("_TeleSalesPanelPartial", new TeleSalesPanelViewModel());
         }
 
     }

@@ -1,0 +1,36 @@
+﻿@model EssexBooking.Models.Customer
+
+<div class="customerDetails">
+    <legend>Customer</legend>
+
+    <div class="display-label">FirstName</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FirstName)
+    </div>
+
+    <div class="display-label">LastName</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.LastName)
+    </div>
+
+    <div class="display-label">Address</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Address)
+    </div>
+
+    <div class="display-label">PostCode</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PostCode)
+    </div>
+
+    <div class="display-label">TelephoneNumber</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TelephoneNumber)
+    </div>
+
+    <div class="display-label">PassportNumber</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PassportNumber)
+    </div>
+</div>
+
