@@ -1,0 +1,22 @@
+﻿@model int
+Number of Rooms: 
+<select name="rooms">
+
+   @for (var i = Model % 2 == 0? Model/2 : (Model+1)/2; i <= Model; i++)
+   {
+        <option value="@i">@i</option>
+   }
+</select>
+
+
+<script type="text/javascript">
+    $(function () {
+        $("[name=rooms]").change(function () {
+            $(this).closest(".bookingForm").addClass("addDoubles");
+            setDoubles($(this).closest("[temp_id]").attr("temp_id"), $(this).val(), $(this).closest(".bookingForm").find("[name=guests]").val(), function (resp) {
+                $(".bookingForm.addDoubles").find(".doubles").html(resp);
+                $(".bookingForm.addDoubles").removeClass("addDoubles");
+            });
+        });
+    });
+</script>

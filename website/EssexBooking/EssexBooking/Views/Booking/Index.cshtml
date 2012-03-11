@@ -14,11 +14,14 @@
 
         $(".start_date").datepicker({ minDate: 0, maxDate: "+1Y", dateFormat: 'mm dd yy',
             beforeShowDay: function (date) {
-                var dateSelected = new Date($(this).closest(".bookingForm").find(".start_date").val());
+
+                var selected = $(this).closest(".bookingForm").find(".start_date").val().toString();
+                var selectedDate = selected.split(" ");
+                var dateSelected = new Date(selectedDate[2], (selectedDate[0] - 1), selectedDate[1]);
                 var range = $(this).closest(".bookingForm").find(".duration input:checked").val();
                 var endDate = new Date(dateSelected);
-                var dateC = "";
                 endDate.setDate(endDate.getDate() + parseInt(range));
+                var dateC = "";
 
                 if (range != null && endDate > date && date > dateSelected) {
                     dateC = "ui-state-active";
@@ -27,7 +30,8 @@
                 return [true, dateC];
             },
             onSelect: function (dateText, inst) {
-                var date = new Date(dateText);
+                var dateArray = dateText.split(" ");
+                var date = new Date(dateArray[2], (dateArray[0] - 1), dateArray[1]);
                 if (date.getDay() != 3 && date.getDay() != 6) {
                     $(this).closest(".bookingForm").find("input[value=2]").button({ "disabled": true });
                     $(this).closest(".bookingForm").find("input[value=1]").attr("checked", true);
@@ -97,9 +101,19 @@
 
         $("[name=guests]").change(function () {
             $(this).closest(".bookingForm").addClass("addGuests");
+            $(this).closest(".bookingForm").addClass("addRooms");
+            $(this).closest(".bookingForm").addClass("addDoubles");
             setGuests($(this).closest("[temp_id]").attr("temp_id"), $(this).val(), function (resp) {
                 $(".bookingForm.addGuests").find(".passenger").html(resp);
                 $(".bookingForm.addGuests").removeClass("addGuests");
+            });
+            setRooms($(this).closest("[temp_id]").attr("temp_id"), $(this).val(), function (resp) {
+                $(".bookingForm.addRooms").find(".rooms").html(resp);
+                $(".bookingForm.addRooms").removeClass("addRooms");
+            });
+            setDoubles($(this).closest("[temp_id]").attr("temp_id"), $(this).closest(".bookingForm").find("[name=rooms]").val(), $(this).val(), function (resp) {
+                $(".bookingForm.addDoubles").find(".doubles").html(resp);
+                $(".bookingForm.addDoubles").removeClass("addDoubles");
             });
         });
     });

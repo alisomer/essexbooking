@@ -84,6 +84,7 @@
     <Compile Include="Models\HistoryModel.cs" />
     <Compile Include="Models\EntitiesRepository.cs" />
     <Compile Include="Models\TelesalesViewModel.cs" />
+    <Compile Include="Models\Validator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -222,6 +223,12 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>AdoModels.Designer.cs</LastGenOutput>
     </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_RoomsFormPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_DoublesFormPartial.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
