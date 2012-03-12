@@ -64,5 +64,36 @@ namespace EssexBooking.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 3)]
+        [Display(Name = "FirstName")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [StringLength(250, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 3)]
+        [Display(Name = "LastName")]
+        public string LastName { get; set; }
+
+        [Required]
+        [DataType(DataType.MultilineText)]
+        [StringLength(450, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 10)]
+        [Display(Name = "Address")]
+        public string Address { get; set; }
+
+        [Required]
+        [StringLength(10, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 5)]
+        [Display(Name = "PostCode")]
+        public string PostCode { get; set; }
+
+        [Required]
+        [DataType(DataType.PhoneNumber)]
+        [Display(Name = "TelephoneNumber")]
+        public int TelephoneNumber { get; set; }
+
+        [Required]
+        //[Range(6, 10, ErrorMessage = "Can only be between 6 .. 10")]
+        [Display(Name = "PassportNumber")]
+        public int PassportNumber { get; set; }
     }
 }

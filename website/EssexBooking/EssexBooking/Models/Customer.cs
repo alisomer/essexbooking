@@ -6,14 +6,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace EssexBooking.Models
 {
-    public class Customer
+    public partial class Customer
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        [DataType(DataType.MultilineText)]
-        public string Address { get; set; }
-        public string PostCode { get; set; }
-        public string TelephoneNumber { get; set; }
-        public string PassportNumber { get; set; }
+        public ASPNETDBEntities ctx;
+        public void AddCustomer()
+        {
+            ctx.AddToCustomers(this);
+            ctx.SaveChanges();
+        }
     }
 }

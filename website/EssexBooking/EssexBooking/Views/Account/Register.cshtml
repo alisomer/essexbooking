@@ -53,6 +53,56 @@
                 @Html.ValidationMessageFor(m => m.ConfirmPassword)
             </div>
 
+            <!-- ADDED -->
+            <div class="editor-label">
+                @Html.LabelFor(m => m.FirstName)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.FirstName)
+                @Html.ValidationMessageFor(m => m.FirstName)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(m => m.LastName)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.LastName)
+                @Html.ValidationMessageFor(m => m.LastName)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(m => m.Address)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.Address)
+                @Html.ValidationMessageFor(m => m.Address)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(m => m.PostCode)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.PostCode)
+                @Html.ValidationMessageFor(m => m.PostCode)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(m => m.TelephoneNumber)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.TelephoneNumber)
+                @Html.ValidationMessageFor(m => m.TelephoneNumber)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(m => m.PassportNumber)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.PassportNumber)
+                @Html.ValidationMessageFor(m => m.PassportNumber)
+            </div>
+            <!-- END -->
+
             <p>
                 <input type="submit" value="Register" />
             </p>

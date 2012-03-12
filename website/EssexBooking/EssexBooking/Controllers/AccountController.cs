@@ -77,13 +77,25 @@ namespace EssexBooking.Controllers
         {
             if (ModelState.IsValid)
             {
+                Guid userKey = Guid.NewGuid();
                 // Attempt to register the user
                 MembershipCreateStatus createStatus;
-                Membership.CreateUser(model.UserName, model.Password, model.Email, null, null, true, null, out createStatus);
+                Membership.CreateUser(model.UserName, model.Password, model.Email, null, null, true, userKey, out createStatus);
 
                 if (createStatus == MembershipCreateStatus.Success)
                 {
                     FormsAuthentication.SetAuthCookie(model.UserName, false /* createPersistentCookie */);
+
+                    // Attempt to create Customer
+                    Customer c = new Customer();//model.FirstName, model.LastName, model.Address, model.PostCode, model.TelephoneNumber, model.PassportNumber, userKey);
+                    c.FirstName = model.FirstName;
+                    c.LastName = model.LastName;
+                    c.Address = model.Address;
+                    c.PostCode = model.PostCode;
+                    c.TelephoneNumber = model.TelephoneNumber;
+                    c.PassportNumber = model.PassportNumber;
+                    c.MembershipID = userKey;
+                    c.AddCustomer();
                     return RedirectToAction("Index", "Home");
                 }
                 else
