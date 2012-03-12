@@ -20,6 +20,7 @@ using System.Runtime.Serialization;
 
 [assembly: EdmRelationshipAttribute("ASPNETDBModel", "FK__aspnet_Me__UserI__22AA2996", "aspnet_Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(EssexBooking.Models.aspnet_Users), "aspnet_Membership", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(EssexBooking.Models.aspnet_Membership), true)]
 [assembly: EdmRelationshipAttribute("ASPNETDBModel", "FK_Bookings_aspnet_Membership", "aspnet_Membership", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(EssexBooking.Models.aspnet_Membership), "Bookings", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(EssexBooking.Models.Booking), true)]
+[assembly: EdmRelationshipAttribute("ASPNETDBModel", "FK_Customer_aspnet_Membership", "aspnet_Membership", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(EssexBooking.Models.aspnet_Membership), "Customer", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(EssexBooking.Models.Customer), true)]
 [assembly: EdmRelationshipAttribute("ASPNETDBModel", "FK_Bookings_Hotels", "Hotels", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(EssexBooking.Models.Hotel), "Bookings", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(EssexBooking.Models.Booking), true)]
 [assembly: EdmRelationshipAttribute("ASPNETDBModel", "FK_Bookings_Travel", "Travel", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(EssexBooking.Models.Travel), "Bookings", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(EssexBooking.Models.Booking), true)]
 [assembly: EdmRelationshipAttribute("ASPNETDBModel", "FK_ExtraBookings_Bookings", "Bookings", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(EssexBooking.Models.Booking), "ExtraBookings", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(EssexBooking.Models.ExtraBooking), true)]
@@ -143,6 +144,22 @@ namespace EssexBooking.Models
             }
         }
         private ObjectSet<Booking> _Bookings;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Customer> Customers
+        {
+            get
+            {
+                if ((_Customers == null))
+                {
+                    _Customers = base.CreateObjectSet<Customer>("Customers");
+                }
+                return _Customers;
+            }
+        }
+        private ObjectSet<Customer> _Customers;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -305,6 +322,14 @@ namespace EssexBooking.Models
         public void AddToBookings(Booking booking)
         {
             base.AddObject("Bookings", booking);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Customers EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToCustomers(Customer customer)
+        {
+            base.AddObject("Customers", customer);
         }
     
         /// <summary>
@@ -998,6 +1023,44 @@ namespace EssexBooking.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Booking>("ASPNETDBModel.FK_Bookings_aspnet_Membership", "Bookings", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ASPNETDBModel", "FK_Customer_aspnet_Membership", "Customer")]
+        public Customer Customer
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Customer>("ASPNETDBModel.FK_Customer_aspnet_Membership", "Customer").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Customer>("ASPNETDBModel.FK_Customer_aspnet_Membership", "Customer").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Customer> CustomerReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Customer>("ASPNETDBModel.FK_Customer_aspnet_Membership", "Customer");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Customer>("ASPNETDBModel.FK_Customer_aspnet_Membership", "Customer", value);
                 }
             }
         }
@@ -1779,6 +1842,258 @@ namespace EssexBooking.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ExtraBooking>("ASPNETDBModel.FK_ExtraBookings_Bookings", "ExtraBookings", value);
+                }
+            }
+        }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="ASPNETDBModel", Name="Customer")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Customer : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Customer object.
+        /// </summary>
+        /// <param name="firstName">Initial value of the FirstName property.</param>
+        /// <param name="lastName">Initial value of the LastName property.</param>
+        /// <param name="address">Initial value of the Address property.</param>
+        /// <param name="postCode">Initial value of the PostCode property.</param>
+        /// <param name="telephoneNumber">Initial value of the TelephoneNumber property.</param>
+        /// <param name="passportNumber">Initial value of the PassportNumber property.</param>
+        /// <param name="membershipID">Initial value of the MembershipID property.</param>
+        public static Customer CreateCustomer(global::System.String firstName, global::System.String lastName, global::System.String address, global::System.String postCode, global::System.Int32 telephoneNumber, global::System.Int32 passportNumber, global::System.Guid membershipID)
+        {
+            Customer customer = new Customer();
+            customer.FirstName = firstName;
+            customer.LastName = lastName;
+            customer.Address = address;
+            customer.PostCode = postCode;
+            customer.TelephoneNumber = telephoneNumber;
+            customer.PassportNumber = passportNumber;
+            customer.MembershipID = membershipID;
+            return customer;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String FirstName
+        {
+            get
+            {
+                return _FirstName;
+            }
+            set
+            {
+                OnFirstNameChanging(value);
+                ReportPropertyChanging("FirstName");
+                _FirstName = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("FirstName");
+                OnFirstNameChanged();
+            }
+        }
+        private global::System.String _FirstName;
+        partial void OnFirstNameChanging(global::System.String value);
+        partial void OnFirstNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String LastName
+        {
+            get
+            {
+                return _LastName;
+            }
+            set
+            {
+                OnLastNameChanging(value);
+                ReportPropertyChanging("LastName");
+                _LastName = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("LastName");
+                OnLastNameChanged();
+            }
+        }
+        private global::System.String _LastName;
+        partial void OnLastNameChanging(global::System.String value);
+        partial void OnLastNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Address
+        {
+            get
+            {
+                return _Address;
+            }
+            set
+            {
+                OnAddressChanging(value);
+                ReportPropertyChanging("Address");
+                _Address = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Address");
+                OnAddressChanged();
+            }
+        }
+        private global::System.String _Address;
+        partial void OnAddressChanging(global::System.String value);
+        partial void OnAddressChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String PostCode
+        {
+            get
+            {
+                return _PostCode;
+            }
+            set
+            {
+                OnPostCodeChanging(value);
+                ReportPropertyChanging("PostCode");
+                _PostCode = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("PostCode");
+                OnPostCodeChanged();
+            }
+        }
+        private global::System.String _PostCode;
+        partial void OnPostCodeChanging(global::System.String value);
+        partial void OnPostCodeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 TelephoneNumber
+        {
+            get
+            {
+                return _TelephoneNumber;
+            }
+            set
+            {
+                OnTelephoneNumberChanging(value);
+                ReportPropertyChanging("TelephoneNumber");
+                _TelephoneNumber = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("TelephoneNumber");
+                OnTelephoneNumberChanged();
+            }
+        }
+        private global::System.Int32 _TelephoneNumber;
+        partial void OnTelephoneNumberChanging(global::System.Int32 value);
+        partial void OnTelephoneNumberChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 PassportNumber
+        {
+            get
+            {
+                return _PassportNumber;
+            }
+            set
+            {
+                OnPassportNumberChanging(value);
+                ReportPropertyChanging("PassportNumber");
+                _PassportNumber = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("PassportNumber");
+                OnPassportNumberChanged();
+            }
+        }
+        private global::System.Int32 _PassportNumber;
+        partial void OnPassportNumberChanging(global::System.Int32 value);
+        partial void OnPassportNumberChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid MembershipID
+        {
+            get
+            {
+                return _MembershipID;
+            }
+            set
+            {
+                if (_MembershipID != value)
+                {
+                    OnMembershipIDChanging(value);
+                    ReportPropertyChanging("MembershipID");
+                    _MembershipID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("MembershipID");
+                    OnMembershipIDChanged();
+                }
+            }
+        }
+        private global::System.Guid _MembershipID;
+        partial void OnMembershipIDChanging(global::System.Guid value);
+        partial void OnMembershipIDChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ASPNETDBModel", "FK_Customer_aspnet_Membership", "aspnet_Membership")]
+        public aspnet_Membership aspnet_Membership
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Membership>("ASPNETDBModel.FK_Customer_aspnet_Membership", "aspnet_Membership").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Membership>("ASPNETDBModel.FK_Customer_aspnet_Membership", "aspnet_Membership").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<aspnet_Membership> aspnet_MembershipReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Membership>("ASPNETDBModel.FK_Customer_aspnet_Membership", "aspnet_Membership");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<aspnet_Membership>("ASPNETDBModel.FK_Customer_aspnet_Membership", "aspnet_Membership", value);
                 }
             }
         }

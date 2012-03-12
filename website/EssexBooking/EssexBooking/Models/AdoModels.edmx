@@ -10,6 +10,7 @@
           <EntitySet Name="aspnet_Roles" EntityType="ASPNETDBModel.Store.aspnet_Roles" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="aspnet_Users" EntityType="ASPNETDBModel.Store.aspnet_Users" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Bookings" EntityType="ASPNETDBModel.Store.Bookings" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Customer" EntityType="ASPNETDBModel.Store.Customer" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ExtraBookings" EntityType="ASPNETDBModel.Store.ExtraBookings" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Extras" EntityType="ASPNETDBModel.Store.Extras" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Hotels" EntityType="ASPNETDBModel.Store.Hotels" store:Type="Tables" Schema="dbo" />
@@ -33,6 +34,10 @@
           <AssociationSet Name="FK_Bookings_Travel" Association="ASPNETDBModel.Store.FK_Bookings_Travel">
             <End Role="Travel" EntitySet="Travel" />
             <End Role="Bookings" EntitySet="Bookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_aspnet_Membership" Association="ASPNETDBModel.Store.FK_Customer_aspnet_Membership">
+            <End Role="aspnet_Membership" EntitySet="aspnet_Membership" />
+            <End Role="Customer" EntitySet="Customer" />
           </AssociationSet>
           <AssociationSet Name="FK_ExtraBookings_Bookings" Association="ASPNETDBModel.Store.FK_ExtraBookings_Bookings">
             <End Role="Bookings" EntitySet="Bookings" />
@@ -123,6 +128,18 @@
           <Property Name="duration" Type="int" Nullable="false" />
           <Property Name="guests" Type="int" Nullable="false" />
           <Property Name="booker_id" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="MembershipID" />
+          </Key>
+          <Property Name="FirstName" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="LastName" Type="nvarchar" Nullable="false" MaxLength="250" />
+          <Property Name="Address" Type="nvarchar" Nullable="false" MaxLength="450" />
+          <Property Name="PostCode" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="TelephoneNumber" Type="int" Nullable="false" />
+          <Property Name="PassportNumber" Type="int" Nullable="false" />
+          <Property Name="MembershipID" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <EntityType Name="ExtraBookings">
           <Key>
@@ -245,6 +262,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Customer_aspnet_Membership">
+          <End Role="aspnet_Membership" Type="ASPNETDBModel.Store.aspnet_Membership" Multiplicity="1" />
+          <End Role="Customer" Type="ASPNETDBModel.Store.Customer" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Membership">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="MembershipID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ExtraBookings_Bookings">
           <End Role="Bookings" Type="ASPNETDBModel.Store.Bookings" Multiplicity="1" />
           <End Role="ExtraBookings" Type="ASPNETDBModel.Store.ExtraBookings" Multiplicity="*" />
@@ -339,6 +368,7 @@
           <EntitySet Name="aspnet_Roles" EntityType="ASPNETDBModel.aspnet_Roles" />
           <EntitySet Name="aspnet_Users" EntityType="ASPNETDBModel.aspnet_Users" />
           <EntitySet Name="Bookings" EntityType="ASPNETDBModel.Booking" />
+          <EntitySet Name="Customers" EntityType="ASPNETDBModel.Customer" />
           <EntitySet Name="ExtraBookings" EntityType="ASPNETDBModel.ExtraBooking" />
           <EntitySet Name="Extras" EntityType="ASPNETDBModel.Extra" />
           <EntitySet Name="Hotels" EntityType="ASPNETDBModel.Hotel" />
@@ -354,6 +384,10 @@
           <AssociationSet Name="FK_Bookings_aspnet_Membership" Association="ASPNETDBModel.FK_Bookings_aspnet_Membership">
             <End Role="aspnet_Membership" EntitySet="aspnet_Membership" />
             <End Role="Bookings" EntitySet="Bookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_aspnet_Membership" Association="ASPNETDBModel.FK_Customer_aspnet_Membership">
+            <End Role="aspnet_Membership" EntitySet="aspnet_Membership" />
+            <End Role="Customer" EntitySet="Customers" />
           </AssociationSet>
           <AssociationSet Name="FK_Bookings_Hotels" Association="ASPNETDBModel.FK_Bookings_Hotels">
             <End Role="Hotels" EntitySet="Hotels" />
@@ -419,6 +453,7 @@
           <Property Name="Comment" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="aspnet_Users" Relationship="ASPNETDBModel.FK__aspnet_Me__UserI__22AA2996" FromRole="aspnet_Membership" ToRole="aspnet_Users" />
           <NavigationProperty Name="Bookings" Relationship="ASPNETDBModel.FK_Bookings_aspnet_Membership" FromRole="aspnet_Membership" ToRole="Bookings" />
+          <NavigationProperty Name="Customer" Relationship="ASPNETDBModel.FK_Customer_aspnet_Membership" FromRole="aspnet_Membership" ToRole="Customer" />
         </EntityType>
         <EntityType Name="aspnet_Roles">
           <Key>
@@ -459,6 +494,19 @@
           <NavigationProperty Name="Hotel" Relationship="ASPNETDBModel.FK_Bookings_Hotels" FromRole="Bookings" ToRole="Hotels" />
           <NavigationProperty Name="Travel" Relationship="ASPNETDBModel.FK_Bookings_Travel" FromRole="Bookings" ToRole="Travel" />
           <NavigationProperty Name="ExtraBookings" Relationship="ASPNETDBModel.FK_ExtraBookings_Bookings" FromRole="Bookings" ToRole="ExtraBookings" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="MembershipID" />
+          </Key>
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="450" Unicode="true" FixedLength="false" />
+          <Property Name="PostCode" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="TelephoneNumber" Type="Int32" Nullable="false" />
+          <Property Name="PassportNumber" Type="Int32" Nullable="false" />
+          <Property Name="MembershipID" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="aspnet_Membership" Relationship="ASPNETDBModel.FK_Customer_aspnet_Membership" FromRole="Customer" ToRole="aspnet_Membership" />
         </EntityType>
         <EntityType Name="ExtraBooking">
           <Key>
@@ -569,6 +617,18 @@
             </Principal>
             <Dependent Role="Bookings">
               <PropertyRef Name="customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_aspnet_Membership">
+          <End Role="aspnet_Membership" Type="ASPNETDBModel.aspnet_Membership" Multiplicity="1" />
+          <End Role="Customer" Type="ASPNETDBModel.Customer" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Membership">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="MembershipID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -735,6 +795,15 @@
             <ScalarProperty Name="guests" ColumnName="guests" />
             <ScalarProperty Name="booker_id" ColumnName="booker_id" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Customers"><EntityTypeMapping TypeName="ASPNETDBModel.Customer"><MappingFragment StoreEntitySet="Customer">
+            <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+            <ScalarProperty Name="LastName" ColumnName="LastName" />
+            <ScalarProperty Name="Address" ColumnName="Address" />
+            <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+            <ScalarProperty Name="TelephoneNumber" ColumnName="TelephoneNumber" />
+            <ScalarProperty Name="PassportNumber" ColumnName="PassportNumber" />
+            <ScalarProperty Name="MembershipID" ColumnName="MembershipID" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="ExtraBookings"><EntityTypeMapping TypeName="ASPNETDBModel.ExtraBooking"><MappingFragment StoreEntitySet="ExtraBookings">
             <ScalarProperty Name="id" ColumnName="id" />
             <ScalarProperty Name="extra_id" ColumnName="extra_id" />
@@ -805,29 +874,36 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="AdoModels">
-        <EntityTypeShape EntityType="ASPNETDBModel.aspnet_Membership" Width="1.5" PointX="3" PointY="8.625" Height="5.4417122395833317" IsExpanded="true" />
-        <EntityTypeShape EntityType="ASPNETDBModel.aspnet_Roles" Width="1.5" PointX="5.75" PointY="8.75" Height="1.9802864583333317" IsExpanded="true" />
-        <EntityTypeShape EntityType="ASPNETDBModel.aspnet_Users" Width="1.5" PointX="0.75" PointY="10" Height="2.5571907552083317" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASPNETDBModel.aspnet_Membership" Width="1.5" PointX="3" PointY="8.75" Height="5.634013671875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASPNETDBModel.aspnet_Roles" Width="1.5" PointX="7.75" PointY="2.75" Height="1.9802864583333335" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASPNETDBModel.aspnet_Users" Width="1.5" PointX="0.75" PointY="10.375" Height="2.5571907552083317" IsExpanded="true" />
         <EntityTypeShape EntityType="ASPNETDBModel.Booking" Width="1.5" PointX="5.25" PointY="0.75" Height="3.3263964843749996" IsExpanded="true" />
-        <EntityTypeShape EntityType="ASPNETDBModel.ExtraBooking" Width="1.5" PointX="5.25" PointY="5.25" Height="2.3648893229166656" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASPNETDBModel.Customer" Width="1.5" PointX="5.25" PointY="10.375" Height="2.5571907552083317" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASPNETDBModel.ExtraBooking" Width="1.5" PointX="5.25" PointY="5.25" Height="2.3648893229166674" IsExpanded="true" />
         <EntityTypeShape EntityType="ASPNETDBModel.Extra" Width="1.5" PointX="3" PointY="5.25" Height="2.3648893229166674" IsExpanded="true" />
         <EntityTypeShape EntityType="ASPNETDBModel.Hotel" Width="1.5" PointX="3" PointY="1.25" Height="2.3648893229166674" IsExpanded="true" />
         <EntityTypeShape EntityType="ASPNETDBModel.HotelType" Width="1.5" PointX="0.75" PointY="2" Height="1.7879850260416674" IsExpanded="true" />
-        <EntityTypeShape EntityType="ASPNETDBModel.Passanger" Width="1.5" PointX="5.25" PointY="14.875" Height="2.1725878906249996" IsExpanded="true" />
-        <EntityTypeShape EntityType="ASPNETDBModel.Resort" Width="1.5" PointX="0.75" PointY="5.375" Height="1.9802864583333317" IsExpanded="true" />
-        <EntityTypeShape EntityType="ASPNETDBModel.Travel" Width="1.5" PointX="3" PointY="14.75" Height="2.3648893229166674" IsExpanded="true" />
-        <EntityTypeShape EntityType="ASPNETDBModel.TravelType" Width="1.5" PointX="0.75" PointY="15" Height="1.9802864583333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASPNETDBModel.Passanger" Width="1.5" PointX="5.25" PointY="15.25" Height="2.1725878906249996" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASPNETDBModel.Resort" Width="1.5" PointX="0.75" PointY="5.375" Height="1.9802864583333353" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASPNETDBModel.Travel" Width="1.5" PointX="3" PointY="15.125" Height="2.3648893229166674" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASPNETDBModel.TravelType" Width="1.5" PointX="0.75" PointY="15.375" Height="1.9802864583333388" IsExpanded="true" />
         <AssociationConnector Association="ASPNETDBModel.FK__aspnet_Me__UserI__22AA2996" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="11.278595377604166" />
-          <ConnectorPoint PointX="3" PointY="11.278595377604166" />
+          <ConnectorPoint PointX="2.25" PointY="11.653595377604166" />
+          <ConnectorPoint PointX="3" PointY="11.653595377604166" />
         </AssociationConnector>
         <AssociationConnector Association="ASPNETDBModel.FK_Bookings_aspnet_Membership" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="8.6261528461538468" />
-          <ConnectorPoint PointX="4.875" PointY="8.2511528461538468" />
+          <ConnectorPoint PointX="4.5" PointY="8.7511528461538468" />
+          <ConnectorPoint PointX="4.875" PointY="8.3761528461538468" />
           <ConnectorPoint PointX="4.875" PointY="2.4131982421875" />
           <ConnectorPoint PointX="4.979166666666667" PointY="2.4131982421874993" />
           <ConnectorPoint PointX="5.145833333333333" PointY="2.4131982421875" />
           <ConnectorPoint PointX="5.25" PointY="2.4131982421875" />
+        </AssociationConnector>
+        <AssociationConnector Association="ASPNETDBModel.FK_Customer_aspnet_Membership" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="11.653595377604166" />
+          <ConnectorPoint PointX="4.979166666666667" PointY="11.653595377604166" />
+          <ConnectorPoint PointX="5.145833333333333" PointY="11.653595377604166" />
+          <ConnectorPoint PointX="5.25" PointY="11.653595377604166" />
         </AssociationConnector>
         <AssociationConnector Association="ASPNETDBModel.FK_Bookings_Hotels" ManuallyRouted="false">
           <ConnectorPoint PointX="4.5" PointY="3.0765437825520836" />
@@ -838,8 +914,8 @@
           <ConnectorPoint PointX="5.25" PointY="3.0765437825520836" />
         </AssociationConnector>
         <AssociationConnector Association="ASPNETDBModel.FK_Bookings_Travel" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="14.813460538461539" />
-          <ConnectorPoint PointX="5.0625" PointY="14.250960538461541" />
+          <ConnectorPoint PointX="4.5" PointY="15.188460538461539" />
+          <ConnectorPoint PointX="5.0625" PointY="14.625960538461541" />
           <ConnectorPoint PointX="5.0625" PointY="1.5503471210937492" />
           <ConnectorPoint PointX="5.25" PointY="1.5503471210937492" />
         </AssociationConnector>
@@ -848,16 +924,16 @@
           <ConnectorPoint PointX="6" PointY="5.25" />
         </AssociationConnector>
         <AssociationConnector Association="ASPNETDBModel.FK_ExtraBookings_ExtraBookings" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="6.4324446614583328" />
-          <ConnectorPoint PointX="4.791666666666667" PointY="6.4324446614583319" />
-          <ConnectorPoint PointX="4.958333333333333" PointY="6.4324446614583328" />
-          <ConnectorPoint PointX="4.979166666666667" PointY="6.4324446614583319" />
-          <ConnectorPoint PointX="5.145833333333333" PointY="6.4324446614583328" />
-          <ConnectorPoint PointX="5.25" PointY="6.4324446614583328" />
+          <ConnectorPoint PointX="4.5" PointY="6.4324446614583337" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="6.4324446614583328" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="6.4324446614583337" />
+          <ConnectorPoint PointX="4.979166666666667" PointY="6.4324446614583328" />
+          <ConnectorPoint PointX="5.145833333333333" PointY="6.4324446614583337" />
+          <ConnectorPoint PointX="5.25" PointY="6.4324446614583337" />
         </AssociationConnector>
         <AssociationConnector Association="ASPNETDBModel.FK_Extras_Resorts" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="6.3651432291666659" />
-          <ConnectorPoint PointX="3" PointY="6.3651432291666659" />
+          <ConnectorPoint PointX="2.25" PointY="6.3651432291666676" />
+          <ConnectorPoint PointX="3" PointY="6.3651432291666676" />
         </AssociationConnector>
         <AssociationConnector Association="ASPNETDBModel.FK_Hotels_HotelTypes" ManuallyRouted="false">
           <ConnectorPoint PointX="2.25" PointY="2.8074446614583337" />
@@ -872,12 +948,12 @@
           <ConnectorPoint PointX="3" PointY="1.9974703307291661" />
         </AssociationConnector>
         <AssociationConnector Association="ASPNETDBModel.FK_Passanger_Travel" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="15.9612939453125" />
-          <ConnectorPoint PointX="5.25" PointY="15.9612939453125" />
+          <ConnectorPoint PointX="4.5" PointY="16.336293945312498" />
+          <ConnectorPoint PointX="5.25" PointY="16.336293945312498" />
         </AssociationConnector>
         <AssociationConnector Association="ASPNETDBModel.FK_Travel_Travel" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="15.990143229166666" />
-          <ConnectorPoint PointX="3" PointY="15.990143229166666" />
+          <ConnectorPoint PointX="2.25" PointY="16.365143229166669" />
+          <ConnectorPoint PointX="3" PointY="16.365143229166669" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>
