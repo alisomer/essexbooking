@@ -24,26 +24,16 @@ namespace EssexBooking.Controllers
             Extra extra = cart.ctx.Extras.FirstOrDefault(x => x.id == extra_id);
             extraBooking.Extra = extra;
             cart.GetBooking(temp_id).ExtraBookings.Add(extraBooking);
-            ViewBag.extra_name = extra.name;
             decimal total_price = number * extra.price;
+
             ViewBag.extra_total_price = total_price;
             Random r = new Random();
             int extrabooktemp_id = r.Next();
-            
-            
-            
+
             //cart.bookings[temp_id].temp_extras.Add(extrabooktemp_id, extraBooking);
 
-
-
-
-
-
-
-           //return PartialView("_ExtraBookingCartPartial", cart.bookings[temp_id].temp_extras);
+            //return PartialView("_ExtraBookingCartPartial", cart.bookings[temp_id].temp_extras);
             return PartialView("_ExtraBookingCartPartial", cart.GetBooking(temp_id).ExtraBookings);
-
-
         }
 
 

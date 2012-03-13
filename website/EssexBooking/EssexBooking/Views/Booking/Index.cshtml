@@ -86,10 +86,12 @@
         $(".duration input").change(function () { $(".start_date").datepicker("refresh"); });
 
         displayExtraCart = function (resp) {
-            $("#miniextracart .extrabookingcart").replaceWith(resp);
+            $(".addExtra .miniextracart .extrabookingcart").removeClass("addExtra").replaceWith(resp);
         };
 
         $(".addExtraToBooking").click(function () {
+            $(this).closest(".bookingForm").addClass("addExtra");
+
             var extra_id = $(this).closest("[data-extra_id]").data("extra_id");
 
             var number = $(this).closest("tr").find("select.participant_number").val();

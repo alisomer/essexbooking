@@ -16,9 +16,9 @@
     <h3>Travel</h3>
    @Html.Partial("_TravelFormPartial", Model)
 
-        @Html.Partial("_ExtraPartial", Model.Hotel.Resort.Extras)
+       @Html.Partial("_ExtraPartial", Model.Hotel.Resort.Extras)
 
-        <div id="miniextracart">
+        <div class="miniextracart">
           @Html.Partial("_ExtraBookingCartPartial", Model.ExtraBookings)
         </div>
         <button class="save">Save</button>

@@ -1,0 +1,42 @@
+﻿@model IEnumerable<EssexBooking.Models.Booking>
+
+
+@{
+    ViewBag.Title = "Payments";
+}
+
+<h2>Booking List</h2>
+<table>
+    <tr>
+        <th>Resort</th> 
+        <th>Hotel</th>
+        <th>Travel</th>
+        <th>Extra</th>
+        <th>Amount</th>
+    </tr>
+    @foreach (var bookingItem in Model)
+    {
+        <tr>
+            <td>@bookingItem.Hotel.Resort.name</td>
+            <td>@bookingItem.Hotel.name</td>
+            <td>@bookingItem.Travel.TravelType.name</td>        
+            <td>
+                <ul>
+                    @foreach (var extra in bookingItem.ExtraBookings)
+                    {  
+                      <li>@extra.Extra.name</li>
+                    }
+                </ul>
+            </td>
+           <td>&pound;@{ViewBag.total = ViewBag.hotel_amount[bookingItem.id] + ViewBag.travel_amount[bookingItem.id] + ViewBag.extra_amount[bookingItem.id];}@ViewBag.total</td>
+        </tr>
+    }
+    <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+                    <td>&pound;@ViewBag.total_amount</td>
+    </tr>
+</table>
+
