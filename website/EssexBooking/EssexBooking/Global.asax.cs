@@ -36,6 +36,8 @@ namespace EssexBooking
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
+
+            Currency.Update();
         }
     }
 }
