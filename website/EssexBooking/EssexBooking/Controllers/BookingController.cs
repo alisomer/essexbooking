@@ -30,6 +30,11 @@ namespace EssexBooking.Controllers
             return View(new Cart());
         }
 
+        public ActionResult Passengers()
+        {
+            return View(new Cart());
+        }
+
         public ActionResult Payments()
         {
             return View(new Cart());
@@ -37,7 +42,9 @@ namespace EssexBooking.Controllers
 
         public ActionResult Checkout()
         {
+
             Cart cart = new Cart();
+
             cart.Checkout();
 
             return View();

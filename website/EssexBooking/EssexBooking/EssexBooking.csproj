@@ -85,6 +85,7 @@
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\HistoryModel.cs" />
     <Compile Include="Models\EntitiesRepository.cs" />
+    <Compile Include="Models\Passanger.cs" />
     <Compile Include="Models\TeleSalesPanelViewModel.cs" />
     <Compile Include="Models\TelesalesViewModel.cs" />
     <Compile Include="Models\Validator.cs" />
@@ -220,13 +221,7 @@
     <Content Include="Views\Shared\_TravelFormPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Shared\_PassengerFormPartial.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EntityDeploy Include="Models\AdoModels.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>AdoModels.Designer.cs</LastGenOutput>
-    </EntityDeploy>
+    <Content Include="Views\Shared\_PassengerFormPartial_old.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_RoomsFormPartial.cshtml" />
@@ -245,6 +240,21 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Booking\Payments.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_PassengersFormPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_PassengerFormPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Booking\Passengers.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="Models\AdoModels.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AdoModels.Designer.cs</LastGenOutput>
+    </EntityDeploy>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

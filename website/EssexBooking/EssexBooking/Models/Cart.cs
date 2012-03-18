@@ -72,6 +72,7 @@ namespace EssexBooking.Models
                     <Booking>();
         }
 
+
         public bool isEmpty(){
             return GetBookings().Count() == 0;
         }

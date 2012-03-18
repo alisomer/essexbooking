@@ -10,7 +10,13 @@
 <script type="text/javascript" src="/Scripts/AjaxProxy.js"></script>
 <script type="text/javascript">
     $(function () {
-        $(".extra_booking_date").datepicker({ showOn: "both", buttonImage: "../../Content/images/calendar.gif", buttonImageOnly: true, minDate: 0, maxDate: "+1Y", dateFormat: 'mm dd yy' });
+        $(".extra_booking_date").datepicker({
+            showOn: "both", buttonImage: "../../Content/images/calendar.gif",
+            buttonImageOnly: true,
+            minDate: 0,
+            maxDate: "+1Y",
+            dateFormat: 'mm dd yy' 
+        });
 
         $(".start_date").datepicker({ minDate: 0, maxDate: "+1Y", dateFormat: 'mm dd yy',
             beforeShowDay: function (date) {
@@ -42,36 +48,15 @@
             }
         });
 
-        $(".start_date").datepicker({ minDate: 0, maxDate: "+1Y", dateFormat: 'dd/mm/yy',
-            beforeShowDay: function (date) {
-                var dateSelected = new Date($(this).closest(".bookingForm").find(".start_date").val());
-                var range = $(this).closest(".bookingForm").find(".duration input:checked").val();
-                var endDate = new Date(dateSelected);
-                var dateC = "";
-                endDate.setDate(endDate.getDate() + parseInt(range));
-
-                if (range != null && endDate > date && date > dateSelected) {
-                    dateC = "ui-state-active";
-
-                }
-                return [true, dateC];
-            },
-            onSelect: function (dateText, inst) {
-                var date = new Date(dateText);
-                if (date.getDay() != 3 && date.getDay() != 6) {
-                    $(this).closest(".bookingForm").find("input[value=2]").button({ "disabled": true });
-                    $(this).closest(".bookingForm").find("input[value=1]").attr("checked", true);
-                    $(this).closest(".bookingForm").find(".radioset").buttonset("refresh");
-                } else {
-                    $(this).closest(".bookingForm").find("input[value=2]").button({ "disabled": false });
-                }
-            }
-        });
 
         $(".radioset").buttonset();
 
         $(".bookingForm .save").click(function () {
             var form = $(this).closest(".bookingForm");
+
+ 
+
+
             UpdateBooking({
                 booking_id: form.attr("booking_id"),
                 start_date: form.find(".start_date").val(),
@@ -80,7 +65,10 @@
                 travel_type_id: form.find(".travel_type input:checked").val()
 
             },
-            function (resp) { console.log("ok"); })
+            function (resp) { 
+                //console.log("ok"); 
+            
+            })
 
         });
         $(".duration input").change(function () { $(".start_date").datepicker("refresh"); });
@@ -106,7 +94,7 @@
             $(this).closest(".bookingForm").addClass("addRooms");
             $(this).closest(".bookingForm").addClass("addDoubles");
             setGuests($(this).closest("[booking_id]").attr("booking_id"), $(this).val(), function (resp) {
-                $(".bookingForm.addGuests").find(".passenger").html(resp);
+                //$(".bookingForm.addGuests").find(".passengers").html(resp);
                 $(".bookingForm.addGuests").removeClass("addGuests");
             });
             setRooms($(this).closest("[booking_id]").attr("booking_id"), $(this).val(), function (resp) {
@@ -127,6 +115,8 @@
 {
    @Html.Partial("_BookingFormPartial", b)
 }
+
+@Html.ActionLink("Proceed to Passenger details","Passengers","Booking")
 
 <div>
     <button class="ui-button ui-button-text-icon-primary book-button">

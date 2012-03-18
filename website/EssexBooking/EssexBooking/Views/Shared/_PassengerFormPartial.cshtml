@@ -1,21 +1,42 @@
-﻿@model int
-   @for (var i = 1; i <= Model; i++)
-   {    if (Model > 1)
-        {
-       <h5>Passenger @i</h5>
-        }
-       <table>
-            <tr>
-                <td><label>First Name: </label></td>
-                <td><input  type="text"/></td>
-            </tr>
-            <tr>
-                <td><label>Last Name: </label></td>
-                <td><input  type="text"/></td>
-            </tr>
-            <tr>
-                <td><label>Passport Number: </label></td>
-                <td><input  type="text"/></td>
-            </tr>
-       </table>
-   }
+﻿@model EssexBooking.Models.Passanger
+
+
+@using (Html.BeginForm("AddPassengers","Ajax",FormMethod.Post)) {
+    @Html.ValidationSummary(true)
+    <fieldset passenger_id="@Model.id" >
+        <legend>Passanger</legend>
+        <input type="hidden" name="id" value="@Model.id" />
+        <div class="editor-label">
+            @Html.LabelFor(model => model.travel_id)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.travel_id)
+            @Html.ValidationMessageFor(model => model.travel_id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.first_name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.first_name)
+            @Html.ValidationMessageFor(model => model.first_name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.last_name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.last_name)
+            @Html.ValidationMessageFor(model => model.last_name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.passaport_no)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.passaport_no)
+            @Html.ValidationMessageFor(model => model.passaport_no)
+        </div>
+    </fieldset>
+}
+
