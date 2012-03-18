@@ -1,24 +1,19 @@
 ﻿@model IEnumerable<EssexBooking.Models.TravelType>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Travel Types";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table>
     <tr>
         <th>
-            name
+            Name
         </th>
         <th>
-            price
+            Price
         </th>
         <th>
-            available_days
+            Available Days
         </th>
         <th></th>
     </tr>
@@ -43,3 +38,7 @@
 }
 
 </table>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>

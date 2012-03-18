@@ -1,0 +1,54 @@
+﻿@model EssexBooking.Areas.Admin.ViewModels.UserViewModel
+
+@{
+    ViewBag.Title = "Users";
+}
+
+<table>
+    <tr>
+        <th>
+            User Name
+        </th>
+@*        <th>
+            IsCustomer
+        </th>*@
+        <th>
+            Staff
+        </th>
+        <th>
+            Admin
+        </th>
+        <th>
+            Last Activity
+        </th>
+
+        @*<th></th>*@
+    </tr>
+
+@foreach (var item in Model.UsersList) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        <td>
+            @Model.Staff.Contains(item.UserName)
+        </td>
+        <td>
+            @Model.Admins.Contains(item.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastActivityDate)
+        </td>
+        @*<td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.UserId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.UserId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.UserId })
+        </td>*@
+    </tr>
+}
+
+</table>
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@

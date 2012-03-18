@@ -1,20 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using EssexBooking.Models;
 
 namespace EssexBooking.Areas.Admin.Controllers
 {
     public class HomeController : Controller
     {
+        private ASPNETDBEntities db = new ASPNETDBEntities();
         //
         // GET: /Admin/Home/
 
         public ActionResult Index()
         {
+            ViewBag.LastBookings = db.Bookings.OrderByDescending(b => b.id).Take(5);
+            ViewBag.Today = db.Bookings.Where(b => b.start_date == DateTime.Today);
             return View();
         }
-
     }
 }

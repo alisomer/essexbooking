@@ -1,0 +1,62 @@
+﻿@model IEnumerable<EssexBooking.Models.Customer>
+
+@{
+    ViewBag.Title = "Customers";
+}
+
+<table>
+    <tr>
+        <th>
+            First Name
+        </th>
+        <th>
+            Last Name
+        </th>
+        <th>
+            Address
+        </th>
+        <th>
+            Post Code
+        </th>
+        <th>
+            Telephone Number
+        </th>
+        <th>
+            Passport Number
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PostCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TelephoneNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PassportNumber)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.MembershipID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.MembershipID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.MembershipID })
+        </td>
+    </tr>
+}
+
+</table>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>

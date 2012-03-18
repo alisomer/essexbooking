@@ -1,18 +1,13 @@
 ﻿@model IEnumerable<EssexBooking.Models.Booking>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Bookings";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table>
     <tr>
         <th>
-            customer_id
+            Customer
         </th>
         <th>
             Travel
@@ -21,16 +16,16 @@
             Hotel
         </th>
         <th>
-            start_date
+            Start Date
         </th>
         <th>
-            duration
+            Duration
         </th>
         <th>
-            guests
+            Guests
         </th>
         <th>
-            booker_id
+            Booker
         </th>
         <th>
             Extra
@@ -38,38 +33,45 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var booking in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.customer_id)
+            @Html.DisplayFor(modelbooking => booking.customer_id)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Travel.id)
+            @Html.DisplayFor(modelbooking => booking.Travel.TravelType.name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Hotel.name)
+            @Html.DisplayFor(modelbooking => booking.Hotel.name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.start_date)
+            @Html.DisplayFor(modelbooking => booking.start_date)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.duration)
+            @Html.DisplayFor(modelbooking => booking.duration)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.guests)
+            @Html.DisplayFor(modelbooking => booking.guests)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.booker_id)
+            @Html.DisplayFor(modelbooking => booking.booker_id)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Extra.name)
+            @foreach (var extrabooking in booking.ExtraBookings)
+            {
+                @Html.DisplayFor(modelbooking => extrabooking.Extra.name)
+            }
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+            @Html.ActionLink("Edit", "Edit", new { id=booking.id }) |
+            @Html.ActionLink("Details", "Details", new { id=booking.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=booking.id })
         </td>
     </tr>
 }
 
 </table>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>

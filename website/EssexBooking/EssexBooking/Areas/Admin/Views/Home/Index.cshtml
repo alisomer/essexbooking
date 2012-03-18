@@ -1,16 +1,69 @@
 ﻿@{
     ViewBag.Title = "Admin Home Page";
 }
+@section extraHead
+{
+<style>
+    .summaries {
+        list-style: none outside none;
+        padding: 0;
+        margin: -5px;
+    }
+    .summaries > li 
+    {
+        float: left;
+        margin-left: 20px;
+        /*border: 1px solid #000;*/
+    }
+    .summaries > li > .contents
+    {
+        /*border: 1px solid #000;*/
+    }
+    .summaries > li > .contents > ul
+    {
+        list-style: none outside none;
+    }
+    .summaries > li > .contents > ul > li:first-child
+    {
+        border-top: 0;
+    }
+    .summaries > li > .contents > ul > li
+    {
+        /*margin: 0 0 18px 20px;*/
+        border-top: 1px solid #999;
+    }
+    .span4
+    {
+        width: 20%;
+        width: 370px;
+        
+        /*background-color: red;*/
+    }
+</style>
+}
 
 <h2>@ViewBag.Message</h2>
 <p>
-	here will be a menu to all the items
+    Welcome to the Essex Booking Administration Panel
 </p>
 
-<ul>
+<ul hidden>
 	<li>@Html.ActionLink("Hotels", "Index", "Hotel")</li>
 	<li>@Html.ActionLink("Resorts", "Index", "Resort")</li>
 	<li>@Html.ActionLink("Extras", "Index", "Extras")</li>
 	<li>@Html.ActionLink("TravelType", "Index", "TravelType")</li>
 	<li>@Html.ActionLink("Bookings", "Index", "Bookings")</li>
+</ul>
+
+
+<ul class="summaries">
+    <li class="span4">
+        @Html.Partial("_LastBookings", (IEnumerable<EssexBooking.Models.Booking>)ViewBag.LastBookings)
+    </li>
+    <li class="span4">
+        @Html.Partial("_BookingsForDate", (IEnumerable<EssexBooking.Models.Booking>)ViewBag.Today)
+    </li>
+    <li class="span4">
+        <h3>Errors?</h3>
+    </li>
 </ul>

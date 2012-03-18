@@ -1,20 +1,20 @@
-﻿@model EssexBooking.Models.Resort
+﻿@model EssexBooking.Models.HotelType
 
 @{
-    ViewBag.Title = "Details of Resort:" + Model.name;
+    ViewBag.Title = "Details of Hotel Type: " + Model.name;
 }
 
 <fieldset>
-    <legend>Resort</legend>
+    <legend>HotelType</legend>
 
-    <div class="display-label">name</div>
+    <div class="display-label">Name</div>
     <div class="display-field">
         @Html.DisplayFor(model => model.name)
     </div>
 
-    <div class="display-label">description</div>
+    <div class="display-label">Price</div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.description)
+        @Html.DisplayFor(model => model.price)
     </div>
 </fieldset>
 <p>

@@ -18,7 +18,7 @@ namespace EssexBooking.Areas.Admin.Controllers
 
         public ViewResult Index()
         {
-            var bookings = db.Bookings.Include("Extra").Include("Hotel").Include("Travel");
+            var bookings = db.Bookings.Include("ExtraBookings").Include("Hotel").Include("Travel");
             return View(bookings.ToList());
         }
 
@@ -27,8 +27,9 @@ namespace EssexBooking.Areas.Admin.Controllers
 
         public ViewResult Details(int id)
         {
-            Booking booking = db.Bookings.Single(b => b.id == id);
-            return View(booking);
+            // Booking booking = db.Bookings.Single(b => b.id == id);
+            // return View(booking);
+            return View();
         }
 
         //
@@ -55,7 +56,7 @@ namespace EssexBooking.Areas.Admin.Controllers
                 return RedirectToAction("Index");  
             }
 
-            ViewBag.extra_id = new SelectList(db.Extras, "id", "name", booking.extra_id);
+            // ViewBag.extra_id = new SelectList(db.Extras, "id", "name", booking.extra_id);
             ViewBag.hotel_id = new SelectList(db.Hotels, "id", "name", booking.hotel_id);
             ViewBag.travel_id = new SelectList(db.Travels, "id", "id", booking.travel_id);
             return View(booking);
@@ -64,10 +65,10 @@ namespace EssexBooking.Areas.Admin.Controllers
         //
         // GET: /Admin/Bookings/Edit/5
  
-        public ActionResult Edit(int id)
+        public ActionResult Edit(Guid id)
         {
             Booking booking = db.Bookings.Single(b => b.id == id);
-            ViewBag.extra_id = new SelectList(db.Extras, "id", "name", booking.extra_id);
+            // ViewBag.extra_id = new SelectList(db.Extras, "id", "name", booking.extra_id);
             ViewBag.hotel_id = new SelectList(db.Hotels, "id", "name", booking.hotel_id);
             ViewBag.travel_id = new SelectList(db.Travels, "id", "id", booking.travel_id);
             return View(booking);
@@ -86,7 +87,7 @@ namespace EssexBooking.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.extra_id = new SelectList(db.Extras, "id", "name", booking.extra_id);
+            // ViewBag.extra_id = new SelectList(db.Extras, "id", "name", booking.extra_id);
             ViewBag.hotel_id = new SelectList(db.Hotels, "id", "name", booking.hotel_id);
             ViewBag.travel_id = new SelectList(db.Travels, "id", "id", booking.travel_id);
             return View(booking);
@@ -95,7 +96,7 @@ namespace EssexBooking.Areas.Admin.Controllers
         //
         // GET: /Admin/Bookings/Delete/5
  
-        public ActionResult Delete(int id)
+        public ActionResult Delete(Guid id)
         {
             Booking booking = db.Bookings.Single(b => b.id == id);
             return View(booking);
@@ -105,7 +106,7 @@ namespace EssexBooking.Areas.Admin.Controllers
         // POST: /Admin/Bookings/Delete/5
 
         [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(Guid id)
         {            
             Booking booking = db.Bookings.Single(b => b.id == id);
             db.Bookings.DeleteObject(booking);
