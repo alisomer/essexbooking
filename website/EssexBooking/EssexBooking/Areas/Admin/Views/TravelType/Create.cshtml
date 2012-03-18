@@ -1,10 +1,8 @@
 ﻿@model EssexBooking.Models.TravelType
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Creating a new Travel Type";
 }
-
-<h2>Create</h2>
 
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
@@ -15,7 +13,7 @@
         <legend>TravelType</legend>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.name)
+            @Html.LabelFor(model => model.name, "Name")
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.name)
@@ -23,7 +21,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.price)
+            @Html.LabelFor(model => model.price, "Price")
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.price)
@@ -31,7 +29,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.available_days)
+            @Html.LabelFor(model => model.available_days, "Available Days")
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.available_days)

@@ -1,10 +1,41 @@
-﻿@model EssexBooking.Models.Booking
+﻿@using EssexBooking.Areas.Admin.ViewModels
+@model EssexBooking.Models.Booking
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Editing Booking No." + Model.id;
 }
 
-<h2>Edit</h2>
+@section extraHead
+{
+<script>
+    $(function () {
+        $("#addExtra").click(function () {
+            $.ajax({
+                url: this.href,
+                cache: false,
+                success: function(html) { $("#extraRows").append(html); }
+            });
+            return false;
+        });
+
+        $("#resort_id").change(function () {
+            var new_id = $("#resort_id").val();
+            $.ajax({
+                url: "@Url.Action("NewHotelRow")",
+                data: {resort_id: new_id},
+                cache: false,
+                success: function (html) { $("#hotelRow").html(html); }
+            });
+            return false;
+        });
+
+        $("a.deleteRow").live("click", function () {
+            $(this).parents("div.editorRow:first").remove();
+            return false;
+        });
+    });
+</script>
+}
 
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
@@ -17,39 +48,51 @@
         @Html.HiddenFor(model => model.id)
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.customer_id)
+            @Html.LabelFor(model => model.customer_id, "Customer")
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.customer_id)
-            @Html.ValidationMessageFor(model => model.customer_id)
+            @*@Html.EditorFor(model => model.customer_id)*@
+            @*@Html.ValidationMessageFor(model => model.customer_id)*@
+            @Html.ActionLink("View Customer", "Details", "Customer", new {id = Model.customer_id}, null)
         </div>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.travel_id, "Travel")
         </div>
         <div class="editor-field">
-            @Html.DropDownList("travel_id", String.Empty)
-            @Html.ValidationMessageFor(model => model.travel_id)
+            @Html.EditorFor(model => model.travel_id)
+            @Html.ValidationMessageFor(model => model.Travel.TravelType.name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.hotel_id, "Resort")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("resort_id", String.Empty)
+            @Html.ValidationMessageFor(model => model.Hotel.resort_id)
         </div>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.hotel_id, "Hotel")
         </div>
         <div class="editor-field">
-            @Html.DropDownList("hotel_id", String.Empty)
+            <div id="hotelRow">
+                @Html.Partial("HotelsEditorRow", (IEnumerable<EssexBooking.Models.Hotel>)ViewBag.Hotels)
+            </div>
             @Html.ValidationMessageFor(model => model.hotel_id)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.start_date)
+            @Html.LabelFor(model => model.start_date, "Start Date (DD/MM/YYYY)")
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.start_date)
+            @*@Html.EditorFor(model => model.start_date)*@
+            @Html.TextBox("start_date", (String.IsNullOrEmpty(Model.start_date.ToString()) == false ? Model.start_date.ToShortDateString() : String.Empty), new { @class = "datePicker" })
             @Html.ValidationMessageFor(model => model.start_date)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.duration)
+            @Html.LabelFor(model => model.duration, "Duration")
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.duration)
@@ -57,7 +100,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.guests)
+            @Html.LabelFor(model => model.guests, "Guests")
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.guests)
@@ -65,20 +108,21 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.booker_id)
+            @Html.LabelFor(model => model.booker_id, "Booker")
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.booker_id)
             @Html.ValidationMessageFor(model => model.booker_id)
         </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.extra_id, "Extra")
+        <h4>Extras</h4>
+        <div id="extraRows">
+        @foreach (var extra in Model.ExtraBookings)
+        {
+            @Html.Partial("ExtraEditorRow", new ExtraBookingViewModel(extra, Model.Hotel.resort_id))
+        }
         </div>
-        <div class="editor-field">
-            @Html.DropDownList("extra_id", String.Empty)
-            @Html.ValidationMessageFor(model => model.extra_id)
-        </div>
+        @Html.ActionLink("Add another extra", "NewExtraRow", new { resort_id = Model.Hotel.resort_id }, new { id = "addExtra" })
 
         <p>
             <input type="submit" value="Save" />

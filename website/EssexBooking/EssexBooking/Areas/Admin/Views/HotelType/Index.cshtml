@@ -1,19 +1,13 @@
-﻿@model IEnumerable<EssexBooking.Models.Extra>
+﻿@model IEnumerable<EssexBooking.Models.HotelType>
 
 @{
-    ViewBag.Title = "Extras";
+    ViewBag.Title = "Hotel Types";
 }
 
 <table>
     <tr>
         <th>
-            Resort
-        </th>
-        <th>
             Name
-        </th>
-        <th>
-            Description
         </th>
         <th>
             Price
@@ -24,13 +18,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Resort.name)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.description)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.price)

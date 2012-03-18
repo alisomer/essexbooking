@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using EssexBooking.Areas.Admin.ViewModels;
 using EssexBooking.Models;
 
 namespace EssexBooking.Areas.Admin.Controllers
@@ -18,58 +19,19 @@ namespace EssexBooking.Areas.Admin.Controllers
 
         public ViewResult Index()
         {
-            var bookings = db.Bookings.Include("Extra").Include("Hotel").Include("Travel");
-            return View(bookings.ToList());
+            var bvm = new BookingsViewModel(db.Bookings.Include("ExtraBookings").Include("Hotel").Include("Travel"));
+            return View(bvm);
         }
 
-        //
-        // GET: /Admin/Bookings/Details/5
-
-        public ViewResult Details(int id)
-        {
-            Booking booking = db.Bookings.Single(b => b.id == id);
-            return View(booking);
-        }
-
-        //
-        // GET: /Admin/Bookings/Create
-
-        public ActionResult Create()
-        {
-            ViewBag.extra_id = new SelectList(db.Extras, "id", "name");
-            ViewBag.hotel_id = new SelectList(db.Hotels, "id", "name");
-            ViewBag.travel_id = new SelectList(db.Travels, "id", "id");
-            return View();
-        } 
-
-        //
-        // POST: /Admin/Bookings/Create
-
-        [HttpPost]
-        public ActionResult Create(Booking booking)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Bookings.AddObject(booking);
-                db.SaveChanges();
-                return RedirectToAction("Index");  
-            }
-
-            ViewBag.extra_id = new SelectList(db.Extras, "id", "name", booking.extra_id);
-            ViewBag.hotel_id = new SelectList(db.Hotels, "id", "name", booking.hotel_id);
-            ViewBag.travel_id = new SelectList(db.Travels, "id", "id", booking.travel_id);
-            return View(booking);
-        }
-        
         //
         // GET: /Admin/Bookings/Edit/5
  
-        public ActionResult Edit(int id)
+        public ActionResult Edit(Guid id)
         {
             Booking booking = db.Bookings.Single(b => b.id == id);
-            ViewBag.extra_id = new SelectList(db.Extras, "id", "name", booking.extra_id);
+            ViewBag.resort_id = new SelectList(db.Resorts, "id", "name", booking.Hotel.resort_id);
             ViewBag.hotel_id = new SelectList(db.Hotels, "id", "name", booking.hotel_id);
-            ViewBag.travel_id = new SelectList(db.Travels, "id", "id", booking.travel_id);
+            ViewBag.hotels = db.Hotels.Where(h => h.resort_id == booking.Hotel.resort_id);
             return View(booking);
         }
 
@@ -86,16 +48,14 @@ namespace EssexBooking.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.extra_id = new SelectList(db.Extras, "id", "name", booking.extra_id);
             ViewBag.hotel_id = new SelectList(db.Hotels, "id", "name", booking.hotel_id);
-            ViewBag.travel_id = new SelectList(db.Travels, "id", "id", booking.travel_id);
             return View(booking);
         }
 
         //
         // GET: /Admin/Bookings/Delete/5
  
-        public ActionResult Delete(int id)
+        public ActionResult Delete(Guid id)
         {
             Booking booking = db.Bookings.Single(b => b.id == id);
             return View(booking);
@@ -105,7 +65,7 @@ namespace EssexBooking.Areas.Admin.Controllers
         // POST: /Admin/Bookings/Delete/5
 
         [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(Guid id)
         {            
             Booking booking = db.Bookings.Single(b => b.id == id);
             db.Bookings.DeleteObject(booking);
@@ -117,6 +77,16 @@ namespace EssexBooking.Areas.Admin.Controllers
         {
             db.Dispose();
             base.Dispose(disposing);
+        }
+
+        public ViewResult NewExtraRow(int resort_id)
+        {
+            return View("ExtraEditorRow", new ExtraBookingViewModel(new ExtraBooking(), resort_id));
+        }
+
+        public ViewResult NewHotelRow(int resort_id)
+        {
+            return View("HotelsEditorRow", db.Hotels.Where(h => h.resort_id == resort_id));
         }
     }
 }

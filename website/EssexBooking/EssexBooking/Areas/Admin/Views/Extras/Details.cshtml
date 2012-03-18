@@ -1,10 +1,8 @@
 ﻿@model EssexBooking.Models.Extra
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Details of " + Model.name + " in " + Model.Resort.name;
 }
-
-<h2>Details</h2>
 
 <fieldset>
     <legend>Extra</legend>
@@ -14,17 +12,17 @@
         @Html.DisplayFor(model => model.Resort.name)
     </div>
 
-    <div class="display-label">name</div>
+    <div class="display-label">Name</div>
     <div class="display-field">
         @Html.DisplayFor(model => model.name)
     </div>
 
-    <div class="display-label">description</div>
+    <div class="display-label">Description</div>
     <div class="display-field">
         @Html.DisplayFor(model => model.description)
     </div>
 
-    <div class="display-label">price</div>
+    <div class="display-label">Price</div>
     <div class="display-field">
         @Html.DisplayFor(model => model.price)
     </div>

@@ -1,26 +1,24 @@
 ﻿@model EssexBooking.Models.TravelType
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Deleting a Travel Type";
 }
-
-<h2>Delete</h2>
 
 <h3>Are you sure you want to delete this?</h3>
 <fieldset>
     <legend>TravelType</legend>
 
-    <div class="display-label">name</div>
+    <div class="display-label">Name</div>
     <div class="display-field">
         @Html.DisplayFor(model => model.name)
     </div>
 
-    <div class="display-label">price</div>
+    <div class="display-label">Price</div>
     <div class="display-field">
         @Html.DisplayFor(model => model.price)
     </div>
 
-    <div class="display-label">available_days</div>
+    <div class="display-label">Available Days</div>
     <div class="display-field">
         @Html.DisplayFor(model => model.available_days)
     </div>

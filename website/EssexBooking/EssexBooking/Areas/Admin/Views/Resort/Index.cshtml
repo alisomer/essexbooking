@@ -1,23 +1,20 @@
 ﻿@model IEnumerable<EssexBooking.Models.Resort>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Resorts";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table>
     <tr>
         <th>
-            name
+            Name
         </th>
         <th>
-            description
+            Description
         </th>
-        <th></th>
+        <th style="border-right: 1px solid #000"></th>
+        <th style="border-right: 1px solid #000">Hotels</th>
+        <th>Extras</th>
     </tr>
 
 @foreach (var item in Model) {
@@ -28,12 +25,24 @@
         <td>
             @Html.DisplayFor(modelItem => item.description)
         </td>
-        <td>
+        <td style="border-right: 1px solid #000">
             @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
             @Html.ActionLink("Details", "Details", new { id=item.id }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+        <td style="border-right: 1px solid #000">
+            @Html.ActionLink("Add Hotel", "Create", "Hotel", new { resort_id = item.id }, null) |
+            @Html.ActionLink("View Hotels", "Index", "Hotel", new { resort_id = item.id }, null)
+        </td>
+        <td>
+            @Html.ActionLink("Add Extra", "Create", "Extras", new { resort_id = item.id }, null) |
+            @Html.ActionLink("View Extras", "Index", "Extras", new { resort_id = item.id }, null)
         </td>
     </tr>
 }
 
 </table>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>

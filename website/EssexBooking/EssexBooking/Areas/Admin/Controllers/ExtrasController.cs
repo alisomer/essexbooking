@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Objects;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -15,10 +16,15 @@ namespace EssexBooking.Areas.Admin.Controllers
 
         //
         // GET: /Admin/Extras/
+        // GET: /Admin/Extras/?resort_id=5
 
-        public ViewResult Index()
+        public ViewResult Index(int? resort_id)
         {
             var extras = db.Extras.Include("Resort");
+            if (resort_id.HasValue)
+            {
+                extras = (ObjectQuery<Extra>) extras.Where(h => h.resort_id == resort_id);
+            }
             return View(extras.ToList());
         }
 
@@ -33,10 +39,15 @@ namespace EssexBooking.Areas.Admin.Controllers
 
         //
         // GET: /Admin/Extras/Create
+        // GET: /Admin/Extras/Create?resort_id=5
 
-        public ActionResult Create()
+        public ActionResult Create(int? resort_id)
         {
             ViewBag.resort_id = new SelectList(db.Resorts, "id", "name");
+            if (resort_id.HasValue)
+            {
+                ViewBag.Resort = resort_id.ToString();
+            }
             return View();
         } 
 
