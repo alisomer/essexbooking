@@ -76,5 +76,15 @@ namespace EssexBooking.Models
             return GetBookings().Count() == 0;
         }
 
+        public decimal GetCartTotal()
+        {
+            decimal total = 0;
+            foreach(Booking b in GetBookings()){
+                total += b.GetBookingTotal();
+            }
+            return total;
+
+        }
+
     }
 }

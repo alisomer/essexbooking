@@ -1,4 +1,4 @@
-﻿@model IEnumerable<EssexBooking.Models.Booking>
+﻿@model EssexBooking.Models.Cart
 
 
 @{
@@ -14,7 +14,7 @@
         <th>Extra</th>
         <th>Amount</th>
     </tr>
-    @foreach (var bookingItem in Model)
+    @foreach (var bookingItem in Model.GetBookings())
     {
         <tr>
             <td>@bookingItem.Hotel.Resort.name</td>
@@ -28,7 +28,7 @@
                     }
                 </ul>
             </td>
-           <td>&pound;@{ViewBag.total = ViewBag.hotel_amount[bookingItem.id] + ViewBag.travel_amount[bookingItem.id] + ViewBag.extra_amount[bookingItem.id];}@ViewBag.total</td>
+           <td>&pound;@bookingItem.GetBookingTotal()</td>
         </tr>
     }
     <tr>
@@ -36,7 +36,9 @@
     <td></td>
     <td></td>
     <td></td>
-                    <td>&pound;@ViewBag.total_amount</td>
+                    <td>&pound;@Model.GetCartTotal()</td>
     </tr>
 </table>
+
+@Html.ActionLink("Buy", "Checkout");
 

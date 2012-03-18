@@ -10,7 +10,7 @@
 <script type="text/javascript" src="/Scripts/AjaxProxy.js"></script>
 <script type="text/javascript">
     $(function () {
-        $(".extra_booking_date").datepicker({ showOn: "button", buttonImage: "../../Content/images/calendar.gif", buttonImageOnly: true, minDate: 0, maxDate: "+1Y", dateFormat: 'dd-mm-yy' });
+        $(".extra_booking_date").datepicker({ showOn: "both", buttonImage: "../../Content/images/calendar.gif", buttonImageOnly: true, minDate: 0, maxDate: "+1Y", dateFormat: 'mm dd yy' });
 
         $(".start_date").datepicker({ minDate: 0, maxDate: "+1Y", dateFormat: 'mm dd yy',
             beforeShowDay: function (date) {
@@ -73,7 +73,7 @@
         $(".bookingForm .save").click(function () {
             var form = $(this).closest(".bookingForm");
             UpdateBooking({
-                temp_id: form.attr("temp_id"),
+                booking_id: form.attr("booking_id"),
                 start_date: form.find(".start_date").val(),
                 duration: form.find(".duration input:checked").val(),
                 guests: form.find("select[name=guests]").val(),
@@ -96,8 +96,8 @@
 
             var number = $(this).closest("tr").find("select.participant_number").val();
             var extra_date = $(this).closest("tr").find(".extra_booking_date").val();
-            var temp_id = $(this).closest("[temp_id]").attr("temp_id");
-            AddExtraToBooking(temp_id, extra_id, number, extra_date, displayExtraCart);
+            var booking_id = $(this).closest("[booking_id]").attr("booking_id");
+            AddExtraToBooking(booking_id, extra_id, number, extra_date, displayExtraCart);
 
         });
 
@@ -105,15 +105,15 @@
             $(this).closest(".bookingForm").addClass("addGuests");
             $(this).closest(".bookingForm").addClass("addRooms");
             $(this).closest(".bookingForm").addClass("addDoubles");
-            setGuests($(this).closest("[temp_id]").attr("temp_id"), $(this).val(), function (resp) {
+            setGuests($(this).closest("[booking_id]").attr("booking_id"), $(this).val(), function (resp) {
                 $(".bookingForm.addGuests").find(".passenger").html(resp);
                 $(".bookingForm.addGuests").removeClass("addGuests");
             });
-            setRooms($(this).closest("[temp_id]").attr("temp_id"), $(this).val(), function (resp) {
+            setRooms($(this).closest("[booking_id]").attr("booking_id"), $(this).val(), function (resp) {
                 $(".bookingForm.addRooms").find(".rooms").html(resp);
                 $(".bookingForm.addRooms").removeClass("addRooms");
             });
-            setDoubles($(this).closest("[temp_id]").attr("temp_id"), $(this).closest(".bookingForm").find("[name=rooms]").val(), $(this).val(), function (resp) {
+            setDoubles($(this).closest("[booking_id]").attr("booking_id"), $(this).closest(".bookingForm").find("[name=rooms]").val(), $(this).val(), function (resp) {
                 $(".bookingForm.addDoubles").find(".doubles").html(resp);
                 $(".bookingForm.addDoubles").removeClass("addDoubles");
             });

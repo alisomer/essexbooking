@@ -14,48 +14,33 @@ namespace EssexBooking.Controllers
 
         ASPNETDBEntities entities = new ASPNETDBEntities();
 
-        public ActionResult Index()
+        protected override void Initialize(System.Web.Routing.RequestContext requestContext)
         {
             Cart cart = new Cart();
+            if (cart.isEmpty()) requestContext.HttpContext.Response.Redirect("/home/");
 
-            if (cart.isEmpty())
-            {
-                return RedirectToAction("Index","Home");
-            }
+            base.Initialize(requestContext);
+            
+        }
 
+
+        public ActionResult Index()
+        {
             ViewBag.TravelTypes = entities.TravelTypes;
-            return View(cart);
+            return View(new Cart());
         }
 
         public ActionResult Payments()
         {
+            return View(new Cart());
+        }
+
+        public ActionResult Checkout()
+        {
             Cart cart = new Cart();
-            ViewBag.cart = cart;
+            cart.Checkout();
 
-            Dictionary<Guid, decimal> hotel_amount = new Dictionary<Guid, decimal>();
-            Dictionary<Guid, decimal> travel_amount = new Dictionary<Guid, decimal>();
-            Dictionary<Guid, decimal> extra_amount = new Dictionary<Guid, decimal>();
-
-            decimal total_hotel_amount = 0;
-            decimal total_travel_amount = 0;
-            decimal extra_price = 0;
-
-
-            foreach (var booking in ViewBag.cart.GetBookings())
-            {
-
-                hotel_amount.Add(booking.id, booking.GetHotelTotal());
-
-                travel_amount.Add(booking.id, booking.GetTravelTotal());
-                extra_amount.Add(booking.id, booking.GetExtraTotal(booking.id));
-            }
-            ViewBag.hotel_amount = hotel_amount;
-            ViewBag.travel_amount = travel_amount;
-            ViewBag.extra_amount = extra_amount;
-            //total_hotel_amount = hotel_amount.Values.Sum();
-            //total_travel_amount = travel_amount.Values.Sum();
-            ViewBag.total_amount = hotel_amount.Values.Sum() + travel_amount.Values.Sum() + extra_amount.Values.Sum();
-            return View(ViewBag.cart.GetBookings());
+            return View();
         }
     }
 }

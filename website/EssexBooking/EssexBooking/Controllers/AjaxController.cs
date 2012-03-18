@@ -14,7 +14,7 @@ namespace EssexBooking.Controllers
 
 
         [HttpPost]
-        public ActionResult AddExtraToBooking(Guid temp_id, int extra_id, int number, DateTime extra_date)
+        public ActionResult AddExtraToBooking(Guid booking_id, int extra_id, int number, DateTime extra_date)
         {
             Cart cart = new Cart();
             ExtraBooking extraBooking = new ExtraBooking();
@@ -23,17 +23,11 @@ namespace EssexBooking.Controllers
             extraBooking.booked_date = extra_date;
             Extra extra = cart.ctx.Extras.FirstOrDefault(x => x.id == extra_id);
             extraBooking.Extra = extra;
-            cart.GetBooking(temp_id).ExtraBookings.Add(extraBooking);
+            cart.GetBooking(booking_id).ExtraBookings.Add(extraBooking);
             decimal total_price = number * extra.price;
-
             ViewBag.extra_total_price = total_price;
-            Random r = new Random();
-            int extrabooktemp_id = r.Next();
 
-            //cart.bookings[temp_id].temp_extras.Add(extrabooktemp_id, extraBooking);
-
-            //return PartialView("_ExtraBookingCartPartial", cart.bookings[temp_id].temp_extras);
-            return PartialView("_ExtraBookingCartPartial", cart.GetBooking(temp_id).ExtraBookings);
+            return PartialView("_ExtraBookingCartPartial", cart.GetBooking(booking_id).ExtraBookings);
         }
 
 
@@ -49,18 +43,18 @@ namespace EssexBooking.Controllers
             return PartialView("_CartPartial", cart);
         }
        
-        public ActionResult RemoveBookingFromCart(Guid temp_id)
+        public ActionResult RemoveBookingFromCart(Guid booking_id)
         {
             
             Cart cart = new Cart();
-            cart.ctx.DeleteObject(cart.GetBooking(temp_id));
+            cart.ctx.DeleteObject(cart.GetBooking(booking_id));
             cart.AddToSession();
             return PartialView("_CartPartial", cart);
         }
 
         public class BookingRequest
         {
-            public Guid temp_id { get; set; }
+            public Guid booking_id { get; set; }
             public DateTime start_date { get; set; }
             public int duration { get; set; }
             public int guests { get; set; }
@@ -81,7 +75,7 @@ namespace EssexBooking.Controllers
 
             if (success)
             {
-                Booking b = cart.GetBooking(br.temp_id);
+                Booking b = cart.GetBooking(br.booking_id);
                 b.guests = br.guests;
                 b.duration = br.duration;
                 b.start_date = br.start_date;
@@ -95,28 +89,28 @@ namespace EssexBooking.Controllers
                     departure = br.start_date,
                     arrival = br.start_date
                 };
-
+                cart.ctx.AddToTravels(travel);
                 b.Travel = travel;
                 
             }
             return Json(new { success = success});
         }
 
-        public ActionResult SetGuests(Guid temp_id, int guests)
+        public ActionResult SetGuests(Guid booking_id, int guests)
         {
             Cart cart = new Cart();
-            cart.GetBooking(temp_id).guests = guests;
+            cart.GetBooking(booking_id).guests = guests;
             return PartialView("_PassengerFormPartial", guests);
         }
 
-        public ActionResult SetRooms(Guid temp_id, int guests)
+        public ActionResult SetRooms(Guid booking_id, int guests)
         {
             Cart cart = new Cart();
-            cart.GetBooking(temp_id).guests = guests;
+            cart.GetBooking(booking_id).guests = guests;
             return PartialView("_RoomsFormPartial", guests);
         }
 
-        public ActionResult SetDoubles(Guid temp_id, int rooms, int guests)
+        public ActionResult SetDoubles(Guid booking_id, int rooms, int guests)
         {
             Cart cart = new Cart();
             return PartialView("_DoublesFormPartial", guests-rooms);
