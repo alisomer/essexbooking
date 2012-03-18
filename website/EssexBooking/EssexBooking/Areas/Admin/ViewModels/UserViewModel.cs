@@ -7,7 +7,7 @@ using EssexBooking.Models;
 
 namespace EssexBooking.Areas.Admin.ViewModels
 {
-    public class UserViewModel : Controller
+    public class UserViewModel
     {
         public UserViewModel(IEnumerable<aspnet_Users> users, IEnumerable<aspnet_Roles> roles)
         {

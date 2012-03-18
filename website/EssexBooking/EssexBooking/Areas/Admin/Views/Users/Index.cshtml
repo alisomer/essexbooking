@@ -4,6 +4,14 @@
     ViewBag.Title = "Users";
 }
 
+@section extraHead{
+    <script>
+        $(function () {
+            $('.role-button').button();
+        });
+    </script>
+}
+
 <table>
     <tr>
         <th>
@@ -25,21 +33,38 @@
         @*<th></th>*@
     </tr>
 
-@foreach (var item in Model.UsersList) {
+@foreach (var item in Model.UsersList)
+{
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.UserName)
         </td>
         <td>
-            @Model.Staff.Contains(item.UserName)
+            @(Model.Staff.Contains(item.UserName) ? "Yes" : "No")
+            @if (Model.Staff.Contains(item.UserName))
+            {
+                @Html.ActionLink("Remove Staff", "RemoveStaff", new { id = item.UserId }, new { @class = "role-button" })
+            }
+            else
+            {
+                @Html.ActionLink("Make Staff", "MakeStaff", new { id = item.UserId }, new { @class = "role-button" })
+            }
         </td>
         <td>
-            @Model.Admins.Contains(item.UserName)
+            @(Model.Admins.Contains(item.UserName) ? "Yes" : "No")
+            @if (Model.Admins.Contains(item.UserName))
+            {
+                @Html.ActionLink("Remove Admin", "RemoveAdmin", new { id = item.UserId }, new { @class = "role-button" })
+            }
+            else
+            {
+                @Html.ActionLink("Make Admin", "MakeAdmin", new { id = item.UserId }, new { @class = "role-button" })
+            }
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.LastActivityDate)
         </td>
-        @*<td>
+        @* <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.UserId }) |
             @Html.ActionLink("Details", "Details", new { id=item.UserId }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.UserId })

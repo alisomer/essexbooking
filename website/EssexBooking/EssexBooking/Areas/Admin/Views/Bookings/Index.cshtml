@@ -1,13 +1,53 @@
-﻿@model IEnumerable<EssexBooking.Models.Booking>
+﻿@model EssexBooking.Areas.Admin.ViewModels.BookingsViewModel
 
 @{
     ViewBag.Title = "Bookings";
 }
 
-<table>
+@foreach (var booking in Model.Bookings) {
+    <div style="margin: 0 20px 9px">
+        <h3>Booking #@booking.id</h3>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { booking.id }) |
+            @*@Html.ActionLink("Details", "Details", new { booking.id }) |*@
+            @Html.ActionLink("Delete", "Delete", new { booking.id })
+        </p>
+        <p>
+            Customer: @Html.DisplayFor(modelbooking => booking.customer_id)
+        </p>
+        <p>
+            Travel: @Html.DisplayFor(modelbooking => booking.Travel.TravelType.name)
+        </p>
+        <p>
+            Hotel: @Html.DisplayFor(modelbooking => booking.Hotel.name)
+        </p>
+        <p>
+            Date: @booking.start_date.ToShortDateString()
+        </p>
+        <p>
+            Duration: @Html.DisplayFor(modelbooking => booking.duration)
+        </p>
+        <p>
+            Guests: @Html.DisplayFor(modelbooking => booking.guests)
+        </p>
+        <p>
+            Booker: @Html.DisplayFor(modelbooking => booking.booker_id)
+        </p>
+        <h4>Extras</h4>
+        <ol>
+        @foreach (var extrabooking in booking.ExtraBookings)
+        {
+            <li>@Html.DisplayFor(modelbooking => extrabooking.Extra.name)</li>
+        }
+        </ol>
+    </div>
+}
+
+
+<table hidden>
     <tr>
         <th>
-            Customer
+            Customer (Needs Customer model associated with Booking)
         </th>
         <th>
             Travel
@@ -33,7 +73,7 @@
         <th></th>
     </tr>
 
-@foreach (var booking in Model) {
+@foreach (var booking in Model.Bookings) {
     <tr>
         <td>
             @Html.DisplayFor(modelbooking => booking.customer_id)
@@ -45,7 +85,7 @@
             @Html.DisplayFor(modelbooking => booking.Hotel.name)
         </td>
         <td>
-            @Html.DisplayFor(modelbooking => booking.start_date)
+            @booking.start_date.ToShortDateString()
         </td>
         <td>
             @Html.DisplayFor(modelbooking => booking.duration)

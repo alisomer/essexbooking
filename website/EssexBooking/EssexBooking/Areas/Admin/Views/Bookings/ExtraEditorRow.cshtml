@@ -1,0 +1,10 @@
+﻿@model EssexBooking.Areas.Admin.ViewModels.ExtraBookingViewModel
+
+<div class="editorRow">
+    Extra: @Html.DropDownList("extra_id", Model.ResortExtras)
+    Number: @Html.EditorFor(x => x.ExtraBooking.participants)
+    Date: @Html.TextBox("booked_date", (String.IsNullOrEmpty(Model.ExtraBooking.booked_date.ToString()) == false ? Model.ExtraBooking.booked_date.ToShortDateString() : String.Empty), new { @class = "datePicker" })
+
+
+    | <a href="#" class="deleteRow">delete</a>
+</div>

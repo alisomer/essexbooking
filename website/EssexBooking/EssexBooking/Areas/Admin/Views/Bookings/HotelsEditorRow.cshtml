@@ -1,0 +1,3 @@
+﻿@model IEnumerable<EssexBooking.Models.Hotel>
+
+@Html.DropDownList("hotel_id", new SelectList(Model, "id", "name"))

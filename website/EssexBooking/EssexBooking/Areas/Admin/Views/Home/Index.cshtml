@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Admin Home Page";
+    ViewBag.Title = "Home Page";
 }
 @section extraHead
 {
@@ -64,6 +64,7 @@
         @Html.Partial("_BookingsForDate", (IEnumerable<EssexBooking.Models.Booking>)ViewBag.Today)
     </li>
     <li class="span4">
-        <h3>Errors?</h3>
+        <h3>Outstanding Payments</h3>
+
     </li>
 </ul>
