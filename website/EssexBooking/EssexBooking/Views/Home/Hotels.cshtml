@@ -17,6 +17,10 @@
             var hotel_id = $(this).closest("[hotel_id]").attr("hotel_id");
             AddHotelToCart(hotel_id, updateCart);
 
+        }).button({
+            icons: {
+                primary: "ui-icon-circle-plus"
+            }
         });
 
         $(".cart .remove").live('click',function () {
@@ -28,10 +32,25 @@
     });
 
 </script>
+<style>
+
+table.hotels
+{
+    float:left;   
+    width: 580px;
+}
+
+#minicart
+{
+    float: right;
+    width: 300px;
+}
+
+</style>
 }
 <h2>Hotels</h2>
 
-<table>
+<table class="hotels">
     <tr>
         <th>
             Name 
@@ -64,7 +83,7 @@
          <td>
             @Html.DisplayFor(modelItem => item.Resort.name)
         </td>
-        <td>
+        <td style="text-align:center">
             <button class="addToCart">Add</button>
         </td>
     </tr>
@@ -75,3 +94,4 @@
 <div id="minicart">
 @Html.Partial("_CartPartial", (EssexBooking.Models.Cart) ViewBag.Cart)
 </div>
+<br class="clear />

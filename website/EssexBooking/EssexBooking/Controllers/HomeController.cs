@@ -12,7 +12,6 @@ namespace EssexBooking.Controllers
         public ASPNETDBEntities entities = new ASPNETDBEntities();
         public ActionResult Index()
         {
-            ViewBag.Message = "Welcome to ASP.NET MVC!";
             ViewBag.cart = new Cart();
             return View();
         }
@@ -26,6 +25,12 @@ namespace EssexBooking.Controllers
         {
             ViewBag.cart = new Cart();
             return View(entities.Hotels);
+        }
+
+        public ActionResult HotelsOfResort(int resort_id)
+        {
+            ViewBag.cart = new Cart();
+            return View("Hotels",entities.Hotels.Where(h => h.resort_id == resort_id));
         }
 
         public ActionResult Travel()

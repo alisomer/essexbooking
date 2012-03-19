@@ -1,6 +1,6 @@
 ﻿@model EssexBooking.Models.Cart
 <div class="cart">
-<h3>Your Cart</h3>
+<div>Your Cart</div>
     <table>
         @foreach (var booking in Model.GetBookings()) {
 
@@ -16,5 +16,24 @@
 
         }
     </table>
-<a class="proceed" href="@Url.Action("Index","Booking")">Proceed to booking</a>
+    <br class="clear" />
+@if (!Model.isEmpty())
+{
+    <a class="proceed" href="@Url.Action("Index", "Booking")">Book Now</a>
+}
+<br class="clear" />
 </div>
+
+<script type="text/javascript">
+    $(".proceed").button({
+        icons: {
+            primary: "ui-icon-cart"
+        }
+    });
+    $(".remove").button({
+        icons: {
+            primary: "ui-icon-trash"
+        }
+    });
+
+</script>

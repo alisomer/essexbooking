@@ -2,8 +2,54 @@
     ViewBag.Title = "Home Page";
 }
 
-<h2>@ViewBag.Message</h2>
+<style>
+
+.floatem img 
+{
+    float:left;   
+}
+
+.floatem p
+{
+    float:left;
+    margin-left:15px;
+    width: 550px; 
+}
+
+#main .resort
+{
+    border-radius: 10px 10px 10px 10px;
+    cursor: pointer;
+    display: block;
+    font-size: 16px;
+    padding: 12px;
+    text-decoration: none;
+}
+    
+.resort:hover
+{
+      background: #def; 
+}
+
+</style>
+
+
 <p>
-    To learn more about ASP.NET MVC visit <a href="http://asp.net/mvc" title="ASP.NET MVC Website">http://asp.net/mvc</a>.
+    Welcome to the Essex Boooking. 
+    We hope that you find your dream holiday among the large selection of resorts that we provide. 
+    Book with Essex Booking and relax, leave the worrying to us.
 </p>
+
+
+@foreach(EssexBooking.Models.Resort resort in ViewBag.cart.ctx.Resorts)
+{
+    <a href="/Home/HotelsOfResort/?resort_id=@resort.id" class="resort" resort_id="@resort.id">
+    <h3>@resort.name</h3>
+    <div class="floatem">
+        <img src="../../Content/images/resorts/@(resort.id).jpg" />
+        <p>@resort.description</p>
+        <br class="clear"/>
+    </div>
+    </a>
+}
 
