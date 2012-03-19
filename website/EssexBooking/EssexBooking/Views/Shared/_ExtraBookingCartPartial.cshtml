@@ -13,10 +13,10 @@
         @foreach (var extrabooking in Model)
         {
         <tr extratemp_id="@extrabooking.id">
-            <td>@ViewBag.extra_name</td>
+            <td>@extrabooking.Extra.name</td>
             <td>@extrabooking.participants</td>   
             <td>@extrabooking.booked_date.ToShortDateString()</td>               
-            <td>@ViewBag.extra_total_price</td>
+            <td>&euro;@(extrabooking.Extra.price * extrabooking.participants)</td>
         </tr>
         }
     </table>

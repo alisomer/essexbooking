@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using EssexBooking.Models;
+using System.Web.Security;
 
 namespace EssexBooking.Controllers
 {
@@ -37,17 +38,9 @@ namespace EssexBooking.Controllers
 
         public ActionResult Payments()
         {
-            return View(new Cart());
+            return View(new PaymentsViewModel { Cart = new Cart(), CreditCard = new CreditCard() });
         }
 
-        public ActionResult Checkout()
-        {
 
-            Cart cart = new Cart();
-
-            cart.Checkout();
-
-            return View();
-        }
     }
 }

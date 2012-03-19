@@ -1,0 +1,18 @@
+﻿@model IEnumerable<EssexBooking.Models.Booking>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+.display-label
+{
+    font-weight:bold;
+}
+</style>
+
+<h2>Your bookings</h2>
+@foreach (EssexBooking.Models.Booking b in Model)
+{
+    @Html.Partial("_BookingDetailsPartial", b);
+}

@@ -10,6 +10,7 @@ namespace EssexBooking.Models
     public class Cart
     {
         public ASPNETDBEntities ctx;
+        public List<string> WhyNotValid;
 
         public Cart()
         {
@@ -17,10 +18,12 @@ namespace EssexBooking.Models
             if (c != null)
             {
                 ctx = c.ctx;
+                WhyNotValid = c.WhyNotValid;
             }
             else
             {
                 ctx = new ASPNETDBEntities();
+                WhyNotValid = new List<string>();
                 this.AddToSession();
             }
 
@@ -43,10 +46,33 @@ namespace EssexBooking.Models
             ctx = new ASPNETDBEntities();
         }
 
-        public void Checkout()
+        public bool Checkout()
         {
-            ctx.SaveChanges();
-            Empty();
+            if (ValidCart())
+            {
+                ctx.SaveChanges();
+                Empty();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool ValidCart()
+        {
+            WhyNotValid.Clear();
+
+            foreach (Booking booking in GetBookings())
+            {
+                if (booking.customer_id == Guid.Parse("00000000-0000-0000-0000-000000000000"))//dummy id
+                {
+                    WhyNotValid.Add("You must be looged in to make a booking");
+                    return false;
+                }
+            }
+            return true;
         }
 
         public void Add(Travel travel)

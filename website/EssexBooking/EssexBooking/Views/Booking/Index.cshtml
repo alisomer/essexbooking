@@ -1,7 +1,7 @@
 ﻿@model EssexBooking.Models.Cart
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Booking details";
 }
 
 @section extraHead
@@ -15,10 +15,16 @@
             buttonImageOnly: true,
             minDate: 0,
             maxDate: "+1Y",
-            dateFormat: 'mm dd yy' 
+            dateFormat: 'mm dd yy',
+            firstDay : 1
         });
 
-        $(".start_date").datepicker({ minDate: 0, maxDate: "+1Y", dateFormat: 'mm dd yy',
+        $(".start_date").datepicker({
+            minDate: 0,
+            maxDate: "+1Y",
+            dateFormat: 'mm dd yy',
+            firstDay: 1, 
+            defaultDate: $(".start_date").attr("date"), 
             beforeShowDay: function (date) {
 
                 var selected = $(this).closest(".bookingForm").find(".start_date").val().toString();
@@ -51,26 +57,6 @@
 
         $(".radioset").buttonset();
 
-        $(".bookingForm .save").click(function () {
-            var form = $(this).closest(".bookingForm");
-
- 
-
-
-            UpdateBooking({
-                booking_id: form.attr("booking_id"),
-                start_date: form.find(".start_date").val(),
-                duration: form.find(".duration input:checked").val(),
-                guests: form.find("select[name=guests]").val(),
-                travel_type_id: form.find(".travel_type input:checked").val()
-
-            },
-            function (resp) { 
-                //console.log("ok"); 
-            
-            })
-
-        });
         $(".duration input").change(function () { $(".start_date").datepicker("refresh"); });
 
         displayExtraCart = function (resp) {
@@ -106,21 +92,40 @@
                 $(".bookingForm.addDoubles").removeClass("addDoubles");
             });
         });
+
+        $(".saveAll").click(function () {
+            $(".bookingForm").each(function () {
+                var form = $(this);
+                UpdateBooking({
+                    booking_id: form.attr("booking_id"),
+                    start_date: form.find(".start_date").val(),
+                    duration: form.find(".duration input:checked").val(),
+                    guests: form.find("select[name=guests]").val(),
+                    travel_type_id: form.find(".travel_type input:checked").val()
+
+                },
+                function (resp) {
+                    if (resp.success) {
+                        $(".bookingForm[booking_id='" + resp.id + "']").addClass("saved");
+                        if ($(".bookingForm.saved").length == $(".bookingForm").length) {
+                            window.location = "/Booking/Passengers"
+                        }
+                    }
+                    else {
+                        alert(resp.errors);
+                    }
+                });
+            });
+        });
+
     });
 </script>
 }
 
-<h2>Index</h2>
+<h2>Booking Details</h2>
 @foreach (var b in Model.GetBookings())
 {
    @Html.Partial("_BookingFormPartial", b)
 }
 
-@Html.ActionLink("Proceed to Passenger details","Passengers","Booking")
-
-<div>
-    <button class="ui-button ui-button-text-icon-primary book-button">
-        <span class="ui-button-icon-primary ui-icon ui-icon-cart"></span>
-        <span class="ui-button-text">Book Now!</span>
-    </button>
-</div>
+<button class="saveAll">Proceed to Passenger info</button>

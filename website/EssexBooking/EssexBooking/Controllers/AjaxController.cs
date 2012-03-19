@@ -6,6 +6,9 @@ using System.Web;
 using System.Web.Mvc;
 using EssexBooking.Models;
 using System.Web.Script.Serialization;
+using System.Web.Security;
+using System.ComponentModel.DataAnnotations;
+using System.Text;
 
 namespace EssexBooking.Controllers
 {
@@ -24,9 +27,6 @@ namespace EssexBooking.Controllers
             Extra extra = cart.ctx.Extras.FirstOrDefault(x => x.id == extra_id);
             extraBooking.Extra = extra;
             cart.GetBooking(booking_id).ExtraBookings.Add(extraBooking);
-            decimal total_price = number * extra.price;
-            ViewBag.extra_total_price = total_price;
-
             return PartialView("_ExtraBookingCartPartial", cart.GetBooking(booking_id).ExtraBookings);
         }
 
@@ -49,6 +49,8 @@ namespace EssexBooking.Controllers
             cart.ctx.AddToTravels(travel);
             newbooking.Travel = travel;
 
+            newbooking.Travel.Passangers.Add(new Passanger { id = Guid.NewGuid() });//at least one passanger
+
             cart.ctx.Bookings.AddObject(newbooking);
 
             return PartialView("_CartPartial", cart);
@@ -63,26 +65,24 @@ namespace EssexBooking.Controllers
             return PartialView("_CartPartial", cart);
         }
 
-        public class BookingRequest
-        {
-            public Guid booking_id { get; set; }
-            public DateTime start_date { get; set; }
-            public int duration { get; set; }
-            public int guests { get; set; }
-            public int travel_type_id { get; set; }
-        }
+
 
         [HttpPost]
         public JsonResult UpdateBooking(BookingRequest br)
         {
-            Guid cusID = new Guid("5ae593b4-066d-4744-b9e0-35030455005b");
-            Cart cart = new Cart();
-            Boolean success = true;
-            List<String> errors = new List<String>();
-            Validator v = new Validator();
 
-            errors.Add(v.ValidateTravel(br.start_date, br.travel_type_id));
-            success = v.Success(errors);
+            Cart cart = new Cart();
+
+            BookingValidator v = new BookingValidator();
+            v.Validate(br);
+
+            List<String> errors = v.errors;
+
+            foreach (ModelState state in ModelState.Values)
+                foreach (ModelError error in state.Errors)
+                    errors.Add(error.ErrorMessage);
+
+            Boolean success = errors.Count == 0;
 
             if (success)
             {
@@ -90,27 +90,27 @@ namespace EssexBooking.Controllers
                 b.guests = br.guests;
                 b.duration = br.duration;
                 b.start_date = br.start_date;
-                b.customer_id = cusID;
 
-                /*
-                Travel travel = new Travel
+                if (User.Identity.IsAuthenticated)
                 {
-                    id = Guid.NewGuid(),
-                    travel_type_id = br.travel_type_id,
-                    departure = br.start_date,
-                    arrival = br.start_date
-                };
-                cart.ctx.AddToTravels(travel);
-                b.Travel = travel;
-                 * */
+                    if (User.IsInRole("TelesaleStaff"))
+                    {
+                        b.booker_id = (System.Guid)Membership.GetUser().ProviderUserKey;
+                        Customer c = (Customer) System.Web.HttpContext.Current.Session["customer"];
 
-                //b.Travel.travel_type_id = br.travel_type_id;
+                        b.customer_id = c.MembershipID;
+                    }
+                    else//normal customer
+                    {
+                        b.customer_id = (System.Guid)Membership.GetUser().ProviderUserKey;
+                    }
+                }
 
                 b.Travel.TravelType = cart.ctx.TravelTypes.SingleOrDefault(t => t.id == br.travel_type_id);
                 b.Travel.departure = br.start_date;
                 b.Travel.arrival = br.start_date;
             }
-            return Json(new { success = success});
+            return Json(new { success = success, id = br.booking_id , errors = errors});
         }
 
         public ActionResult SetGuests(Guid booking_id, int guests)
@@ -159,11 +159,69 @@ namespace EssexBooking.Controllers
                 existing_passenger.first_name = passenger.first_name;
                 existing_passenger.last_name = passenger.last_name;
                 existing_passenger.passaport_no = passenger.passaport_no;
-                return Json(new { success = true, id = existing_passenger.id });
+
+                String nextpage = "/Booking/Payments";
+                if (booking.customer_id == Guid.Parse("00000000-0000-0000-0000-000000000000"))//dummy id
+                {
+                    nextpage = "/Account/Register";
+                }
+
+                return Json(new { success = true, id = existing_passenger.id , nextpage = nextpage});
             }
             return Json(new { success = false });
         }
 
+
+        public JsonResult Checkout(CreditCard creditCard)
+        {
+
+            Cart cart = new Cart();
+
+            if (User.IsInRole("TelesaleStaff"))
+            {
+                Customer c = (Customer)System.Web.HttpContext.Current.Session["customer"];
+                MembershipCreateStatus createStatus;
+                Membership.CreateUser(c.FirstName + c.LastName, "dummypassword", "", null, null, true, c.MembershipID, out createStatus);
+                if (createStatus == MembershipCreateStatus.Success)
+                {
+                    cart.ctx.AddToCustomers(c);
+                }
+            }
+
+            List<string> reasons = new List<string>();
+            if (ModelState.IsValid)//Check if credit card is ok
+            {
+                
+                var cost = cart.GetCartTotal();
+
+                if (creditCard.isValid() && creditCard.hasAmount(cost)) //confirm that the money is there
+                {
+                    if (cart.Checkout())
+                    {
+                        creditCard.Charge(cost);
+                        return Json(new { success = true , });
+                    }
+                    else
+                    {
+                        return Json(new { success = false , errors = cart.WhyNotValid});
+                    }
+                }
+                else
+                {
+
+                    
+                    reasons.Add("We havent ben able to charge your credit card. ");
+                    return Json(new { success = false, errors = reasons });
+                }
+            }
+            else
+            {
+                //This means that something is not valid with the card. 
+                reasons.Add("The card details you have entered are not valid. ");
+                return Json(new { success = false, errors = reasons });
+            }
+
+        }
 
     }
 }

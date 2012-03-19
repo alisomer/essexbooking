@@ -7,7 +7,7 @@
 <div class="hotelForm">
     <h2>Booking for @Model.Hotel.name</h2>
 
-    <div class="formField"><div class="start_date"></div></div>
+    <div class="formField"><div date="@Model.start_date.Month @Model.start_date.Day @Model.start_date.Year" class="start_date"></div></div>
     <div class="formField">
         Duration 
         <div class="radioset duration">
@@ -16,14 +16,6 @@
         </div>
     </div>
     <div class="formField">
-        guests @Html.DropDownListFor(model=> model.guests, new SelectList(Enumerable.Range(0, 20)))
-@*        guests <select name="guests">
-            @for(int i=1; i<=20;i++){
-                <option value="@i">@i</option>
-            }
-        </select>
-*@
-        Val from obj = @(Model.guests)
-        <!--TODO: pre select from dropdown -->
+        guests @Html.DropDownListFor(model=> model.guests, new SelectList(Enumerable.Range(1, 20)))
     </div>
 </div>

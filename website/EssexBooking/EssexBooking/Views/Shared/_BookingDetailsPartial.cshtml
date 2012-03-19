@@ -1,0 +1,37 @@
+﻿@model EssexBooking.Models.Booking
+
+<fieldset>
+    <legend>Booking</legend>
+
+    <div class="display-label">Tracking ID</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.id)
+    </div>
+
+    <div class="display-label">travel</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Travel.TravelType.name)
+    </div>
+
+    <div class="display-label">hotel </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Hotel.name)
+    </div>
+
+    <div class="display-label">start_date</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.start_date)
+    </div>
+
+    <div class="display-label">duration</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.duration)
+    </div>
+
+    <div class="display-label">guests</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.guests)
+    </div>
+
+</fieldset>
+

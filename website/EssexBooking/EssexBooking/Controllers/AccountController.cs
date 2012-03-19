@@ -96,7 +96,18 @@ namespace EssexBooking.Controllers
                     c.PassportNumber = model.PassportNumber;
                     c.MembershipID = userKey;
                     c.AddCustomer();
-                    return RedirectToAction("Index", "Home");
+
+                    Cart cart = new Cart();
+                    if(cart.isEmpty()){
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else{//customers was just shppping now
+                        foreach (Booking b in cart.GetBookings())
+                        {
+                            b.customer_id = c.MembershipID;
+                            return RedirectToAction("Payments", "Booking");
+                        }
+                    }
                 }
                 else
                 {

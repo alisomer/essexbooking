@@ -58,9 +58,9 @@ namespace EssexBooking.Controllers
         [HttpPost]
         public ActionResult CustomerForm(Customer c)
         {
+            c.MembershipID = Guid.NewGuid();
             System.Web.HttpContext.Current.Session["customer"] = c;
             return RedirectToAction("Hotels", "Home");
-
         }
 
         public ActionResult RemoveCustomer()

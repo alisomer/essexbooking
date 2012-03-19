@@ -1,0 +1,46 @@
+﻿@model EssexBooking.Models.Cart
+
+@{
+    ViewBag.Title = "Passengers";
+}
+@section extraHead
+{
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+        $('form').submit(function () {
+            if ($(this).valid()) {
+                $.ajax({
+                    url: this.action,
+                    type: this.method,
+                    data: $(this).serialize(),
+                    success: function (resp) {
+                        $("[passenger_id='" + resp.id + "']").addClass("saved");
+                        //$('#result').html(result);
+                        if ($("fieldset.saved").length == $("fieldset").length) {
+                            window.location = resp.nextpage
+                        }
+                    }
+                });
+            }
+            return false;
+        });
+
+        $(".saveAll").click(function () {
+            $("form").submit();
+        });
+    });
+</script>
+
+}
+<h2>Passengers</h2>
+@foreach(EssexBooking.Models.Booking b in Model.GetBookings())
+{
+    <h3>Booking for @b.Hotel.name by @b.Travel.TravelType.name</h3>
+    <div class="passengers">
+        @Html.Partial("_PassengersFormPartial", b.Travel.Passangers)
+    </div>
+    
+    <button class="saveAll">Proceed to Payment</button>
+}

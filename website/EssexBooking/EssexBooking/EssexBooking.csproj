@@ -65,10 +65,24 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\BookingsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CustomerController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ExtrasController.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\HotelController.cs" />
+    <Compile Include="Areas\Admin\Controllers\HotelTypeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ResortController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TravelTypeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
+    <Compile Include="Areas\Admin\ViewModels\BookingsViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\ExtraBookingViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\UserViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AjaxController.cs" />
     <Compile Include="Controllers\BookingController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\TeleSalesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -81,14 +95,16 @@
     </Compile>
     <Compile Include="Models\Booking.cs" />
     <Compile Include="Models\Cart.cs" />
+    <Compile Include="Models\CreditCard.cs" />
     <Compile Include="Models\Currency.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\HistoryModel.cs" />
     <Compile Include="Models\EntitiesRepository.cs" />
     <Compile Include="Models\Passanger.cs" />
+    <Compile Include="Models\PaymentsViewModel.cs" />
     <Compile Include="Models\TeleSalesPanelViewModel.cs" />
     <Compile Include="Models\TelesalesViewModel.cs" />
-    <Compile Include="Models\Validator.cs" />
+    <Compile Include="Models\BookingValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -251,10 +267,62 @@
     <Content Include="Views\Booking\Passengers.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Admin\Views\Bookings\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Bookings\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Bookings\ExtraEditorRow.cshtml" />
+    <Content Include="Areas\Admin\Views\Bookings\HotelsEditorRow.cshtml" />
+    <Content Include="Areas\Admin\Views\Bookings\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Bookings\NewHotelRow.cshtml" />
+    <Content Include="Areas\Admin\Views\Customer\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Customer\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Customer\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Customer\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Customer\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Extras\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Extras\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Extras\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Extras\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Extras\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\HotelType\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\HotelType\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\HotelType\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\HotelType\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\HotelType\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Hotel\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Hotel\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Hotel\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Hotel\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Hotel\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Resort\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Resort\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Resort\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Resort\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Resort\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\Error.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_BookingsForDate.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_LastBookings.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\TravelType\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\TravelType\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\TravelType\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\TravelType\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\TravelType\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Web.config" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
     <EntityDeploy Include="Models\AdoModels.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>AdoModels.Designer.cs</LastGenOutput>
     </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Profile\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_BookingDetailsPartial.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

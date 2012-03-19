@@ -6,13 +6,7 @@
     <fieldset passenger_id="@Model.id" >
         <legend>Passanger</legend>
         <input type="hidden" name="id" value="@Model.id" />
-        <div class="editor-label">
-            @Html.LabelFor(model => model.travel_id)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.travel_id)
-            @Html.ValidationMessageFor(model => model.travel_id)
-        </div>
+        <input type="hidden" name="travel_id" value="@Model.travel_id" />
 
         <div class="editor-label">
             @Html.LabelFor(model => model.first_name)

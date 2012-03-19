@@ -6,9 +6,9 @@
 
 <div class="radioset travel_type">
 <p>Note: Aeroplane travel is currently only avaliable on the following days: Wednesday, Saturday.</p>
-@foreach(var item in ViewBag.TravelTypes)
+@foreach(EssexBooking.Models.TravelType item in ViewBag.TravelTypes)
 {
-    <input name="@(prefix)_travel_id" id="@(prefix)_travel_@(item.id)" value="@(item.id)" type="radio" />
+    <input name="@(prefix)_travel_id" id="@(prefix)_travel_@(item.id)" value="@(item.id)" type="radio"  @(Model.Travel.travel_type_id == item.id ? "checked='checked'" : "")/>
     <label name="@(item.id)" for="@(prefix)_travel_@(item.id)">@item.name</label>
 }
 </div>

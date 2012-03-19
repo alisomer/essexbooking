@@ -1,0 +1,6 @@
+﻿@model IEnumerable<EssexBooking.Models.Passanger>
+           
+@foreach (EssexBooking.Models.Passanger p in Model)
+{
+    @Html.Partial("_PassengerFormPartial", p)
+}

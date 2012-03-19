@@ -8,7 +8,8 @@ namespace EssexBooking.Models
 {
     public partial class Customer
     {
-        public ASPNETDBEntities ctx;
+
+        public ASPNETDBEntities ctx = new ASPNETDBEntities();
         public void AddCustomer()
         {
             ctx.AddToCustomers(this);
