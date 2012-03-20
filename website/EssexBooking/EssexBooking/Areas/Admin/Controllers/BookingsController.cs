@@ -9,7 +9,9 @@ using EssexBooking.Areas.Admin.ViewModels;
 using EssexBooking.Models;
 
 namespace EssexBooking.Areas.Admin.Controllers
-{ 
+{
+    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "TelesaleStaff")]
     public class BookingsController : Controller
     {
         private ASPNETDBEntities db = new ASPNETDBEntities();
@@ -56,6 +58,12 @@ namespace EssexBooking.Areas.Admin.Controllers
         // GET: /Admin/Bookings/Delete/5
  
         public ActionResult Delete(Guid id)
+        {
+            Booking booking = db.Bookings.Single(b => b.id == id);
+            return View(booking);
+        }
+
+        public ActionResult Details(Guid id)
         {
             Booking booking = db.Bookings.Single(b => b.id == id);
             return View(booking);

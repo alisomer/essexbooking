@@ -8,7 +8,9 @@ using System.Web.Mvc;
 using EssexBooking.Models;
 
 namespace EssexBooking.Areas.Admin.Controllers
-{ 
+{
+    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "TelesaleStaff")]
     public class ResortController : Controller
     {
         private ASPNETDBEntities db = new ASPNETDBEntities();

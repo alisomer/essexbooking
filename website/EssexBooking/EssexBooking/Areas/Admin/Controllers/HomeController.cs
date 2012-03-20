@@ -5,6 +5,8 @@ using EssexBooking.Models;
 
 namespace EssexBooking.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "TelesaleStaff")]
     public class HomeController : Controller
     {
         private ASPNETDBEntities db = new ASPNETDBEntities();

@@ -7,7 +7,7 @@
         <li>
             Hotel @item.Hotel.name (in @item.Hotel.Resort.name)
             <br>
-            @item.guests @(item.guests == 1 ? "guest" : "guests") at @item.start_date.ToShortDateString() for @item.duration @(item.duration == 1 ? "day" : "days")
+            @item.guests() @(item.guests() == 1 ? "guest" : "guests") at @item.start_date.ToShortDateString() for @item.duration @(item.duration == 1 ? "day" : "days")
             <div style="text-align: right">@Html.ActionLink("View", "Details", "Bookings", new { item.id }, null)</div>
         </li>
 }

@@ -214,12 +214,18 @@ namespace EssexBooking.Controllers
                 
                 var cost = cart.GetCartTotal();
 
+                List<String> booking_ids = new List<string>();
+                foreach (Booking b in cart.GetBookings())
+                {
+                    booking_ids.Add(b.id.ToString());
+                }
+
                 if (creditCard.isValid() && creditCard.hasAmount(cost)) //confirm that the money is there
                 {
                     if (cart.Checkout())
                     {
                         creditCard.Charge(cost);
-                        return Json(new { success = true });
+                        return Json(new { success = true, ids = booking_ids });
                     }
                     else
                     {

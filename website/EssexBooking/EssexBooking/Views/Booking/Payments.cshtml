@@ -19,7 +19,8 @@
                     data: $(this).serialize(),
                     success: function (resp) {
                         if (resp.success) {
-                            $("form").html("<p style='font-size:40px; color:#2a2'>Your booking has been succesfully made.</p>")
+                            $("form").html("<p style='font-size:40px; color:#2a2'>Your booking has been succesfully made.</p>" );
+                            $("form").append("<h3>Tracking Numbers</h3><textarea style='width: 100%;'>"+ resp.ids.join("\n")+"</textarea>");
                         }
                         else {
                             alert(resp.errors);

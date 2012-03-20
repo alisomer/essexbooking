@@ -28,7 +28,10 @@
             Duration: @Html.DisplayFor(modelbooking => booking.duration)
         </p>
         <p>
-            Guests: @Html.DisplayFor(modelbooking => booking.guests)
+            Single Rooms: @Html.DisplayFor(modelbooking => booking.single_rooms)
+        </p>
+         <p>
+            Double Rooms: @Html.DisplayFor(modelbooking => booking.double_rooms)
         </p>
         <p>
             Booker: @Html.DisplayFor(modelbooking => booking.booker_id)
@@ -89,9 +92,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelbooking => booking.duration)
-        </td>
-        <td>
-            @Html.DisplayFor(modelbooking => booking.guests)
         </td>
         <td>
             @Html.DisplayFor(modelbooking => booking.booker_id)
