@@ -50,6 +50,17 @@ namespace EssexBooking.Models
         {
             if (ValidCart())
             {
+                //add payments for each booking
+                foreach(Booking b in GetBookings()){
+                    Payment p = new Payment();
+                    p.id = Guid.NewGuid();
+                    p.amount = b.GetBookingTotal();
+                    p.payment_date = DateTime.Now;
+                    p.Booking = b;
+                    ctx.AddToPayments(p);
+                }
+
+
                 ctx.SaveChanges();
                 Empty();
                 return true;

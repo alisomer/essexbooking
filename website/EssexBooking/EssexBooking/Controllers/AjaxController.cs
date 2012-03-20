@@ -87,7 +87,9 @@ namespace EssexBooking.Controllers
             if (success)
             {
                 Booking b = cart.GetBooking(br.booking_id);
-                b.guests = br.guests;
+                //b.guests = br.guests;
+                b.single_rooms = br.single_rooms;
+                b.double_rooms = br.double_rooms;
                 b.duration = br.duration;
                 b.start_date = br.start_date;
 
@@ -109,10 +111,24 @@ namespace EssexBooking.Controllers
                 b.Travel.TravelType = cart.ctx.TravelTypes.SingleOrDefault(t => t.id == br.travel_type_id);
                 b.Travel.departure = br.start_date;
                 b.Travel.arrival = br.start_date;
+
+                foreach (Passanger p in b.Travel.Passangers.ToList())
+                {
+                    b.Travel.Passangers.Remove(p);
+                    cart.ctx.DeleteObject(p);
+                }
+
+                //b.Travel.Passangers.Clear();
+                for (int i = 0; i < b.guests(); i++)
+                {
+                    b.Travel.Passangers.Add(new Passanger { id = Guid.NewGuid() });
+                }
+
+
             }
             return Json(new { success = success, id = br.booking_id , errors = errors});
         }
-
+        /*
         public ActionResult SetGuests(Guid booking_id, int guests)
         {
 
@@ -133,19 +149,23 @@ namespace EssexBooking.Controllers
             return PartialView("_PassengersFormPartial", b.Travel.Passangers);
         }
 
-        public ActionResult SetRooms(Guid booking_id, int guests)
+        public ActionResult SetRooms(Guid booking_id, int single_rooms, int double_rooms)
         {
             Cart cart = new Cart();
-            cart.GetBooking(booking_id).guests = guests;
-            return PartialView("_RoomsFormPartial", guests);
+            Booking b = cart.GetBooking(booking_id);
+            b.single_rooms = single_rooms;
+            b.double_rooms = double_rooms;
+            b.updatePassangersFromRooms();
+            return PartialView("_RoomsFormPartial", b);
         }
-
+         * /
+/*
         public ActionResult SetDoubles(Guid booking_id, int rooms, int guests)
         {
             Cart cart = new Cart();
             return PartialView("_DoublesFormPartial", guests-rooms);
         }
-
+*/
         [HttpPost]
         public JsonResult AddPassengers(Passanger passenger)
         {
@@ -199,7 +219,7 @@ namespace EssexBooking.Controllers
                     if (cart.Checkout())
                     {
                         creditCard.Charge(cost);
-                        return Json(new { success = true , });
+                        return Json(new { success = true });
                     }
                     else
                     {

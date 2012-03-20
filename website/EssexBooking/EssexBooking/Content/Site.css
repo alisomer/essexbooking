@@ -356,6 +356,12 @@ div#title {
     margin: 20px 0;
 }
 
+.saveAll
+{
+    float:right;
+    margin:10px;
+}
+
 #TsPanel
 {
     background: none repeat scroll 0 0 #ccffcc;

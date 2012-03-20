@@ -14,13 +14,18 @@ namespace EssexBooking.Models
     {
         public double twoWeekDiscount = 0.9;
         public double groupDiscount = 0.95;
+        public double singleRoomSuplement = 1.2;
+
+        public int guests(){
+            return single_rooms + double_rooms * 2;
+        }
 
         // public decimal extra_total_price;
         public decimal GetHotelTotal()
         {
             //TODO: change guests to number of rooms
-            
-            double result = (double) Hotel.HotelType.price * guests * duration;
+
+            double result = (double) Hotel.HotelType.price * (single_rooms * singleRoomSuplement + double_rooms *2 ) * duration;
             if (HasDiscount14day()) result *= twoWeekDiscount; //14 day stay discount
             return (decimal) result;
         }
@@ -32,12 +37,17 @@ namespace EssexBooking.Models
 
         public bool HasDiscountGroup()
         {
-            return (guests > 10);
+            return (guests() > 10);
+        }
+
+        public bool HasSingleRoomSupplement()
+        {
+            return (single_rooms > 0);
         }
 
         public decimal GetTravelTotal()
         {
-            return (Travel.TravelType.price * guests);//TODO: change to passangers
+            return (Travel.TravelType.price * guests());//TODO: change to passangers
         }
 
         public decimal GetExtraTotal()
@@ -68,6 +78,25 @@ namespace EssexBooking.Models
 
         }
 
+        public Payment GetPayment(){
+            return Payments.Single(p => p.booking_id == id);
+        }
+
+        /**
+        public void updatePassangersFromRooms(){
+            foreach (Passanger p in this.Travel.Passangers.ToList())
+            {
+                this.Travel.Passangers.Remove(p);
+                //cart.ctx.DeleteObject(p);
+            }
+
+            //b.Travel.Passangers.Clear();
+            for (int i = 0; i < guests(); i++)
+            {
+                this.Travel.Passangers.Add(new Passanger { id = Guid.NewGuid() });
+            }
+        }
+        */
     }
 
 
@@ -84,8 +113,10 @@ namespace EssexBooking.Models
         public int duration { get; set; }
 
         [Required]
-        [Range(1, 20, ErrorMessage = "Please select a number of guests")]
-        public int guests { get; set; }
+        public int single_rooms { get; set; }
+
+        [Required]
+        public int double_rooms { get; set; }
 
         [Required]
         [Range(1, 2, ErrorMessage = "Please select a travel type")]

@@ -27,20 +27,38 @@
             return false;
         });
 
-        $(".saveAll").click(function () {
+        $(".saveAll")
+        .button({
+            icons: {
+                primary: "ui-icon-circle-triangle-e"
+            }
+        })
+        .click(function () {
             $("form").submit();
         });
     });
 </script>
+<style>
+.passengers form
+{
+    width:50%;
+    float:left;
+    
+}
+
+</style>
 
 }
 <h2>Passengers</h2>
 @foreach(EssexBooking.Models.Booking b in Model.GetBookings())
 {
-    <h3>Booking for @b.Hotel.name by @b.Travel.TravelType.name</h3>
+    
     <div class="passengers">
+    <h3>Booking for @b.Hotel.name by @b.Travel.TravelType.name</h3>
         @Html.Partial("_PassengersFormPartial", b.Travel.Passangers)
     </div>
-    
-    <button class="saveAll">Proceed to Payment</button>
+    <br class="clear" />
+
 }
+<button class="saveAll">Proceed to Payment</button>
+<br class="clear" />

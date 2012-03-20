@@ -29,8 +29,17 @@ namespace EssexBooking.Models
             return true;
         }
 
+        private bool ValidateRooms(int single_rooms, int double_rooms){
+            if (single_rooms + double_rooms == 0)
+            {
+                errors.Add("There needs to be at least one room");
+                return false;
+            }
+            return true;
+        }
+
         public bool Validate(BookingRequest br){
-            return ValidateTravel(br.start_date, br.travel_type_id);
+            return ValidateTravel(br.start_date, br.travel_type_id) && ValidateRooms(br.single_rooms, br.double_rooms);
         }
 
     }

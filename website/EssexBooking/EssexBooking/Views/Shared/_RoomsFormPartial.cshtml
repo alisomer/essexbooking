@@ -1,15 +1,16 @@
-﻿@model int
-Number of Rooms: 
-<select name="rooms">
-
-   @for (var i = Model % 2 == 0? Model/2 : (Model+1)/2; i <= Model; i++)
-   {
-        <option value="@i">@i</option>
-   }
-</select>
-
+﻿@model EssexBooking.Models.Booking
+  
+<div class="formField">        
+<h4 style="display: inline;">Single Rooms</h4>
+@Html.DropDownListFor(model=> model.single_rooms, new SelectList(Enumerable.Range(0, 20)))
+</div>
+<div class="formField">        
+<h4 style="display: inline;">Double Rooms</h4>
+@Html.DropDownListFor(model=> model.double_rooms, new SelectList(Enumerable.Range(0, 20)))
+</div>
 
 <script type="text/javascript">
+/*
     $(function () {
         $("[name=rooms]").change(function () {
             $(this).closest(".bookingForm").addClass("addDoubles");
@@ -19,4 +20,5 @@ Number of Rooms:
             });
         });
     });
+    */
 </script>

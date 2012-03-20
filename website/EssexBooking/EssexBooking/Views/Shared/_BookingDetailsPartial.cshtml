@@ -28,9 +28,24 @@
         @Html.DisplayFor(model => model.duration)
     </div>
 
-    <div class="display-label">guests</div>
+    <div class="display-label">single rooms</div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.guests)
+        @Html.DisplayFor(model => model.single_rooms)
+    </div>
+
+    <div class="display-label">double rooms</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.double_rooms)
+    </div>
+
+    <div class="display-label">Paid</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.GetPayment().amount)
+    </div>
+
+    <div class="display-label">Payment date</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.GetPayment().payment_date)
     </div>
 
 </fieldset>

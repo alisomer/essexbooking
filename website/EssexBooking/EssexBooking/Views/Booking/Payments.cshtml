@@ -30,6 +30,8 @@
             return false;
         });
 
+        $(".buy").button();
+
     });
 </script>
 
@@ -56,14 +58,21 @@ table.payment td
         <th>Hotel</th>
         <th>Travel</th>
         <th>Extra</th>
-        <th>Discounts</th>
+        <th>Discounts &amp;<br />Supplements</th>
         <th>Amount</th>
     </tr>
     @foreach (var bookingItem in Model.Cart.GetBookings())
     {
         <tr>
             <td><div>@bookingItem.Hotel.Resort.name</div></td>
-            <td><div>@bookingItem.Hotel.name</div> <div>for @bookingItem.duration days</div><div>@bookingItem.guests people</div><div class="moneyTotal">&pound;@bookingItem.GetHotelTotal().ToString("N2")</div></td>
+            <td>
+                <div>@bookingItem.Hotel.name</div> 
+                <div>for @bookingItem.duration days</div>
+                <div>@bookingItem.single_rooms single rooms</div>
+                <div>@bookingItem.double_rooms double rooms</div>
+                <div>@bookingItem.guests() people</div>
+                <div class="moneyTotal">&pound;@bookingItem.GetHotelTotal().ToString("N2")</div>
+            </td>
             <td><div>@bookingItem.Travel.TravelType.name</div> <div>for @bookingItem.Travel.Passangers.Count passengers</div><div class="moneyTotal">&pound;@bookingItem.GetTravelTotal().ToString("N2")</div></td>        
             <td>
                     @foreach (var extra in bookingItem.ExtraBookings)
@@ -75,6 +84,8 @@ table.payment td
              <td>
              <div>@(bookingItem.HasDiscount14day() ? "14-night stay discount" : "")</div>
              <div>@(bookingItem.HasDiscountGroup() ? "Group discount" : "")</div>
+              <div>@(bookingItem.HasSingleRoomSupplement() ? "There is a 20% supplement for single rooms" : "")</div>
+             
              </td>
            <td>&pound;@bookingItem.GetBookingTotal().ToString("N2")</td>
         </tr>

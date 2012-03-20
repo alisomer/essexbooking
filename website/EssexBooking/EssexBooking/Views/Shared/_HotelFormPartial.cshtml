@@ -15,7 +15,5 @@
             <label for="@(prefix)_duration_14">2 weeks</label><input @(Model.duration == 14 ? "checked='checked'" : "") id="@(prefix)_duration_14" type="radio" name="@(prefix)_duration" value="14"/>
         </div>
     </div>
-    <div class="formField">
-        guests @Html.DropDownListFor(model=> model.guests, new SelectList(Enumerable.Range(1, 20)))
-    </div>
+  
 </div>

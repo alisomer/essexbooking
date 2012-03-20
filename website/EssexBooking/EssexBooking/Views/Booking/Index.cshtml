@@ -57,6 +57,7 @@
 
         $(".radioset").buttonset();
 
+
         $(".duration input").change(function () { $(".start_date").datepicker("refresh"); });
 
         displayExtraCart = function (resp) {
@@ -93,14 +94,21 @@
             });
         });
 
-        $(".saveAll").click(function () {
+        $(".saveAll")
+        .button({
+             icons: {
+                 primary: "ui-icon-circle-triangle-e"
+             }
+        })
+        .click(function () {
             $(".bookingForm").each(function () {
                 var form = $(this);
                 UpdateBooking({
                     booking_id: form.attr("booking_id"),
                     start_date: form.find(".start_date").val(),
                     duration: form.find(".duration input:checked").val(),
-                    guests: form.find("select[name=guests]").val(),
+                    single_rooms: form.find("select[name=single_rooms]").val(),
+                    double_rooms: form.find("select[name=double_rooms]").val(),
                     travel_type_id: form.find(".travel_type input:checked").val()
 
                 },
@@ -129,3 +137,4 @@
 }
 
 <button class="saveAll">Proceed to Passenger info</button>
+<br class="clear" />
